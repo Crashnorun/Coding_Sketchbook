@@ -13,5 +13,5 @@ There are also two TypeScript files:
 - P5.d.ts
 - P5.global-mode.d.ts
 
- which are used for intellisense when using Visual Studio Code.
+ These are used for intellisense when using Visual Studio Code.
 
