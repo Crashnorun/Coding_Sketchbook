@@ -1,4 +1,4 @@
-.docx
+*.docx
 /P5/Cubes_01/Animations
 .DS_Store
 applet
