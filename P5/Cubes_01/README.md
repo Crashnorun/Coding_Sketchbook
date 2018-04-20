@@ -7,3 +7,4 @@ This project contains a series of rotating cubes that each differ in color. This
 - Blue corresponds to the Z axis. The larger the Z value, the greater the Blue value
 
 A rotation is applied to each cube for effect.
+![Rotating Cubes](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/P5/Cubes_01/Images/Rotating_Cubes_01.gif)
