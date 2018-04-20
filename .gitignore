@@ -1,5 +1,6 @@
 /P5/*.docx
 /P5/Cubes_01/Animations
+*.tmp
 .DS_Store
 applet
 application.linux32
