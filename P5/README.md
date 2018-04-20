@@ -18,9 +18,9 @@ There are also two TypeScript files:
 - P5.global-mode.d.ts
 
 The TypeScript files are used for intellisense when using Visual Studio Code as your IDE. You can find more information about these files at [this link](https://github.com/processing/p5.js/issues/1339). To use the intellisense you must reference the file in your JavaScript file by using the syntax below:
-
-///&lt;referencepath=&quot;&lt;folder location&gt;\p5.global-mode.d.ts&quot;/&gt;
-
+```javascript
+///referencepath="<folder location>\p5.global-mode.d.ts";
+```
 Replace &lt;folder location&gt; with the directory where your p5.global-mode.d.ts file is located on your drive.
 
 ## IDE
