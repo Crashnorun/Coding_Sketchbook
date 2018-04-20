@@ -1,5 +1,5 @@
-/P5/*.docx
 /P5/Cubes_01/Animations
+*docx
 *.tmp
 .DS_Store
 applet
