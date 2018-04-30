@@ -1,5 +1,6 @@
 class Hexigon {
 
+    // hexigon is inscribed in a circle
     /** 
      * @param {number} x 
      * @param {number} y
@@ -8,13 +9,14 @@ class Hexigon {
     constructor(x, y, radius) {
         this.x = x;
         this.y = y;
-        this.radius = radius;
+        this.radius = radius;           // radius of the circle
         this.center = new cls_Point(x, y);
         this.pts = [];
         this.color = [];
-        this.CalcHex();
+        this.CalcHex();                 // get hexigon points
     }
 
+    // calculate hexigon points
     CalcHex() {
         for (let i = 0; i < 2 * PI; i += PI / 3) {
             let tempx = cos(i) * (this.radius);
@@ -25,7 +27,7 @@ class Hexigon {
     }
 
     Render() {
-        stroke(0);
+        //stroke(0);
         //strokeWeight(1);
         // fill(0, 0, 255);
         fill(this.color);
