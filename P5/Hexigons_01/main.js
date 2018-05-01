@@ -5,6 +5,7 @@
 
 let gridSpacing = 20;           // radius value
 let pts = [];
+let colorRange = 10;            // allowable color deviation
 
 function setup() {
     createCanvas(600, 600);
@@ -12,8 +13,7 @@ function setup() {
     noStroke();
 
     let pt;
-    let colorRange = 20;    // allowable color deviation
-    let col = [random(256), random(256), random(256)];      // generate random color
+    let col = [random(256), random(256), random(256)];              // generate random color
     let count = 0;
     let tempX = CalcWidth();
     for (let i = 0; i < height + 100; i += (gridSpacing * 0.88)) {  // 0.88 is unknown
@@ -23,7 +23,7 @@ function setup() {
             } else {
                 pt = new Hexigon(j + (gridSpacing * 1.5), i, gridSpacing);
             }
-            if (count != 0) {           // generate random color
+            if (count != 0) {                                       // generate random color
                 let r = col[0] + random(-colorRange, colorRange);
                 let g = col[1] + random(-colorRange, colorRange);
                 let b = col[2] + random(-colorRange, colorRange);
@@ -39,8 +39,13 @@ function setup() {
 
 function draw() {
     for (let i = 0; i < pts.length; i++) {
-        let col =
-            pts[i].Render();
+        let col = pts[i].color;
+        let r = col[0] + random(-colorRange, colorRange);
+        let g = col[1] + random(-colorRange, colorRange);
+        let b = col[2] + random(-colorRange, colorRange);
+        col = [r, g, b];
+        pts[i].color = col;
+        pts[i].Render();
     }
 }
 
