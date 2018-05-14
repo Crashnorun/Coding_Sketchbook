@@ -1,20 +1,20 @@
 
 
-var svg = d3.select("svg"),
-    margin = { top: 20, right: 20, bottom: 30, left: 50 },
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var svg = d3.select("svg"),                                             // declare svg object
+    margin = { top: 20, right: 20, bottom: 30, left: 50 },              // declare margin object
+    width = +svg.attr("width") - margin.left - margin.right,            // declare width object
+    height = +svg.attr("height") - margin.top - margin.bottom,          // declare height object
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");     // declare g object
 
-var parseTime = d3.timeParse("%d-%b-%y");
+var parseTime = d3.timeParse("%d-%b-%y");                               // parse the date time
 
-var x = d3.scaleTime()
+var x = d3.scaleTime()                                                  // set X scale to be within 0 - width
     .rangeRound([0, width]);
 
-var y = d3.scaleLinear()
+var y = d3.scaleLinear()                                                // set Y scale to be within 0 and height
     .rangeRound([height, 0]);
 
-var line = d3.line()
+var line = d3.line()                                                    // draw axis
     .x(function (d) { return x(d.date); })
     .y(function (d) { return y(d.close); });
 
@@ -22,8 +22,8 @@ var line = d3.line()
 var file = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/master/D3/LineChart/data.tsv";
 
 //d3.tsv("data.tsv", function (d) {
-d3.tsv(file, function (d) {
-    d.date = parseTime(d.date);
+d3.tsv(file, function (d) {                                             // read data file
+    d.date = parseTime(d.date);                                         // parse by date
     d.close = +d.close;
     return d;
 }, function (error, data) {
