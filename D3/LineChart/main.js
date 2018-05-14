@@ -19,7 +19,7 @@ var line = d3.line()
     .y(function (d) { return y(d.close); });
 
 // loaded the data file onto github and then linked the raw data file here.
-var file = "https://raw.githubusercontent.com/Crashnorun/D3_Test/master/data.tsv";
+var file = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/master/D3/LineChart/data.tsv";
 
 //d3.tsv("data.tsv", function (d) {
 d3.tsv(file, function (d) {
