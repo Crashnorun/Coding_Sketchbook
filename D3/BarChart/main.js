@@ -33,6 +33,21 @@ svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.tsv("data.tsv", type, function(error, data) {
-    x.domain(data.map(function(d) { return d.letter; }));
-    y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+var file = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/master/D3/BarChart/data.tsv";
+d3.tsv(file, type, function (error, data) {
+    x.domain(data.map(returnLetter));
+    y.domain([0, d3.max(data, returnFrequency)]);
+})
+
+function returnFrequency(d) {
+    return d.frequency;
+}
+
+function returnLetter(d) {
+    return d.letter;
+}
+
+function type(d) {
+    d.frequency = +d.frequency;
+    return d;
+}
