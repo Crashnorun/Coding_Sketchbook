@@ -1,6 +1,7 @@
 /**
  * By adding the non minified D3 file into the project directory
  * adds intellisense to this document.
+ * Reference link: http://bl.ocks.org/Caged/6476579
  */
 
 var svg = d3.select("svg");
@@ -14,7 +15,7 @@ var x = d3.scaleOrdinal([0, width]);
 var y = d3.scaleLinear([height, 0]);
 
 var xAxis = d3.axisBottom(x);
-xAxis.name = "bottom";
+// xAxis.name = "bottom";
 var yAxis = d3.axisLeft(y).tickFormat(formatPercent);
 var tip = d3.tip().attr("class", "d3-tip").offset();
 
