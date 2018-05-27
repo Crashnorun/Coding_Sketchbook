@@ -15,16 +15,8 @@ var x = d3.scaleOrdinal([0, width]);
 var y = d3.scaleLinear([height, 0]);
 
 var xAxis = d3.axisBottom(x);
-// xAxis.name = "bottom";
 var yAxis = d3.axisLeft(y).tickFormat(formatPercent);
 var tip = d3.tip().attr("class", "d3-tip").offset();
-
-// var tip = d3.tip()
-//   .attr('class', 'd3-tip')
-//   .offset([-10, 0])
-//   .html(function(d) {
-//     return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
-//   })
 
 svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -35,10 +27,12 @@ svg = d3.select("body").append("svg")
 svg.call(tip);
 
 var file = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/master/D3/BarChart/data.tsv";
-d3.tsv(file, type, function (error, data) {
+d3.tsv(file, type, readData(file.data));
+
+function readData(error, data) {
     x.domain(data.map(returnLetter));
-    y.domain([0, d3.max(data, returnFrequency)]);
-})
+    y.domain([0, d3.max(returnFrequency)]);
+}
 
 function returnFrequency(d) {
     return d.frequency;
