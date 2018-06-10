@@ -8,10 +8,11 @@ class Hexigon {
         this.locX = locX;
         this.locY = locY;
         this.rad = Rad;
-        this.col = [50, 50, 255];
-        this.fillCol = [0, 0, 0];
+        this.col = [0, 0, 0];
+        this.fillCol = [0, 0, 255];
         this.pts = [];
         this.calcPts();
+        this.scale;
     }
 
     calcPts() {
@@ -28,6 +29,11 @@ class Hexigon {
         fill(this.fillCol);
         strokeWeight(3);
         stroke(this.col);
+
+        // translate(-this.locX, -this.locY);
+        // scale(this.scale);
+        // translate(this.locX, this.locY);
+
         beginShape();
         for (let i = 0; i < this.pts.length; i++) {
             vertex(this.pts[i].x, this.pts[i].y);
@@ -36,4 +42,16 @@ class Hexigon {
         //ellipse(this.locX, this.locY, this.rad, this.rad);
     }
 
+    fold() {
+        fill(this.fillCol);
+        strokeWeight(3);
+        stroke(this.col);
+        beginShape();
+        for (let i = 0; i < this.pts.length-1; i++) {
+            vertex(this.pts[i].x, this.pts[i].y);
+            vertex(this.pts[i+1].x, this.pts[i+1].y);
+            vertex(this.locX, this.locY);
+        }
+        endShape(CLOSE);
+    }
 }

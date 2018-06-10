@@ -21,7 +21,6 @@ function setup() {
                 hex = new Hexigon(i + (rad * 1.5), j, rad);
             }
             tempHex.push(hex);
-            // hex.render();
         }
         hexigons.push(tempHex);
         count++;
@@ -36,12 +35,19 @@ function draw() {
     for (let i = 0; i < hexigons.length; i++) {
         for (let j = 0; j < hexigons[i].length; j++) {
 
-            if (abs(mouseX - hexigons[i][j].locX) < centerLine &&
-                abs(mouseY - hexigons[i][j].locY) < centerLine) {
-                    hexigons[i][j].fillCol = [255,0,0];
-            } else{
-                hexigons[i][j].fillCol = [0,0,255];
-            }
+            // if (abs(mouseX - hexigons[i][j].locX) < centerLine &&
+            //     abs(mouseY - hexigons[i][j].locY) < centerLine) {
+            //         hexigons[i][j].fillCol = [0,0,0];
+            //        //hexigons[i][j].fold();
+            // } else{
+            //     hexigons[i][j].fillCol = [0,0,255];
+            // }
+            
+            let v1 = createVector(hexigons[i][j].locX, hexigons[i][j].locY);
+            let v2 = createVector(mouseX, mouseY);
+            let d = v1.dist(v2);
+            let scale = map(d, 0, width, 0.1, 1);
+            hexigons[i][j].scale = scale;
             hexigons[i][j].render();
         }
     }
