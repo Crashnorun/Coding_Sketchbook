@@ -12,8 +12,8 @@ function setup() {
     canvas = createCanvas(300, 300, WEBGL);
     console.log(canvas);
 
-    angleMode(DEGREES);
-    colorMode(RGB, 255);
+    angleMode(DEGREES);                 // set angle mode
+    colorMode(RGB, 255);                // set color mode
     background(0);
     stroke(0);                          // this line is needed to display the surface - seems to be a bug
     strokeWeight(0);                    // this line is needed to hide the surface edge
