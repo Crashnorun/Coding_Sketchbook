@@ -9,3 +9,7 @@ This is an example how to create a simple websocket application. The example use
 -   [P5](https://p5js.org/)
 
 ![aExample using P5.js](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/P5/WebSocket_Example_01/Animations/Websockets_01_1.gif)
+
+# Application setup:
+1) Run server.js in node on local machine
+2) open two chrome broswers and point to localhose:3000
