@@ -3,6 +3,7 @@
 /P5/Finding_Myself/Animations
 /P5/QuadTree/Animations
 /P5/Radial_Pattern_01/Animations/*.mov
+/Coding_Sketchbook\P5\WebSocket_Example_01\node_modules
 *.tmp
 *.docx
 .DS_Store
