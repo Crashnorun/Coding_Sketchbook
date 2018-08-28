@@ -10,9 +10,13 @@ function setup() {
     angleMode(DEGREES);
     background(0);
     strokeWeight(0.1);
+    let count = height / boxSize + width / boxSize;
+    count = 360 / count;
+
     for (let i = -height / 2; i < height / 2; i += boxSize) {
         for (let j = -width / 2; j < width / 2; j += boxSize) {
-            let cube = { x: j, y: i };
+            let tempCol = color(360 /count, 100, 100, 50);
+            let cube = { x: j, y: i, col: count * (i * j) };
             cubes.push(cube);
         }
     }
@@ -26,7 +30,8 @@ function draw() {
         rotateX(count);
         rotateY(count);
         rotateZ(count);
-        fill((360 / cubes.length) * i, 100, 100, 50);
+        //fill((360 / cubes.length) * i, 100, 100, 50);
+        fill(cubes[i].col, 100, 100, 50);
         translate(cubes[i].x, cubes[i].y);
         box(boxSize);
         count++;
