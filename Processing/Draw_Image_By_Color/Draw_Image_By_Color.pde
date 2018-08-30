@@ -1,4 +1,4 @@
-
+ //<>// //<>//
 /*
 1. sukply an image
  2. classify all pixels by color
@@ -31,13 +31,13 @@ void settings() {
     Pixel pix = new Pixel(x, y, img.pixels[i]);
     myPix.add(pix);
 
-   // newImg.pixels[i] = color(0 );
-   // newImg.updatePixels();
+    // newImg.pixels[i] = color(0 );
+    // newImg.updatePixels();
   }
 
-  Collections.sort(myPix); //<>//
+  Collections.sort(myPix);
 
-  size(w, h); //<>//
+  size(w, h);
   count = 0;
 }
 
@@ -52,11 +52,16 @@ void draw() {
   newImg.pixels[count] = myPix.get(count).colLong;
   newImg.updatePixels();
   image(newImg, 0, 0);
- 
+
   if (count < newImg.pixels.length-1 || count < 0) { 
     count++;
   } else {
     count = 0;
   }
+}
 
+
+void mouseClicked() {
+  save("sorted_Image.jpg");
+  println("Saved image");
 }
