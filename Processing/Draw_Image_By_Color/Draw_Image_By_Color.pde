@@ -22,7 +22,8 @@ void settings() {
   println("Image Size: width " + w + " | height " + h);
 
   myPix = new ArrayList<Pixel>();
-  newImg = createImage(w, h, RGB);
+  newImg = loadImage("small.jpg");
+  //newImg = createImage(w, h, RGB);
   newImg.loadPixels();
 
   for (int i = 0; i < img.pixels.length; i++) {
