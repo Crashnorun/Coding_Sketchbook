@@ -6,21 +6,21 @@ let count = 0;
 
 function setup() {
     createCanvas(600, 600, WEBGL);
+    //frameRate(10);
     colorMode(HSB, 360, 100, 100, 100);
     angleMode(DEGREES);
     background(0);
-    strokeWeight(0.1);
-    let count = height / boxSize * width / boxSize;
-    console.log("count: " + count);
-    count = 360 / count;
-    console.log("count: " + count);
-let val = 0;
+    strokeWeight(1);
+    let count = (height / boxSize) * (width / boxSize);         // number of boxes in the scene
+    console.log("Number of boxes in scene: " + count);
+    count = 360 / count;                                        // rate of change for color
+    console.log("Color rate of change: " + count);
+    let val = 0;
 
     for (let i = -height / 2; i < height / 2; i += boxSize) {
         for (let j = -width / 2; j < width / 2; j += boxSize) {
-            let tempCol = color(360 /count, 100, 100, 50);
-            let cube = { x: j, y: i, col: count * val };
-            console.log("count: " + cube.col);
+            let tempCol = color(count * val, 100, 100, 50);
+            let cube = { x: j + boxSize / 2, y: i + boxSize / 2, col: tempCol };
             cubes.push(cube);
             val++;
         }
@@ -29,17 +29,19 @@ let val = 0;
 }
 
 function draw() {
-    fill(0, 0, 0, 0);
+    //fill(0, 0, 0, 0);
     //rect(-width/2, -height/2, width, height);
+
     push();
     for (let i = 0; i < cubes.length; i++) {
         rotateX(count);
         rotateY(count);
         rotateZ(count);
 
-        fill(cubes[i].col, 100, 100, 50);
+        fill(cubes[i].col);
         translate(cubes[i].x, cubes[i].y);
-        box(boxSize);
+        box(boxSize, boxSize, boxSize);
+        // translate(-cubes[i].x, -cubes[i].y);
         count++;
     }
     pop();
