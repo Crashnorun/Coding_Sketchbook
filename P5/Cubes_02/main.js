@@ -3,9 +3,11 @@
 let cubes = [];
 let boxSize = 50;
 let count = 0;
+let frame = 0;
+let c;
 
 function setup() {
-    createCanvas(600, 600, WEBGL);
+   c = createCanvas(600, 600, WEBGL);
     //frameRate(10);
     colorMode(HSB, 360, 100, 100, 100);
     angleMode(DEGREES);
@@ -29,21 +31,34 @@ function setup() {
 }
 
 function draw() {
+    background(0);
     //fill(0, 0, 0, 0);
     //rect(-width/2, -height/2, width, height);
+    // noStroke();
 
-    push();
     for (let i = 0; i < cubes.length; i++) {
+
+        push();
+        translate(cubes[i].x, cubes[i].y);
         rotateX(count);
         rotateY(count);
         rotateZ(count);
-
         fill(cubes[i].col);
-        translate(cubes[i].x, cubes[i].y);
+
         box(boxSize, boxSize, boxSize);
-        // translate(-cubes[i].x, -cubes[i].y);
+        translate(-cubes[i].x, -cubes[i].y);
+        pop();
         count++;
     }
-    pop();
 
+
+}
+
+function mousePressed() {
+    if (frame < 10) {
+        saveCanvas(c, "Image_0" + frame + ".jpg");
+    } else {
+        saveCanvas(c, "Image_" + frame + ".jpg");
+    }
+    frame++;
 }
