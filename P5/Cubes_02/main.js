@@ -8,7 +8,7 @@ let c;
 
 function setup() {
    c = createCanvas(600, 600, WEBGL);
-    //frameRate(10);
+    frameRate(30);
     colorMode(HSB, 360, 100, 100, 100);
     angleMode(DEGREES);
     background(0);
@@ -56,9 +56,10 @@ function draw() {
 
 function mousePressed() {
     if (frame < 10) {
-        saveCanvas(c, "Image_0" + frame + ".jpg");
+        //saveCanvas(c, "Image_0" + frame + ".jpg");
     } else {
-        saveCanvas(c, "Image_" + frame + ".jpg");
+       // saveCanvas(c, "Image_" + frame + ".jpg");
     }
     frame++;
+    saveFrames("Image_", ".jpg", 10, 30);
 }
