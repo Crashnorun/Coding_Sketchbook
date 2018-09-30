@@ -4,6 +4,10 @@
 /P5/QuadTree/Animations
 /P5/Radial_Pattern_01/Animations/*.mov
 /Coding_Sketchbook\P5\WebSocket_Example_01\node_modules
+
+/D3/BarChart_02/201808-citibike-tripdata.csv
+/D3/BarChart_02/201808-citibike-tripdata.csv.zip
+
 *.tmp
 *.docx
 .DS_Store
