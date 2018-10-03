@@ -3,13 +3,37 @@
 let urlPath = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/D3_Barchart_02/D3/BarChart_02/Short_File_01.csv";
 //let nums = [20, 30, 40];
 
+
 function draw() {
     let years = [];
 
-    let data = d3.csv(urlPath, function (d) {
-        years.push(d["birth year"]);
-    });
 
+    // Option 1: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+    // let data = d3.csv(urlPath).then(function (d) {
+    //     //years.push(d["birth year"]);
+    //     console.log(d);
+    //     return d;
+    // });
+
+    // Option 2
+    //     const data = d3.csv(urlPath);
+    //     const da = data.then(function (d) { return d; });
+    //    console.log(data);
+
+    //Option 3
+    let data2 = d3.csv(urlPath).then(function (d) { return d; });
+    console.log("Data2: " + data2);
+
+    //     let data = loadCSV(urlPath) {
+    //         return new Promise(functino(resolve, reject) {
+    //         d3.csv(urlPath, function (error, request) {
+    //             if (error) { reject(error); }
+    //             else { resolve(request); }
+    //         });
+    //     });
+    // }
+
+    console.log("Data:" + data);
     console.log("Years: " + years);
     console.log("Extend: " + d3.extent(years));
 
@@ -30,6 +54,9 @@ function draw() {
         .attr("height", "100%")
         .attr("fill", "pink");
     console.log("Canvas: " + canvas);
+
+    console.log("Years: " + years);
+    console.log("Extend: " + d3.extent(years));
 
     let rect = canvas.selectAll("rect")
         .data(years)
