@@ -21,20 +21,16 @@ function draw() {
     //    console.log(data);
 
     //Option 3
-    let data2 = d3.csv(urlPath).then(function (d) { return d; });
-    console.log("Data2: " + data2);
+    let data = d3.csv(urlPath).then(function (d) { return d; });
 
-    //     let data = loadCSV(urlPath) {
-    //         return new Promise(functino(resolve, reject) {
-    //         d3.csv(urlPath, function (error, request) {
-    //             if (error) { reject(error); }
+    //     let data f (error) { reject(error); }
     //             else { resolve(request); }
     //         });
     //     });
     // }
 
-    console.log("Data:" + data);
-    console.log("Years: " + years);
+    console.log( data);
+    console.log("Data: " + data);
     console.log("Extend: " + d3.extent(years));
 
     let scale = d3.scaleLinear()        //.domain(d3.extent(years))
