@@ -1,6 +1,6 @@
 
 // let path = "201808-citibike-tripdata/Short_File_01.csv";
-let urlPath = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/D3_Barchart_02/D3/BarChart_02/Short_File_01.csv";
+let urlPath = "https://raw.githubusercontent.com/Crashnorun/Coding_Sketchbook/master/D3/BarChart_02/Short_File_01.csv";
 let years = [];
 
 function draw() {
