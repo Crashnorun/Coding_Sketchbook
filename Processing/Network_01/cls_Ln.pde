@@ -4,8 +4,10 @@ class cls_Ln {
 
   cls_Pt stpt, endpt;
   color col;
+  boolean ignore = false;
 
   cls_Ln() {
+
   }
   
   

@@ -6,12 +6,13 @@ split into a grid
  and radiate about
  */
 
-color col = color(0, 0, 0, 10);            // background color
+color col = color(0, 0, 0, 12);            // background color
+color dots =  color(150, 0, 0);
 int spacing = 25;            
 ArrayList<ArrayList<cls_Pt>> Grid; 
 ArrayList<PVector> Active;
 ArrayList<cls_Ln> ActiveLns;
-int radius = 10;
+int radius = 5;
 int count = 0;
 // list of current active points
 // list of current active lines
@@ -22,7 +23,6 @@ void setup() {
   frameRate(5);
   Active = new ArrayList<PVector>();
 
-
   CreateGrid();
   Spawn();
 }
@@ -31,12 +31,16 @@ void draw() {
   fill(col);
   rect(0, 0, width, height);
 
+  Respawn();
+
   for (int i = 0; i< Active.size(); i++) {
     PVector vect = Active.get(i);
     Grid.get((int)vect.x).get((int)vect.y).Render();
-  }
 
-  Respawn();
+    if (!ActiveLns.get(i).ignore) {
+      ActiveLns.get(i).Render();
+    }
+  }
 }
 
 
@@ -48,7 +52,7 @@ void CreateGrid() {
   for (int i = 0; i <= height; i+= spacing) {
     ArrayList<cls_Pt> temp = new ArrayList<cls_Pt>();
     for (int j = 0; j <= width; j+= spacing) {
-      temp.add(new cls_Pt(i, j, i/spacing, j/spacing, color(150, 0, 0), radius));
+      temp.add(new cls_Pt(i, j, i/spacing, j/spacing, dots, radius));
     }
     Grid.add(temp);
   }
@@ -57,7 +61,7 @@ void CreateGrid() {
 
 // randomly pick a series of points to spawn from 
 void Spawn() {
-  int tempNum = (int)random(3, 5);
+  int tempNum = (int)random(7, 10);
   int count = 0;
 
   // randomly pick from grid
@@ -66,7 +70,7 @@ void Spawn() {
     int h = (int) random(0, Grid.size());
     if (Grid.get(w).get(h).display == false) {
       // Grid.get(w).get(h).display = true;
-      // Grid.get(w).get(h).Render();
+       Grid.get(w).get(h).Render();
       Active.add(new PVector(w, h));
       count++;
     }
@@ -82,9 +86,10 @@ void Respawn() {
 
   for (int i  = 0; i < Active.size(); i++) {
     cls_Ln templn = new cls_Ln();
+    templn.col = dots;
     templn.stpt = Grid.get((int)Active.get(i).x).get((int)Active.get(i).y);
 
-    int num = (int) random(0, 4);
+    int num = (int) random(0, 4);                  // pick a direction
 
     switch (num) {
     case 0:
@@ -121,9 +126,12 @@ void Respawn() {
       break;
     }
 
-    if ( !ignore) {
+    if (!ignore) {
       templn.endpt = Grid.get((int)Active.get(i).x).get((int)Active.get(i).y);
+    } else {
+      templn.ignore = ignore;
     }
     ignore = false;
+    ActiveLns.add(templn);
   }
 }
