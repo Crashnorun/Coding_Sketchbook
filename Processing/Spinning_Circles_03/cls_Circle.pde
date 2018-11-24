@@ -1,4 +1,4 @@
- //<>// //<>//
+ //<>//
 
 // ellipse radius
 // circle radius
@@ -21,7 +21,7 @@ class Circle {
     this.rad1 = rad1;
     this.rad2 = rad2;
     this.colFill = colFill;
-    this.rot = random(0, PI/4);
+    this.rot = random(0, PI);
 
     if (random(1) > 0.5) {
      this.dir = 1;
@@ -32,12 +32,16 @@ class Circle {
 
 
   void Render() {
-    rotate(this.rot);
+    rotate(this.rot );
     fill(colFill);
    
-    ellipse(sin(x) * rad2, cos(y) * rad2, rad1, rad1);
+    ellipse(sin(x) * rad2 * dir, cos(y) * rad2 * dir, rad1, rad1);
     x += 0.1; 
     y += 0.1;
+
+    if(y < 5 && y > 2){
+     dir = -dir; 
+    }
   }
 
 

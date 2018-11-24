@@ -1,9 +1,6 @@
- //<>// //<>//
+ //<>//
 int w = 600, h = 600;
-float x = 0, y = 0;
-float rad1 = 20;
-float rad2 = 100;
-color colBack = color(0, 50);
+color colBack = color(0, 25);
 color colFill = color(100, 100, 150);
 ArrayList<Circle> circles = new ArrayList<Circle>();
 int maxCircles = 20;
@@ -20,8 +17,8 @@ void setup() {
   noStroke();
 
   for (int i = 0; i < maxCircles; i++) {
-    float r1 = random(3, 10);
-    float r2 = random(50, 100);
+    float r1 = random(2, 15);                  // ellipse radius
+    float r2 = random(75, 150);                // circle radius
     color col = color(200);
     circles.add(new Circle(r1, r2, col));
   }
@@ -35,23 +32,16 @@ void draw() {
   //translate(width/3, height/2);
   for (int i = 0; i < maxCircles; i++) {
 
-    translate(width/3, height/2);
-
-    if (circles.get(i).dir >0) 
-      translate(width/3, 0);
-
-    circles.get(i).Render();
-    translate(-width/3, -height/2);
-    if (circles.get(i).dir >0) 
-      translate(-width/3, -0);
+    if (circles.get(i).dir > 0) { 
+      pushMatrix();
+      translate(width/3, height/2);
+      circles.get(i).Render();
+      popMatrix();
+    } else {
+      pushMatrix();
+      translate(2*width/3, height/2);
+      circles.get(i).Render();
+      popMatrix();
+    }
   }
-
-
-  //fill(colFill);
-  //ellipse(sin(x) * rad2, cos(y)*rad2, rad1, rad1);
-  //x+=0.1;
-  //y+=0.1;
-
-  //translate(width/3, 0);
-  //ellipse(-sin(x) * rad2, -cos(y)*rad2, rad1, rad1);
 }
