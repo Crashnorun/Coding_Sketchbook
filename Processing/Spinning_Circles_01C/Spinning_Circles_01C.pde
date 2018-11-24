@@ -5,6 +5,7 @@ float rad1 = 20;
 float rad2 = 100;
 color colBack = color(0, 10);
 color colFill = color(100, 100, 150);
+boolean visible = false;
 
 void settings() {
   size(w, h);
@@ -23,11 +24,22 @@ void draw() {
 
   fill(colFill);
   translate(width/3, height/2);
-  ellipse(sin(x) * rad2, cos(y) * rad2, rad1, rad1);
+  if (visible) {
+    ellipse(sin(x) * rad2, cos(y) * rad2, rad1, rad1);
+  }
   x += 0.1;
   y += 0.1;
 
 
-  translate(width/3, 0);
-  ellipse(-sin(x) * rad2, -cos(y) * rad2, rad1, rad1);
+  if (!visible) {
+    translate(width/3, 0);
+    ellipse(-sin(x) * rad2, -cos(y) * rad2, rad1, rad1);
+  }
+
+  if ((cos(y) * rad2) > -5 && (cos(y) * rad2) < 5) {
+    if (sin(x) > 0.5 ) {
+      //noLoop();
+      visible = !visible;
+    }
+  }
 }
