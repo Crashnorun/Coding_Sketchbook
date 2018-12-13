@@ -7,7 +7,7 @@ class Particle {
         this.Velocity.setMag(random(0.5, 1.5));          // random magnitude
         this.Acceleration = createVector();
         this.MaxForce = 0.2;
-        this.MaxSpeed = 1;
+        this.MaxSpeed = 0.25;
     }
 
     edges() {

@@ -8,15 +8,17 @@ const flock = [];
 let col;
 
 function setup() {
-    createCanvas(640, 360);
+    createCanvas(800, 800);
+    background(0);
     for (let i = 0; i < 100; i++) {
         flock.push(new Particle());
     }
-    col = color(0, 15);
+    col = color(0, 5);
 }
 
 function draw() {
     //background(51);
+    noStroke();
     fill(col);
     rect(0,0,width, height);
 
