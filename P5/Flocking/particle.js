@@ -67,9 +67,9 @@ class Particle {
 
     steer(flock) {
         let alignment = this.align(flock);
-        let cohesion = this.cohesion(flock);
+        //let cohesion = this.cohesion(flock);
         this.Acceleration = alignment;
-        this.Acceleration = cohesion;
+        //this.Acceleration = cohesion;
     }
 
     update() {

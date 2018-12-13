@@ -125,14 +125,52 @@
           "metaData" : ""
         }
       ]
+    },
+    {
+      "id" : 4,
+      "src" : "C:\\Users\\cportelli\\Documents\\Camtasia\\Rec 12-12-18 3.trec",
+      "rect" : [0, 0, 800, 800],
+      "lastMod" : "20181213T014120",
+      "sourceTracks" : [
+        {
+          "range" : [0, 1096],
+          "type" : 0,
+          "editRate" : 30,
+          "trackRect" : [0, 0, 800, 800],
+          "sampleRate" : 29,
+          "bitDepth" : 0,
+          "numChannels" : 0,
+          "metaData" : "Rec 12-12-18 3.trec;"
+        },
+        {
+          "range" : [0, 1610752],
+          "type" : 2,
+          "editRate" : 44100,
+          "trackRect" : [0, 0, 0, 0],
+          "sampleRate" : 44100,
+          "bitDepth" : 16,
+          "numChannels" : 2,
+          "metaData" : ""
+        },
+        {
+          "range" : [0, 1605632],
+          "type" : 2,
+          "editRate" : 44100,
+          "trackRect" : [0, 0, 0, 0],
+          "sampleRate" : 44100,
+          "bitDepth" : 16,
+          "numChannels" : 2,
+          "metaData" : ""
+        }
+      ]
     }
   ],
   "timeline" : {
-    "id" : 4,
+    "id" : 5,
     "sceneTrack" : {
       "scenes" : [
         {
-          "duration" : 18.1666666666667,
+          "duration" : 35.1,
           "title" : "",
           "type" : "",
           "csml" : {
@@ -141,11 +179,11 @@
                 "trackIndex" : 0,
                 "medias" : [
                   {
-                    "id" : 5,
+                    "id" : 6,
                     "_type" : "UnifiedMedia",
                     "video" : 
                         {
-                          "id" : 6,
+                          "id" : 7,
                           "_type" : "ScreenVMFile",
                           "src" : 1,
                           "trackNumber" : 0,
@@ -178,7 +216,7 @@
                         },
                     "audio" : 
                         {
-                          "id" : 7,
+                          "id" : 8,
                           "_type" : "AMFile",
                           "src" : 1,
                           "trackNumber" : 2,
@@ -220,11 +258,11 @@
                 "trackIndex" : 1,
                 "medias" : [
                   {
-                    "id" : 8,
+                    "id" : 9,
                     "_type" : "UnifiedMedia",
                     "video" : 
                         {
-                          "id" : 9,
+                          "id" : 10,
                           "_type" : "ScreenVMFile",
                           "src" : 2,
                           "trackNumber" : 0,
@@ -257,7 +295,7 @@
                         },
                     "audio" : 
                         {
-                          "id" : 10,
+                          "id" : 11,
                           "_type" : "AMFile",
                           "src" : 2,
                           "trackNumber" : 2,
@@ -299,11 +337,11 @@
                 "trackIndex" : 2,
                 "medias" : [
                   {
-                    "id" : 11,
+                    "id" : 12,
                     "_type" : "UnifiedMedia",
                     "video" : 
                         {
-                          "id" : 12,
+                          "id" : 13,
                           "_type" : "ScreenVMFile",
                           "src" : 3,
                           "trackNumber" : 0,
@@ -336,7 +374,7 @@
                         },
                     "audio" : 
                         {
-                          "id" : 13,
+                          "id" : 14,
                           "_type" : "AMFile",
                           "src" : 3,
                           "trackNumber" : 2,
@@ -377,10 +415,89 @@
               {
                 "trackIndex" : 3,
                 "medias" : [
+                  {
+                    "id" : 15,
+                    "_type" : "UnifiedMedia",
+                    "video" : 
+                        {
+                          "id" : 16,
+                          "_type" : "ScreenVMFile",
+                          "src" : 4,
+                          "trackNumber" : 0,
+                          "attributes" : {
+                            "ident" : "Rec 12-12-18 3"
+                          },
+                          "parameters" : {
+                            "cursorScale" : {
+                              "type" : "double",
+                              "defaultValue" : 1.0,
+                              "interp" : "linr"
+                            },
+                            "cursorOpacity" : {
+                              "type" : "double",
+                              "defaultValue" : 1.0,
+                              "interp" : "linr"
+                            }
+                          },
+                          "effects" : [
+
+                          ],
+                          "start" : 0,
+                          "duration" : 1053,
+                          "mediaStart" : 39,
+                          "mediaDuration" : 1053,
+                          "scalar" : 1,
+                          "animationTracks" : {
+
+                          }
+                        },
+                    "audio" : 
+                        {
+                          "id" : 17,
+                          "_type" : "AMFile",
+                          "src" : 4,
+                          "trackNumber" : 2,
+                          "attributes" : {
+                            "ident" : "",
+                            "sampleRate" : 44100,
+                            "bitDepth" : 16,
+                            "gain" : 1.0,
+                            "mixToMono" : false
+                          },
+                            "channelNumber" : "0,1",
+                          "effects" : [
+
+                          ],
+                          "start" : 0,
+                          "duration" : 1053,
+                          "mediaStart" : 39,
+                          "mediaDuration" : 1053,
+                          "scalar" : 1,
+                          "animationTracks" : {
+
+                          }
+                        }
+,
+                    "start" : 0,
+                    "duration" : 1053,
+                    "mediaStart" : 0,
+                    "mediaDuration" : 1092,
+                    "scalar" : 1,
+                    "metadata" : {
+                      "AutoAppliedSmartFocus" : "False",
+                      "WinSubProjectDisplayName" : "",
+                      "clipSpeedAttribute" : false
+                    }
+                  }
                 ]
               },
               {
                 "trackIndex" : 4,
+                "medias" : [
+                ]
+              },
+              {
+                "trackIndex" : 5,
                 "medias" : [
                 ]
               }
@@ -390,6 +507,15 @@
       ]
     },
     "trackAttributes" : [
+      {
+        "ident" : "",
+        "audioMuted" : true,
+        "videoHidden" : true,
+        "metadata" : {
+          "IsLocked" : "False",
+          "WinTrackHeight" : "56"
+        }
+      },
       {
         "ident" : "",
         "audioMuted" : true,
@@ -452,7 +578,7 @@
     "backgroundColor" : [ 0, 0, 0, 255]
   },
   "metadata" : {
-    "AutoSaveFile" : "",
+    "AutoSaveFile" : "C:\\Users\\cportelli\\AppData\\Local\\TechSmith\\Camtasia Studio\\18.0\\Auto-Saves\\Flocking_01ef0702dd.autosave.tscproj",
     "CanvasZoom" : 69,
     "Date" : "2018-12-12 08:23:27 PM",
     "IsAutoSave" : "0",
