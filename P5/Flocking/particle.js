@@ -36,7 +36,28 @@ class Particle {
             }
         }
         if (total > 0) {
-            avg = avg.div(total);
+            avg.div(total);
+            avg.setMag(this.MaxSpeed);
+            avg.sub(this.Velocity);
+            avg.limit(this.MaxForce);
+        }
+        return avg;
+    }
+
+    cohesion(flock) {
+        let avg = createVector();
+        let maxDist = 50;
+        let total = 0;
+        for (let particle of flock) {
+            let d = dist(this.Position.x, this.Position.y, particle.Position.x, particle.Position.y);
+            if (d < maxDist && particle != this) {
+                avg.add(particle.Position);
+                total++;
+            }
+        }
+        if (total > 0) {
+            avg.div(total);
+            avg.sub(this.Position);
             avg.setMag(this.MaxSpeed);
             avg.sub(this.Velocity);
             avg.limit(this.MaxForce);
@@ -45,15 +66,16 @@ class Particle {
     }
 
     steer(flock) {
-        let alignment = this.align(flock);
-        this.Acceleration = alignment;
+        //let alignment = this.align(flock);
+        let cohesion = this.cohesion(flock);
+      //  this.Acceleration = alignment;
+        this.Acceleration = cohesion;
     }
 
     update() {
         this.Position.add(this.Velocity);
         this.Velocity.add(this.Acceleration);
     }
-
 
     show() {
 
