@@ -5,17 +5,20 @@ https://www.youtube.com/redirect?v=mhjuuHl6qHM&event=video_description&redir_tok
 */
 
 const flock = [];
+let col;
 
 function setup() {
     createCanvas(640, 360);
-    for(let i = 0; i < 100; i++){
+    for (let i = 0; i < 100; i++) {
         flock.push(new Particle());
     }
-
+    col = color(0, 15);
 }
 
 function draw() {
-    background(51);
+    //background(51);
+    fill(col);
+    rect(0,0,width, height);
 
     for (let particle of flock) {
         particle.edges();
