@@ -6,14 +6,20 @@ https://www.youtube.com/redirect?v=mhjuuHl6qHM&event=video_description&redir_tok
 
 const flock = [];
 let col;
+let alignSlider, cohesionSlider, separationSlider;
 
 function setup() {
     createCanvas(800, 800);
     background(0);
+    col = color(0, 10);
+    
+    alignSlider = createSlider(0, 2, 1.5, 0.1);
+    cohesionSlider = createSlider(0, 2, 1, 0.1);
+    separationSlider = createSlider(0, 2, 2, 0.1);
+
     for (let i = 0; i < 100; i++) {
         flock.push(new Particle());
     }
-    col = color(0, 5);
 }
 
 function draw() {
