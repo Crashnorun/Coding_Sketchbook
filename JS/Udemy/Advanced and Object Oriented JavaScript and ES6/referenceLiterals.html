@@ -1,0 +1,46 @@
+<html>
+
+<body>
+    <script>
+
+        var student = {
+            name: "charlie",
+            score: 90
+        }
+
+        var s1 = new Object();
+        s1.name = "charlie";
+        s1.score = 90;
+
+        document.write(typeof student +"<br/>");
+        document.write((student instanceof Object) +"<br/>");
+        document.write(student.name + "<br\>");
+        document.write(student.score + "<br\>");
+        document.write((student === s1) + "<br\>");
+        document.write((student == s1) + "<br\>");
+        
+        var studentNames = ["John", "Bob", "Harry"];
+        var sn = new Array("John", "bob", "harry");
+
+        document.write(studentNames + "<br\>");
+        document.write(sn + "<br\>");
+        document.write(typeof studentNames +"<br/>");
+        document.write((studentNames instanceof Array) +"<br/>");
+
+        function hello(name) {
+            return "Hello " + name;
+        }
+        document.write(hello(s1.name) + "<br\>");
+
+        var myFunc = new Function("functionName", "return 'Hello ' + functionName");
+        document.write(myFunc(student.name) + "<br\>");
+        document.write(typeof myFunc +"<br/>");
+        document.write((myFunc instanceof Function) +"<br/>");
+
+        var regEx = /\d+/;
+        document.write(typeof regEx +"<br/>");
+        document.write((regEx instanceof RegExp) +"<br/>");
+    </script>
+</body>
+
+</html>
