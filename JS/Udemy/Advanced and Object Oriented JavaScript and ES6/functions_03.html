@@ -1,0 +1,21 @@
+<html>
+
+<body>
+    <script>
+
+        function product() {
+            var result = 1;
+            for (var i = 0; i < arguments.length; i++) {
+                result *= arguments[i];
+            }
+            return result;
+        }
+
+        document.write(product(10,20,32) + "<br/>");
+        document.write(product(1,2,3) + "<br/>");
+        document.write(product(10) + "<br/>");
+        document.write(product() + "<br/>");
+    </script>
+</body>
+
+</html>

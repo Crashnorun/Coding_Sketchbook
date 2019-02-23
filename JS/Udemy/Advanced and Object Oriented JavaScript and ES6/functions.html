@@ -1,0 +1,45 @@
+<html>
+
+<body>
+    <script>
+        // js supports function hoisting, unlike python
+        // js functions can magincally take more arguements then required
+        document.write(evenOrOdd(21, 10, 30, 40) + "<br/>");
+
+        // declaration way of defining a function
+        function evenOrOdd(num) {
+
+            // to access any extra argeuements assigned to a fuction use the 
+            // ARGEUEMENTS keyword
+            document.write(arguments[2] + "<br/>");
+            document.write("Number of arguements: " + arguments.length + "<br/>");
+            document.write(evenOrOdd.length + "<br/>");
+
+            if (num % 2 == 0) {
+                return "even";
+            } else {
+                return "odd";
+            }
+        }
+
+
+        // assign a function to a variable
+        var e = evenOrOdd;
+        document.write(e(23) + "<br/>");
+
+
+        // expression way of defining a function
+        var evenOrOdd2 = function (num) {
+            if (num % 2 == 0) {
+                return "even";
+            } else {
+                return "odd";
+            }
+        };
+
+        document.write(evenOrOdd2(5) + "<br/>");
+
+    </script>
+</body>
+
+</html>
