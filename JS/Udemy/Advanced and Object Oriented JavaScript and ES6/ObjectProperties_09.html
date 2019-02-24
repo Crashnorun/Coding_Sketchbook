@@ -1,0 +1,22 @@
+<html>
+
+<body>
+    <script>
+        var product = {
+            name: "iphone"
+        };
+        console.log(Object.isExtensible(product));
+        console.log(Object.isSealed(product));
+
+        Object.preventExtensions(product);      // prevents the adding of properties
+        Object.seal(product);
+        console.log(Object.isExtensible(product));
+        console.log(Object.isSealed(product));
+
+        product.price = 700;
+        console.log("price" in product);
+
+        console.log(delete product.name);
+    </script>
+
+</html>
