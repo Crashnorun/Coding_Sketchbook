@@ -1,0 +1,41 @@
+<html>
+
+<body>
+    <script>
+
+        function displayDetails(testscore) {
+            document.write(this.id + "<br/>");
+            document.write(this.name + "<br/>");
+            document.write(testscore + "<br/>");
+        }
+        var student = {
+            id: 1,
+            name: "bob"
+
+        };
+
+        var student2 = {
+            id: 2,
+            name: "john"
+
+        };
+
+        this.id = 3;
+        this.name = "mary";
+
+        var displayForStudent1 = displayDetails.bind(student);
+        displayForStudent1(10);
+
+        var displayForStudent2 = displayDetails.bind(student2, 20);
+        displayForStudent2();
+
+        displayForStudent2.displayDetails = displayForStudent1;
+        displayForStudent2(24);
+
+        // var displayForStudent1 = displayDetails.bind(student);
+        // displayForStudent1(10);
+
+    </script>
+</body>
+
+</html>

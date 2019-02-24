@@ -3,29 +3,31 @@
 <body>
     <script>
 
-        function displayDetails() {
+        function displayDetails(testscore, testscore2) {
             document.write(this.id + "<br/>");
             document.write(this.name + "<br/>");
+            document.write(testscore + "<br/>");
+            document.write(testscore2 + "<br/>");
         }
         var student = {
             id: 1,
-            name: "bob",
-            display: displayDetails
+            name: "bob"
+            
         };
 
         var student2 = {
             id: 2,
-            name: "john",
-            display: displayDetails
+            name: "john"
+            
         };
 
         this.id = 3;
         this.name = "mary";
 
-        student.display();
-        student2.display();
-        displayDetails();
-        
+       displayDetails.apply(student, [10,29]);
+       displayDetails.apply(student2,[20,2]);
+       displayDetails.apply(this, [30,1]);
+
     </script>
 </body>
 
