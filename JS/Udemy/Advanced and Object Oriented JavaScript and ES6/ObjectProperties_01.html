@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    <script>
+
+        var course1 = {
+            name: "js fundamentals"    //JS engine will invoke a PUT
+        };
+
+        var course2 = new Object();
+        course2.name = "ReactJS";        // JS engine will invoke PUT
+
+        course1.name = "End to end java";    // JS engine will invoke SET
+
+        course1.description = "master java proj dev";   // JS engine will invoke PUT
+
+        // checks if a property exists on an object
+        console.log("description" in course1);
+        // even inherited methods / properties can be tested
+        console.log("toString" in course1);
+
+        // this check if the method / property is owned by the object
+        console.log(course1.hasOwnProperty("toString"));
+
+        console.log(course1.hasOwnProperty("name"));
+
+    </script>
+</body>
+
+</html>
