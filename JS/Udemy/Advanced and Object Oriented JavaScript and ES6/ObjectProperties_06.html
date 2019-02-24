@@ -1,0 +1,39 @@
+<html>
+
+<body>
+    <script>
+        var cc = {};
+
+        Object.defineProperties(cc, {       // defining multiple properties, internal and external
+            _name: {
+                value: "John",
+                enumerable: true,
+                configurable: true,
+                writable: true
+            },
+
+            name: {
+                get: function () {
+                    return this._name;
+                },
+                set: function (value) {
+                    this._name = value;
+                },
+                enumerable: true,
+                configurable: true
+            }
+        });
+
+        console.log("name" in cc);
+        console.log(cc.propertyIsEnumerable("name"));
+        console.log(delete cc.name);
+        console.log("name" in cc);
+        console.log(cc.name);
+
+        cc.name = "bob";
+        console.log(cc.name);
+
+    </script>
+</body>
+
+</html>

@@ -12,16 +12,16 @@
             get: function(){
                 return this._name;
             },
-            set: function(value){
-                this._name = value;
-            },
-            enumerable: true,       // by default this would be false
-            configurable: true,     // by default this would be false
+            // set: function(value){
+            //     this._name = value;
+            // },
+            // enumerable: true,       // by default this would be false
+            // configurable: true,     // by default this would be false
         });
 
         console.log("name" in cc);
         console.log(cc.propertyIsEnumerable("name"));
-        delete cc.name;
+        console.log(delete cc.name);
         console.log("name" in cc);
         console.log(cc.name);
 
