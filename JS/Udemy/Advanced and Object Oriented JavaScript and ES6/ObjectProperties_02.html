@@ -1,0 +1,24 @@
+<html>
+
+<body>
+    <script>
+
+        var cc = {
+            _name: "John",              // unserscore is used as a convention to keep variables internal
+            get name() {                // create a getter accessor
+                return this._name;
+            },
+
+            set name(value) {           // create a setter accessor
+                this._name = value;
+            }
+        };
+
+        console.log(cc.name);
+        cc.name = "bob";
+        console.log(cc.name);
+
+    </script>
+</body>
+
+</html>
