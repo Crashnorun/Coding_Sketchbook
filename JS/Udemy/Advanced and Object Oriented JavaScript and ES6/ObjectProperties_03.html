@@ -1,0 +1,37 @@
+<html>
+
+<body>
+    <script>
+
+        var cc = {
+            name: "John",            
+        };
+
+        console.log(cc.propertyIsEnumerable("name"));
+
+        // this makes a property not enumerable
+        Object.defineProperty(cc, "name",{
+            enumerable:false
+        });
+
+        console.log("name" in cc);
+        console.log(cc.propertyIsEnumerable("name"));
+
+        // definds if a property can be changed or deleted
+        Object.defineProperty(cc, "name",{
+            configurable:false
+        });
+
+        delete cc.name;
+        console.log("name" in cc);      // this fails silently
+        console.log(cc.name);
+
+        // once marked as non configurable, it cannot be marked as configurable
+        Object.defineProperty(cc, "name",{
+            configurable:true
+        });
+
+    </script>
+</body>
+
+</html>
