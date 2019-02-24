@@ -1,0 +1,26 @@
+<html>
+
+<body>
+    <script>
+
+        var cc = {};
+        Object.defineProperty(cc, "name", {
+            value: "John",
+            //enumerable: true,       // by default this would be false
+            //configurable: true,     // by default this would be false
+            //writable: true          // by default this would be false
+        });
+
+        console.log("name" in cc);
+        console.log(cc.propertyIsEnumerable("name"));
+        delete cc.name;
+        console.log("name" in cc);
+        console.log(cc.name);
+
+        cc.name = "bob";
+        console.log(cc.name);
+
+    </script>
+</body>
+
+</html>
