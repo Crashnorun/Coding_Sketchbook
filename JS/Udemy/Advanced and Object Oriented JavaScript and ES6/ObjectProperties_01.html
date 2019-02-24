@@ -39,10 +39,15 @@
         var allProps = Object.keys(course1);
         console.log(allProps);
 
-        for(var i = 0; i < allProps.length; i++){
+        for (var i = 0; i < allProps.length; i++) {
             console.log(allProps[i]);
             console.log(course1[allProps[i]]);
         }
+
+        console.log(course1.propertyIsEnumerable("name"));
+        console.log(course1.propertyIsEnumerable("toString"));      // built in properties are not enumerable
+        console.log(allProps.propertyIsEnumerable("length"));       // internal properties are not enumerable
+
 
     </script>
 </body>
