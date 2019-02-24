@@ -1,0 +1,18 @@
+<html>
+
+<body>
+    <script>
+        var cc = {
+            name: "John"
+        };
+
+        var descriptor = Object.getOwnPropertyDescriptor(cc, "name");
+        console.log(descriptor.enumerable);
+        console.log(descriptor.configurable);
+        console.log(descriptor.writable);
+        console.log(descriptor.value);
+
+    </script>
+</body>
+
+</html>
