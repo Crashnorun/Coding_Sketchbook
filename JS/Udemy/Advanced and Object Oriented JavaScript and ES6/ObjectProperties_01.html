@@ -14,15 +14,35 @@
 
         course1.description = "master java proj dev";   // JS engine will invoke PUT
 
+        console.log("Deleting a property: " + delete course1.description);      // JS engine invokes DELETE
+
         // checks if a property exists on an object
+        console.log("Does DESCRIPTION propety exist: ");
         console.log("description" in course1);
+
         // even inherited methods / properties can be tested
+        console.log("Does TOSTRING propety exist: ");
         console.log("toString" in course1);
 
         // this check if the method / property is owned by the object
-        console.log(course1.hasOwnProperty("toString"));
+        console.log("Is TOSTRING owned by course1 object: " + course1.hasOwnProperty("toString"));
 
-        console.log(course1.hasOwnProperty("name"));
+        console.log("Is NAME owned by course1 object: " + course1.hasOwnProperty("name"));
+
+        // iterate through all properties in the object
+        for (var eachProp in course1) {
+            console.log(eachProp);
+            console.log(course1[eachProp]);
+        }
+
+        // this will return all the properties in an object
+        var allProps = Object.keys(course1);
+        console.log(allProps);
+
+        for(var i = 0; i < allProps.length; i++){
+            console.log(allProps[i]);
+            console.log(course1[allProps[i]]);
+        }
 
     </script>
 </body>
