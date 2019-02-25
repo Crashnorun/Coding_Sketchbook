@@ -1,0 +1,28 @@
+<html>
+
+<body>
+    <script>
+        function Flight(airlines, flightNumber) {
+            this.airlines = airlines;
+            this.flightNumber = flightNumber;
+
+            this.display = function () {
+                console.log(this.airlines);
+                console.log(this.flightNumber);
+            };
+            return;         // this is not necessary
+        }
+
+        var flight1 = new Flight("AA", "aa123");
+        var flight2 = new Flight("BA", "ba123");
+        flight1.display();
+        flight2.display();
+
+        // console.log(flight1 instanceof Flight);
+        // console.log(flight2 instanceof Flight);
+
+        // console.log(flight1.constructor === Flight());
+
+    </script>
+
+</html>
