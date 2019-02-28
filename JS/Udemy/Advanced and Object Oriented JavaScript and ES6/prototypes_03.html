@@ -13,12 +13,14 @@
         // define a "prototype" for the Flight class
         // conseptually similar to inheritance
         Flight.prototype = {
+            constructor: Flight,
+
             display: function () {
                 console.log(this.airlines);
                 console.log(this.flightNumber);
             },
-            toString: function(){
-                return "Flight " + this.airlines + " " + this.flightNumber; 
+            toString: function () {
+                return "Flight " + this.airlines + " " + this.flightNumber;
             }
         };
 
@@ -28,6 +30,10 @@
         flight2.display();
         console.log(flight1.toString());
         console.log(flight2.toString());
+
+        console.log(flight1 instanceof Flight);
+        console.log(flight1.constructor == Flight);
+        console.log(flight1.constructor == Object);
 
     </script>
 
