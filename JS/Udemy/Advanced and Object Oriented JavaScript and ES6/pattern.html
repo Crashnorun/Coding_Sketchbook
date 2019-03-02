@@ -1,0 +1,31 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        var account = (function () {
+            
+            // this is considred a private variable
+            var balance = 1000;
+           
+            // anything in the 'return' is considered a public variable / function
+            return {
+                // these variables & functions are considered public
+                name: "john",
+                getBalance: function () { return balance; },
+                addIntrest: function (interest) { balance += interest; }
+            };
+        }());
+
+        console.log(account.name);
+        console.log(account.getBalance());
+        account.balance = 2000;
+        console.log(account.getBalance());
+        account.addIntrest(300);
+        console.log(account.getBalance());
+
+    </script>
+</body>
+
+</html>
