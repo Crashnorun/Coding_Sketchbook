@@ -2,33 +2,44 @@
 
 <body>
     <script>
-
+        // create a doctor object
         function Doctor(name) {
             this.name = name;
         };
-
+        // give the doctor a meathod
         Doctor.prototype.treat = function () {
             return "treated";
         };
-
+        // override toString function
         Doctor.prototype.toString = function () {
             return "Doctor " + this.name;
         };
 
+        // create surgeon object
         function Surgeon(name, type) {
             this.name = name;
             this.type = type;
         };
 
+        // inhert from the Dotor object
         Surgeon.prototype = new Doctor();
+        // assign a constructor
         Surgeon.prototype.construtor = Surgeon;
 
+        // override the doctor treat function
+        Surgeon.prototype.treat = function () {
+            // call the doctor treat function k
+            return Doctor.prototype.treat.call(this) + " operated";
+        };
+
+        // override the to string function
         Surgeon.prototype.toString = function () {
             return "Surgeon " + this.name + " Type " + this.type;
         };
 
         var doctor = new Doctor("john");
         var surgeon = new Surgeon("bon", "dental");
+
         console.log(doctor.treat());
         console.log(surgeon.treat());
         console.log(doctor.toString());
@@ -36,7 +47,7 @@
 
         console.log(doctor instanceof Doctor);
         console.log(doctor instanceof Object);
-        
+
         console.log(surgeon instanceof Doctor);
         console.log(surgeon instanceof Surgeon);
         console.log(surgeon instanceof Object);
