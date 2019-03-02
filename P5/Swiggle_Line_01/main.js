@@ -11,13 +11,34 @@ let pts = [];
 function setup() {
     createCanvas(600, 600);
     background(0);
-    let pt = new Point(createVector(random(1, 5), random(1, 5)), 4);
-    pt.color = [random(0, 255), random(0, 255), random(200, 255)];
 
-    stroke(pt.color);
+    let ptPrev = new Point(createVector(random(1, 5), random(1, 5)), 5);
+    ptPrev.vect.setMag(80);
+    ptPrev.offset = 0.01;
+    let len = ptPrev.vect.mag();
+    ptPrev.color = [random(0, 255), random(0, 255), random(200, 255)];
+    pts.push(ptPrev);
+
+    for (let i = 0; i < 10; i++) {
+        let pt = new Point(ptPrev.vect, ptPrev.weight * 0.9);
+        pt.offset = pts[i].offset + 0.01;
+        pt.rotateVector();
+        pt.vect = p5.Vector.add(ptPrev.vect, pt.vect);
+        pt.vect.setMag(len);
+        pt.color = [random(0, 255), random(0, 255), random(200, 255)];
+        pts.push(pt);
+        ptPrev = pt;
+    }
+
     translate(width / 2, height / 2);
-    strokeWeight(pt.weight);
-    line(0, 0, pt.vect.x, pt.vect.y);
+
+    for (let i = 0; i < pts.length; i++) {
+        stroke(pts[i].color);
+        strokeWeight(pts[i].weight);
+        ellipse(pts[i].vect.x, pts[i].vect.y, pts[i].weight, pts[i].weight);
+        if (i > 1)
+            line(pts[i - 1].vect.x, pts[i - 1].vect.y, pts[i].vect.x, pts[i].vect.y)
+    }
 }
 
 function draw() {
@@ -27,4 +48,11 @@ function draw() {
 function Point(vect, weight) {
     this.vect = vect;
     this.weight = weight;
+    this.offset;
+    this.rotateVector = function () {
+        this.vect.rotate(noise(this.offset));
+        //this.offset += 0.01;
+        console.log(this.offset);
+    }
+
 }
