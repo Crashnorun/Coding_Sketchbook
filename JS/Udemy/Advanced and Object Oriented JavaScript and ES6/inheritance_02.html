@@ -1,0 +1,26 @@
+<html>
+
+<body>
+    <script>
+
+        var project1 = {
+            name: "road work",
+            display:function(){
+                console.log(this.name);
+            }
+        };
+
+var project2 = Object.create(project1, {
+    name: {
+        configurable:true,
+        enumerable: true,
+        value: "bridge work",
+        writable : true
+    }
+});
+
+project2.display();
+project1.display();
+
+    </script>
+</html>

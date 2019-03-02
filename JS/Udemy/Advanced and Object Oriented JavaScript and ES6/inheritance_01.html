@@ -1,0 +1,16 @@
+<html>
+
+<body>
+    <script>
+
+        var project = {
+            name: "road work"
+        };
+
+        console.log(project.hasOwnProperty("name"));
+        var prototype = Object.getPrototypeOf(project);
+        console.log(project === Object.prototype);
+
+    </script>
+
+</html>
