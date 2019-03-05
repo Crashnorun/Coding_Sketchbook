@@ -1,0 +1,30 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        let student = {
+            firstName: "John",
+            lastName: "baily",
+            score: 90
+        };
+
+        // extract all the propertites in an object into variables in one line
+        const { firstName: fname, lastName: lname, score: s } = student;
+
+        console.log(fname);
+        console.log(lname);
+        console.log(s);
+
+        // this will extract the properties into variables of the same name as the property
+        const { firstName, lastName, score } = student;
+
+        console.log(firstName);
+        console.log(lastName);
+        console.log(score);
+
+    </script>
+</body>
+
+</html>
