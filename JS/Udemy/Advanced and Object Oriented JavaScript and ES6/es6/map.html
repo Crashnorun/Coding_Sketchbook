@@ -1,0 +1,41 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        // create a new map object
+        let scores = new Map();
+
+        // another way of definign a map
+        let scores2 = new Map([["math", 90], ["eng", 97], ["bio", 50]]);
+        console.log(scores2);
+
+        // values to a map
+        scores.set("math", 90);
+        scores.set("eng", 97);
+        scores.set("bio", 50);
+
+        // get values from a map
+        console.log(scores.get("math"));
+        console.log(scores.get("eng"));
+        console.log(scores.get("bio"));
+
+        // get map size
+        console.log(scores.size);
+
+        // check if a map has a specific property
+        console.log(scores.has('eng'));
+
+        // delete an object from a map
+        scores.delete('math');
+        console.log(scores.has("math"));
+
+        console.log(scores);
+        scores.clear();         // clear an entire map
+        console.log(scores.size);
+
+    </script>
+</body>
+
+</html>
