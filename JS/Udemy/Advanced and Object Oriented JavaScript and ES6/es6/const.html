@@ -1,0 +1,23 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+        "use strict";
+        const pi = 3.14;    // const values cannot be changed
+        // pi = 3.70;          // this will throw an error
+        console.log(pi);
+
+        const product = {}; // can't re assign the object
+        product["name"] = "iphone"; // but can give it a new property
+        console.log(product);
+
+        const product2 = Object.freeze({}); // can't re assign the object
+        product2["name"] = "iphone"; // cannot assign new properties
+        console.log(product2);
+
+
+    </script>
+</body>
+
+</html>
