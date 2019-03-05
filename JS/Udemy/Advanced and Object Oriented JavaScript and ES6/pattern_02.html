@@ -9,7 +9,7 @@
             // this is considred a private variable
             var balance = 1000;
             function getBalance() { return balance; }
-            function addInterest(interest) { balance += interest; }
+            function addInterest(interest) { return balance += interest; }
 
             // anything in the 'return' is considered a public variable / function
             return {
@@ -24,7 +24,7 @@
         console.log(account.getBalance());
         account.balance = 2000;
         console.log(account.getBalance());
-        account.addIntrest(300);
+        account.addInterest(300);
         console.log(account.getBalance());
 
     </script>
