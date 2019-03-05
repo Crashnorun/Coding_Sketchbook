@@ -1,0 +1,23 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        function add({ num1, num2, num3 }) {
+            console.log(num1 + num2 + num3);
+        }
+
+        add({ num1: 10, num2: 20, num3: 30 });
+
+
+        // assigning a default value
+        function add2({ num1 = 10, num2, num3 }) {
+            console.log(num1 + num2 + num3);
+        }
+
+        add2({ num2: 20, num3: 30 });
+    </script>
+</body>
+
+</html>
