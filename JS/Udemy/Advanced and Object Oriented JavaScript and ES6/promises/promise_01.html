@@ -1,0 +1,29 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        function MyAsyncFunction() {
+            let promise = new Promise((resolve, reject) => {
+                let error = true;
+                setTimeout(() => {
+                    console.log("async")
+                    if (error) { reject("Error"); }
+                    else { resolve("Done"); }
+                }
+                    , 1000);
+            });
+
+            return promise;
+        }
+
+        MyAsyncFunction().then(
+            (success) => console.log(success),
+            //(error) => console.log(error)
+        ).catch((error) => console.log(error));
+
+    </script>
+</body>
+
+</html>

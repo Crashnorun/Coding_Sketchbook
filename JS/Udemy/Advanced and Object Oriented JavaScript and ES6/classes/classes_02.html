@@ -1,0 +1,56 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        class BMW {
+            constructor(make, model, year) {
+                this.make = make;
+                this.model = model;
+                this.year = year;
+            }
+            start(){ console.log("Start engine"); }
+            stop(){ console.log("Stop engine"); }
+        }
+
+        // "extends" allows for inheritance
+        class ThreeSeries extends BMW {
+            constructor(make, model, year, cruiseControlEnabeled) {
+                super(make, model, year)         // used to initialize the parent class
+                this.cruiseControlEnabeled = cruiseControlEnabeled;
+            }
+        }
+
+        // "extends" allows for inheritance
+        class FiveSeries extends BMW {
+            constructor(make, model, year, parkingAssistEnabeled) {
+                super(make, model, year)         // used to initialize the parent class
+                this.parkingAssistEnabeled = parkingAssistEnabeled;
+            }
+            start(){ console.log("Remote start"); }
+        }
+
+        let threeseries = new ThreeSeries("BMW", "383", 2018, true);
+        let fiveseries = new FiveSeries("BMW", "353", 2018, true);
+       
+        console.log(threeseries.make);
+        console.log(threeseries.model);
+        console.log(threeseries.year);
+        console.log(threeseries.cruiseControlEnabeled);
+        threeseries.start();
+        threeseries.stop();
+
+        console.log(fiveseries.make);
+        console.log(fiveseries.model);
+        console.log(fiveseries.year);
+        console.log(fiveseries.parkingAssistEnabeled);
+        fiveseries.start();
+        fiveseries.stop();
+
+        console.log(threeseries);
+
+    </script>
+</body>
+
+</html>
