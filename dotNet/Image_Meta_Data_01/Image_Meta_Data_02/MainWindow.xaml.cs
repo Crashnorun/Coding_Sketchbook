@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Image_Meta_Data_02
 {
@@ -61,7 +62,20 @@ namespace Image_Meta_Data_02
 
         private void ImgBox_Loaded(object sender, RoutedEventArgs e)
         {
-            // read image data
+            System.Drawing.Image img = System.Drawing.Image.FromFile(FilePath);
+            PropertyItem[] properties = img.PropertyItems;              // read image data
+            List<cls_ImageProperty> ImgProperties = new List<cls_ImageProperty>();
+
+            foreach(PropertyItem item in properties)
+            {
+                cls_ImageProperty imgProp = new cls_ImageProperty();
+                imgProp.Id = item.Id;
+                imgProp.DataLength = item.Len;
+                imgProp.DataBuffer = item.Value;
+
+
+            }
+
             // display image data in data grid view
         }
     }
