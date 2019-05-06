@@ -29,15 +29,17 @@
         <DataGrid x:Name="dataGrid" Margin="5"
                   Grid.Column="0" Grid.Row="0" 
                   ItemsSource="{Binding}"
-                  AutoGenerateColumns="True">
+                  AutoGenerateColumns="True"
+                  HeadersVisibility="Column"
+                  BorderThickness="0">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Property" Binding="{Binding PropertyName}" Width="*"/>
                 <DataGridTextColumn Header="Value" Binding="{Binding PropertyValue}" Width="*"/>
             </DataGrid.Columns>
+
         </DataGrid>
-            
-        
+
     </Grid>
 
        
