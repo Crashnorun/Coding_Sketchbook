@@ -102,7 +102,8 @@ namespace Image_Meta_Data_02
                 value = 15
             };
 
-            dataGrid.DataContext = new List<Person> { me, bob };
+            dataGrid.DataContext = 2;
+            //dataGrid.DataContext = new List<Person> { me, bob };
         }
 
     }

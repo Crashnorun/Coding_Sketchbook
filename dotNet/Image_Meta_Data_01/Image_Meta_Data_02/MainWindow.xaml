@@ -28,7 +28,16 @@
 
         <DataGrid x:Name="dataGrid" Margin="5"
                   Grid.Column="0" Grid.Row="0" 
-                  HeadersVisibility="None" />
+                  ItemsSource="{Binding}"
+                  AutoGenerateColumns="True">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Property" Binding="{Binding PropertyName}" Width="*"/>
+                <DataGridTextColumn Header="Value" Binding="{Binding PropertyValue}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+            
+        
     </Grid>
 
        
