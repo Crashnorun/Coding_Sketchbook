@@ -1,0 +1,15 @@
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\bin\Debug\Image_Meta_Data_02.exe.config
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\bin\Debug\Image_Meta_Data_02.exe
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\bin\Debug\Image_Meta_Data_02.pdb
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.csprojAssemblyReference.cache
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\MainWindow.g.cs
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\App.g.cs
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02_MarkupCompile.cache
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02_MarkupCompile.lref
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\MainWindow.baml
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.g.resources
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.Properties.Resources.resources
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.csproj.GenerateResource.cache
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.csproj.CoreCompileInputs.cache
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.exe
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.pdb
