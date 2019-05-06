@@ -30,6 +30,8 @@ namespace Image_Meta_Data_02
          */
         #endregion
 
+        public string FilePath;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,9 +53,16 @@ namespace Image_Meta_Data_02
             DialogResult dr = ofd.ShowDialog();
             if (dr == System.Windows.Forms.DialogResult.OK && ofd.FileName != null)
             {
-                BitmapImage bitMap = new BitmapImage(new Uri(ofd.FileName));
+                FilePath = ofd.FileName;
+                BitmapImage bitMap = new BitmapImage(new Uri(FilePath));
                 imgBox.Source = bitMap;                                                 // load image
             }
+        }
+
+        private void ImgBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            // read image data
+            // display image data in data grid view
         }
     }
 }

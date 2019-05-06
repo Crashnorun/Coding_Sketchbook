@@ -24,11 +24,11 @@
                 ToolTip="Hello world" Click="BtnLoad_Click" />
 
         <Image x:Name="imgBox" Margin="5"
-               Grid.Column="1" Grid.Row="0" />
+               Grid.Column="1" Grid.Row="0" Loaded="ImgBox_Loaded" />
 
         <DataGrid x:Name="dataGrid" Margin="5"
                   Grid.Column="0" Grid.Row="0" 
-                  HeadersVisibility="None"/>
+                  HeadersVisibility="None" />
     </Grid>
 
        
