@@ -24,7 +24,7 @@
                 ToolTip="Hello world" Click="BtnLoad_Click" />
 
         <Image x:Name="imgBox" Margin="5"
-               Grid.Column="1" Grid.Row="0" Loaded="ImgBox_Loaded" />
+               Grid.Column="1" Grid.Row="0" />
 
         <DataGrid x:Name="dataGrid" Margin="5"
                   Grid.Column="0" Grid.Row="0" 

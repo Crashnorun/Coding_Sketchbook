@@ -57,26 +57,60 @@ namespace Image_Meta_Data_02
                 FilePath = ofd.FileName;
                 BitmapImage bitMap = new BitmapImage(new Uri(FilePath));
                 imgBox.Source = bitMap;                                                 // load image
+
+                //LoadMetaData();
+                tempLoadData();
             }
         }
 
-        private void ImgBox_Loaded(object sender, RoutedEventArgs e)
+        private void LoadMetaData()
         {
             System.Drawing.Image img = System.Drawing.Image.FromFile(FilePath);
             PropertyItem[] properties = img.PropertyItems;              // read image data
             List<cls_ImageProperty> ImgProperties = new List<cls_ImageProperty>();
 
-            foreach(PropertyItem item in properties)
+            foreach (PropertyItem item in properties)
             {
                 cls_ImageProperty imgProp = new cls_ImageProperty();
                 imgProp.Id = item.Id;
-                imgProp.DataLength = item.Len;
+                imgProp.DataType = (ExifPropertyDataTypes)item.Type;
                 imgProp.DataBuffer = item.Value;
+                imgProp.DataLength = item.Len;
 
-
+                ImgProperties.Add(imgProp);
             }
+
+            dataGrid.ItemsSource = ImgProperties;
 
             // display image data in data grid view
         }
+
+
+        private void tempLoadData()
+        {
+            Person me = new Person()
+            {
+                name = "Charlie",
+                age = 10,
+                value = 12
+            };
+
+            Person bob = new Person()
+            {
+                name = "bob",
+                age = 14,
+                value = 15
+            };
+
+            dataGrid.DataContext = new List<Person> { me, bob };
+        }
+
+    }
+
+    public class Person
+    {
+        public string name;
+        public int age;
+        public int value;
     }
 }

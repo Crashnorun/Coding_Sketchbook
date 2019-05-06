@@ -9,16 +9,104 @@ namespace Image_Meta_Data_02
     public class cls_ImageProperty
     {
         public int Id;
-        public string PropertyValue;
-        public string PropertyName;
-        public int DataLength;
-        public byte[] DataBuffer
+        public string PropertyValue
         {
-            set { CalculateValue(value); }
+            get { return CalculateValue(); }
+            set { }
         }
+        public string PropertyName;
+        public Type PropertyType;
+        public ExifPropertyDataTypes DataType;
+        public int DataLength;
+        public byte[] DataBuffer;
 
-        private string CalculateValue(byte[] propertyValue)
+        private string CalculateValue()
         {
+
+            string result = "";
+            int num_items, item_size;
+
+            switch (DataType)
+            {
+                case ExifPropertyDataTypes.ByteArray:
+                case ExifPropertyDataTypes.UByteArray:
+                    PropertyValue = BitConverter.ToString(DataBuffer);
+                    break;
+
+                case ExifPropertyDataTypes.String:
+                    PropertyValue = Encoding.UTF8.GetString(DataBuffer, 0, DataLength - 1);
+                    break;
+
+                case ExifPropertyDataTypes.UShortArray:
+                    result = "";
+                    item_size = 2;
+                    num_items = DataLength / item_size;
+                    for (int i = 0; i < num_items; i++)
+                    {
+                        ushort value = BitConverter.ToUInt16(DataBuffer, i * item_size);
+                        result += ", " + value.ToString();
+                    }
+                    if (result.Length > 0) result = result.Substring(2);
+                    PropertyValue = "[" + result + "]";
+                    break;
+
+                case ExifPropertyDataTypes.ULongArray:
+                    result = "";
+                    item_size = 4;
+                    num_items = DataLength / item_size;
+                    for (int i = 0; i < num_items; i++)
+                    {
+                        uint value = BitConverter.ToUInt32(DataBuffer, i * item_size);
+                        result += ", " + value.ToString();
+                    }
+                    if (result.Length > 0) result = result.Substring(2);
+                    PropertyValue = "[" + result + "]";
+                    break;
+
+                case ExifPropertyDataTypes.ULongFractionArray:
+                    result = "";
+                    item_size = 8;
+                    num_items = DataLength / item_size;
+                    for (int i = 0; i < num_items; i++)
+                    {
+                        uint numerator = BitConverter.ToUInt32(DataBuffer, i * item_size);
+                        uint denominator = BitConverter.ToUInt32(DataBuffer, i * item_size + item_size / 2);
+                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
+                    }
+                    if (result.Length > 0) result = result.Substring(2);
+                    PropertyValue = "[" + result + "]";
+                    break;
+
+                case ExifPropertyDataTypes.LongArray:
+                    result = "";
+                    item_size = 4;
+                    num_items = DataLength / item_size;
+                    for (int i = 0; i < num_items; i++)
+                    {
+                        int value = BitConverter.ToInt32(DataBuffer, i * item_size);
+                        result += ", " + value.ToString();
+                    }
+                    if (result.Length > 0) result = result.Substring(2);
+                    PropertyValue = "[" + result + "]";
+                    break;
+
+                case ExifPropertyDataTypes.LongFractionArray:
+                    result = "";
+                    item_size = 8;
+                    num_items = DataLength / item_size;
+                    for (int i = 0; i < num_items; i++)
+                    {
+                        int numerator = BitConverter.ToInt32(DataBuffer, i * item_size);
+                        int denominator = BitConverter.ToInt32(DataBuffer, i * item_size + item_size / 2);
+                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
+                    }
+                    if (result.Length > 0) result = result.Substring(2);
+                    PropertyValue = "[" + result + "]";
+                    break;
+            }
+
+
+
 
             return null;
         }
