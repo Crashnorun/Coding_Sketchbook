@@ -36,8 +36,7 @@ namespace Image_Meta_Data_02
         public MainWindow()
         {
             InitializeComponent();
-
-            tempLoadData();
+            dataGrid.Visibility = Visibility.Hidden;
         }
 
 
@@ -69,6 +68,7 @@ namespace Image_Meta_Data_02
             System.Drawing.Image img = System.Drawing.Image.FromFile(FilePath);
             PropertyItem[] properties = img.PropertyItems;              // read image data
             List<cls_ImageProperty> ImgProperties = new List<cls_ImageProperty>();
+            int count = 1;
 
             foreach (PropertyItem item in properties)
             {
@@ -77,13 +77,15 @@ namespace Image_Meta_Data_02
                 imgProp.DataType = (ExifPropertyDataTypes)item.Type;
                 imgProp.DataBuffer = item.Value;
                 imgProp.DataLength = item.Len;
+                imgProp.RowNumber = count;
+                count++;
 
                 ImgProperties.Add(imgProp);
             }
 
-            dataGrid.ItemsSource = ImgProperties;
-
             // display image data in data grid view
+            dataGrid.ItemsSource = ImgProperties;
+            dataGrid.Visibility = Visibility.Visible;
         }
 
 
@@ -111,6 +113,10 @@ namespace Image_Meta_Data_02
            // dataGrid.Items.Add(bob);
         }
 
+        private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 
     public class Person

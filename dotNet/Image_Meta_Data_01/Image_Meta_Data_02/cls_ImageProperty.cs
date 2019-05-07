@@ -8,21 +8,17 @@ namespace Image_Meta_Data_02
 {
     public class cls_ImageProperty
     {
+        public int RowNumber;
         public int Id;
-        public string PropertyValue
-        {
-            get { return CalculateValue(); }
-            set { }
-        }
+        public string PropertyValue;
         public string PropertyName;
         public Type PropertyType;
         public ExifPropertyDataTypes DataType;
         public int DataLength;
         public byte[] DataBuffer;
 
-        private string CalculateValue()
+        public void CalculateValue()
         {
-
             string result = "";
             int num_items, item_size;
 
@@ -105,10 +101,7 @@ namespace Image_Meta_Data_02
                     break;
             }
 
-
-
-
-            return null;
+            PropertyValue = result;
         }
     }
 

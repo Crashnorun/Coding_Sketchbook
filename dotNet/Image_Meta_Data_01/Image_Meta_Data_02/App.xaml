@@ -13,15 +13,18 @@
             <Setter Property="FontFamily" Value="{StaticResource Segoe UI}"/>
             <Setter Property="Foreground" Value="{StaticResource Black}"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="None"/> 
         </Style>
 
         <Style TargetType="DataGridCell" x:Name="dgCellStyle" x:Key="dgCellStyle">
             <!--<Setter Property="Background" Value="Green"/>-->
             <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderThickness" Value="0"/>
+
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="Azure"/>
+                    <Setter Property="Background" Value="AliceBlue"/>
                 </Trigger>
             </Style.Triggers>
             

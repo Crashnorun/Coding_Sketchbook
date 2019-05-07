@@ -30,12 +30,20 @@
                   Grid.Column="0" Grid.Row="0" 
                   AutoGenerateColumns="True"
                   HeadersVisibility="Column"
-                  Background="AliceBlue" BorderThickness="0" 
-                  CellStyle="{DynamicResource dgCellStyle}" >
-           
+                  Background="{x:Null}" BorderThickness="0" 
+                  CellStyle="{DynamicResource dgCellStyle}" 
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="LightGray"  >
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar">
+                    <Setter Property="Width" Value="5"/>
+                </Style>
+            </DataGrid.Resources>
+            
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Property" Width="*" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Value"  Width="*"/>
+                <DataGridTextColumn Header="" Width="0.25*" IsReadOnly="True" Binding="{Binding RowNumber}"/>
+                <DataGridTextColumn Header="Property" Width="*" IsReadOnly="True" Binding="{Binding Property}"/>
+                <DataGridTextColumn Header="Value"  Width="*" Binding="{Binding Value}"/>
             </DataGrid.Columns>
 
         </DataGrid>
