@@ -36,6 +36,8 @@ namespace Image_Meta_Data_02
         public MainWindow()
         {
             InitializeComponent();
+
+            tempLoadData();
         }
 
 
@@ -59,7 +61,6 @@ namespace Image_Meta_Data_02
                 imgBox.Source = bitMap;                                                 // load image
 
                 LoadMetaData();
-                //tempLoadData();
             }
         }
 
@@ -90,28 +91,31 @@ namespace Image_Meta_Data_02
         {
             Person me = new Person()
             {
-                name = "Charlie",
-                age = 10,
-                value = 12
+                Value = "Charlie",
+                Property = 10
             };
 
             Person bob = new Person()
             {
-                name = "bob",
-                age = 14,
-                value = 15
+                Value = "bob",
+                Property = 14
             };
 
-            //dataGrid.DataContext = 2;
-            dataGrid.DataContext = new List<Person> { me, bob };
+            List<Person> people = new List<Person>();
+            people.Add(me);
+            people.Add(bob);
+           
+            dataGrid.ItemsSource = people;
+         
+            //dataGrid.Items.Add(me);
+           // dataGrid.Items.Add(bob);
         }
 
     }
 
     public class Person
     {
-        public string name;
-        public int age;
-        public int value;
+        public string Value;
+        public int Property;
     }
 }

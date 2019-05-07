@@ -3,7 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Image_Meta_Data_02"
              StartupUri="MainWindow.xaml">
+    
     <Application.Resources>
-         
+        <FontFamily x:Name="appFont" x:Key="Segoe UI"/>
+        <SolidColorBrush x:Name="appFontColor" x:Key="Black"/>
+        
+        <Style TargetType="DataGrid" x:Name="dgStyle" x:Key="dgStyle">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="{StaticResource Segoe UI}"/>
+            <Setter Property="Foreground" Value="{StaticResource Black}"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+        </Style>
+
+        <Style TargetType="DataGridCell" x:Name="dgCellStyle" x:Key="dgCellStyle">
+            <!--<Setter Property="Background" Value="Green"/>-->
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Azure"/>
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
+   
     </Application.Resources>
+    
 </Application>

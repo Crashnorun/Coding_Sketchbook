@@ -13,3 +13,4 @@ C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta
 C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.csproj.CoreCompileInputs.cache
 C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.exe
 C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\Image_Meta_Data_02.pdb
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Image_Meta_Data_01\Image_Meta_Data_02\obj\Debug\App.baml

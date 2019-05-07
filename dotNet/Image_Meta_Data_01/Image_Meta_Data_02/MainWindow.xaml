@@ -21,21 +21,21 @@
                 Grid.Column="0" Grid.Row="1"
                 HorizontalAlignment="Left" VerticalAlignment="Stretch"
                 Margin="5" Width="100" 
-                ToolTip="Hello world" Click="BtnLoad_Click" />
+                ToolTip="Select image to load" Click="BtnLoad_Click" BorderBrush="{x:Null}" />
 
         <Image x:Name="imgBox" Margin="5"
                Grid.Column="1" Grid.Row="0" />
 
         <DataGrid x:Name="dataGrid" Margin="5"
                   Grid.Column="0" Grid.Row="0" 
-                  ItemsSource="{Binding}"
                   AutoGenerateColumns="True"
                   HeadersVisibility="Column"
-                  BorderThickness="0">
-
+                  Background="AliceBlue" BorderThickness="0" 
+                  CellStyle="{DynamicResource dgCellStyle}" >
+           
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Property" Binding="{Binding PropertyName}" Width="*"/>
-                <DataGridTextColumn Header="Value" Binding="{Binding PropertyValue}" Width="*"/>
+                <DataGridTextColumn Header="Property" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Value"  Width="*"/>
             </DataGrid.Columns>
 
         </DataGrid>
