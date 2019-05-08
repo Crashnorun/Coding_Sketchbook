@@ -8,14 +8,14 @@ namespace Image_Meta_Data_02
 {
     public class cls_ImageProperty
     {
-        public int RowNumber;
-        public int Id;
-        public string PropertyValue;
-        public string PropertyName;
-        public Type PropertyType;
-        public ExifPropertyDataTypes DataType;
-        public int DataLength;
-        public byte[] DataBuffer;
+        public int RowNumber { get; set; }
+        public int Id { get; set; }
+        public string PropertyValue { get; set; }
+        public string PropertyName { get; set; }
+        public Type PropertyType { get; set; }
+        public ExifPropertyDataTypes DataType { get; set; }
+        public int DataLength { get; set; }
+        public byte[] DataBuffer { get; set; }
 
         public void CalculateValue()
         {
