@@ -28,15 +28,27 @@
 
         <DataGrid x:Name="dataGrid" Margin="5"
                   Grid.Column="0" Grid.Row="0" 
-                  AutoGenerateColumns="True"
+                  AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   Background="{x:Null}" BorderThickness="0" 
                   CellStyle="{DynamicResource dgCellStyle}" 
                   GridLinesVisibility="Horizontal"
-                  HorizontalGridLinesBrush="LightGray"  >
+                  HorizontalGridLinesBrush="LightGray">
+            
             <DataGrid.Resources>
                 <Style TargetType="ScrollBar">
-                    <Setter Property="Width" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="Width" Value="3"/>
+                        </Trigger>
+
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter Property="Height" Value="3"/>
+                        </Trigger>
+                        
+                    </Style.Triggers>
+
+                    <!--<Setter Property="Width" Value="5"/>-->
                 </Style>
             </DataGrid.Resources>
             

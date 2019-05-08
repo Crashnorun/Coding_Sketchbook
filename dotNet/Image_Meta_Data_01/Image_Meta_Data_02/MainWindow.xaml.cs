@@ -28,6 +28,9 @@ namespace Image_Meta_Data_02
          * https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-open-files-using-the-openfiledialog-component
          * https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.image?view=netframework-4.8
          * https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
+         * https://stackoverflow.com/questions/16900291/c-sharp-image-propertyitems-metadate-how-do-you-know-which-number-is-which-pro
+         * https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?redirectedfrom=MSDN&view=netframework-4.8#System_Drawing_Imaging_PropertyItem_Id
+         * https://github.com/anton-iermolenko/Photo-library-toolkit/blob/master/PhotoLibaryToolkit/Framework/ImageConstants.cs
          */
         #endregion
 
@@ -44,8 +47,7 @@ namespace Image_Meta_Data_02
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Multiselect = false,
-                Title = "Image Meta Data",
+                Multiselect = false, Title = "Image Meta Data",
                 Filter = "Images (*.BMP; *.JPG; *.PNG; *.GIF; *.TIFF) |*.BMP; *.JPG; *.PNG; *.GIF; *.TIFF"
             };
             //ofd.Multiselect = false;
@@ -55,11 +57,11 @@ namespace Image_Meta_Data_02
             DialogResult dr = ofd.ShowDialog();
             if (dr == System.Windows.Forms.DialogResult.OK && ofd.FileName != null)
             {
-                FilePath = ofd.FileName;
+                FilePath = ofd.FileName;                                                // get the file path
                 BitmapImage bitMap = new BitmapImage(new Uri(FilePath));
                 imgBox.Source = bitMap;                                                 // load image
 
-                LoadMetaData();
+                LoadMetaData();                                                         // get meta data
             }
         }
 
@@ -78,50 +80,21 @@ namespace Image_Meta_Data_02
                 imgProp.DataBuffer = item.Value;
                 imgProp.DataLength = item.Len;
                 imgProp.RowNumber = count;
+                imgProp.CalculateValue();
                 count++;
 
                 ImgProperties.Add(imgProp);
             }
 
             // display image data in data grid view
-            dataGrid.ItemsSource = ImgProperties;
+             dataGrid.ItemsSource = ImgProperties;
             dataGrid.Visibility = Visibility.Visible;
         }
 
-
-        private void tempLoadData()
-        {
-            Person me = new Person()
-            {
-                Value = "Charlie",
-                Property = 10
-            };
-
-            Person bob = new Person()
-            {
-                Value = "bob",
-                Property = 14
-            };
-
-            List<Person> people = new List<Person>();
-            people.Add(me);
-            people.Add(bob);
-           
-            dataGrid.ItemsSource = people;
-         
-            //dataGrid.Items.Add(me);
-           // dataGrid.Items.Add(bob);
-        }
-
+      
         private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 
         }
-    }
-
-    public class Person
-    {
-        public string Value;
-        public int Property;
     }
 }
