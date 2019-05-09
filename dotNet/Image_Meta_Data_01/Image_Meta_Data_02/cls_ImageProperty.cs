@@ -189,6 +189,11 @@ namespace Image_Meta_Data_02
                 { 0x011D, "Page Name" },
                 { 0x011E, "X Position" },
                 { 0x011F, "Y Position" },
+
+                { 0x0120, "Free Offset" },
+                { 0x011D, "Page Name" },
+                { 0x011E, "X Position" },
+                { 0x011F, "Y Position" },
             };
         }
 
