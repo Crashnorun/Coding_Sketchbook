@@ -17,6 +17,7 @@ namespace Image_Meta_Data_02
         public int DataLength { get; set; }
         public byte[] DataBuffer { get; set; }
 
+        private Dictionary<int, string> PropertyTags { get; set; }
 
         public cls_ImageProperty()
         {
@@ -108,6 +109,11 @@ namespace Image_Meta_Data_02
                     break;
             }
 
+            if (PropertyTags.ContainsKey(Id))
+                Property = PropertyTags[Id];
+            else
+                Property = Id.ToString();
+
             Value = result;
         }
 
@@ -122,9 +128,11 @@ namespace Image_Meta_Data_02
 
 
         // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions
+        // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-image-property-tag-constants
+        // https://blogs.msdn.microsoft.com/kamalds/2012/04/08/working-with-exif-metadata/
         public void CreatePropertyTags()
         {
-            Dictionary<int, string> PropertyTags = new Dictionary<int, string>() {
+            Dictionary<int, string> _PropertyTags = new Dictionary<int, string>() {
                 { 0x0000, "GPS Version" },
                 { 0x0001, "GPS Latitude Reference" },
                 { 0x0002, "GPS Latitude" },
@@ -180,7 +188,7 @@ namespace Image_Meta_Data_02
                 { 0x0116, "Rows Per Strip" },
                 { 0x0117, "Strip Bytes Count" },
 
-                { 0x0118, "Minimum Sample Value" },              
+                { 0x0118, "Minimum Sample Value" },
                 { 0x0119, "Maximum Sample Value" },
                 { 0x011A, "X Resolution" },
                 { 0x011B, "Y Resolution" },
@@ -190,8 +198,80 @@ namespace Image_Meta_Data_02
                 { 0x011E, "X Position" },
                 { 0x011F, "Y Position" },
 
-                { 0x0120, "Free Offset" }
+                { 0x0120, "Free Offset" },
+                { 0x0121, "Free Byte Counts" },
+                { 0x0122, "Gray Response Unit" },       // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytaggrayresponseunit
+                { 0x0123, "Gray Response Curve" },
+                { 0x0124, "T4 Encoding" },
+                { 0x0125, "T6 Encoding" },
+
+                { 0x0128, "Resolution Unit" },
+                { 0x0129, "Page Number" },
+                { 0x012D, "Transfer Function" },
+                { 0x0131, "Software Used" },
+                { 0x0132, "Date Time" },
+                { 0x013B, "Artist" },
+                { 0x013C, "Host Computer" },
+                { 0x013D, "Predictor" },
+                { 0x013E, "White Point" },
+                { 0x013F, "Primary Chromaticities" },
+
+                { 0x0140, "Color Map" },
+                { 0x0141, "Halftone Hints" },
+                { 0x0142, "Tile Width" },
+                { 0x0143, "Tile Length" },
+                { 0x0144, "Tile Offset" },
+                { 0x0145, "Tile Byte Counts" },
+                { 0x014C, "Ink Set" },
+                { 0x014D, "Ink Names" },
+                { 0x014E, "Nunber Of Inks" },
+
+                { 0x0150, "Dot Range" },
+                { 0x0151, "Target Printer" },
+                { 0x0152, "Extra Samples" },
+                { 0x0153, "Sample Format" },
+                { 0x0154, "S Minimum Sample Value" },
+                { 0x0155, "S Maximum Sample Value" },
+                { 0x0156, "Transfer Range" },
+
+                { 0x0200, "JPEG Compression Process" },
+                { 0x0201, "JPEG Inter Format" },
+                { 0x0202, "JPEG Inter Length" },
+                { 0x0203, "JPEG Restart Interval" },
+                { 0x0205, "JPEG Lossless Predictors" },
+                { 0x0206, "JPEG Point Transforms" },
+                { 0x0207, "JPEG Q Tables" },
+                // stopped here: https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagjpegdctables
+                // started here: https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagindextransparent
+
+                { 0x5110, "Pixel Unit" },
+                { 0x5111, "Pixel Per Unit X" },
+                { 0x5112, "Pixel Per Unit Y" },
+                { 0x5113, "Palette Histogram" },
+                { 0x8298, "Copyright" },
+                { 0x829A, "EXIF Exposure Time" },
+                { 0x829D, "EXIF F Number" },
+
+                { 0x8769, "EXIF IFD" },
+                { 0x8773, "ICC Profile" },
+                { 0x8822, "EXIF Exposure Prog" },       // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifexposureprog
+                // stopped here: https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifspectralsense
+                // started here: https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytaggpsifd
+
+                { 0x8827, "EXIF ISO Speed" },
+                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifoecf
+                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifcompbpp
+                { 0x9201, "EXIF Shutter Speed" },
+                { 0x9202, "EXIF Apature" },
+                { 0x9203, "EXIF Brightness" },
+                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifexposurebias
+                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifflash
+                { 0x920A, "EXIF Focal Length" },
+                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifmakernote
+                { 0x9286, "EXIF User Comment" }
+                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifdtsubsec
             };
+            PropertyTags = _PropertyTags;
         }
 
 

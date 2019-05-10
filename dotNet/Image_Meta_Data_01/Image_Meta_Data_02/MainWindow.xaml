@@ -51,11 +51,14 @@
                     <!--<Setter Property="Width" Value="5"/>-->
                 </Style>
             </DataGrid.Resources>
-            
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="" Width="0.25*" IsReadOnly="True" Binding="{Binding RowNumber}"/>
-                <DataGridTextColumn Header="Property" Width="*" IsReadOnly="True" Binding="{Binding Property}"/>
-                <DataGridTextColumn Header="Value"  Width="*" Binding="{Binding Value}"/>
+                <DataGridTextColumn Header="" Width="0.25*" IsReadOnly="True" 
+                                    Binding="{Binding RowNumber}" HeaderStyle="{StaticResource ColumnHeaderStyle}"/>
+                <DataGridTextColumn Header="Property" Width="*" IsReadOnly="True" 
+                                    Binding="{Binding Property}" HeaderStyle="{StaticResource ColumnHeaderStyle}"/>
+                <DataGridTextColumn Header="Value"  Width="*" 
+                                    Binding="{Binding Value}" HeaderStyle="{StaticResource ColumnHeaderStyle}"/>
             </DataGrid.Columns>
 
         </DataGrid>
