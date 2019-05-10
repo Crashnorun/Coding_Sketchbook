@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace Image_Meta_Data_02
 {
@@ -82,6 +83,8 @@ namespace Image_Meta_Data_02
                 imgProp.RowNumber = count;
                 imgProp.CalculateValue();
                 count++;
+
+                Debug.Print(imgProp.Id.ToString());
 
                 ImgProperties.Add(imgProp);
             }
