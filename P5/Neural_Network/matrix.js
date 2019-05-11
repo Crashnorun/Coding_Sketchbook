@@ -17,7 +17,7 @@ class Matrix {
     //#endregion
 
 
-     randomize() {
+    randomize() {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 this.matrix[i][j] = Math.floor(Math.random() * 10);
@@ -81,6 +81,15 @@ class Matrix {
         }
     }
 
+    transpose() {
+        let result = new Matrix(this.cols, this.rows);
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                result.matrix[j][i] = this.matrix[i][j];
+            }
+        }
+        return result;
+    }
     //#endregion
 
 }

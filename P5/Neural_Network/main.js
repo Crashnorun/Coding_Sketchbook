@@ -17,6 +17,9 @@ function setup() {
 
     let c = a.multiply(b);
     console.table(c.matrix);
+
+    let d = c.transpose();
+    console.table(d.matrix);
 }
 
 function draw() {
