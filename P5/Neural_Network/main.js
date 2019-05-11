@@ -12,14 +12,14 @@ function setup() {
     a.randomize();
     b.randomize();
 
-    console.table(a.matrix);
-    console.table(b.matrix);
+    a.print();
+    b.print();
 
-    let c = a.multiply(b);
-    console.table(c.matrix);
+    let c = Matrix.multiply(a,b);
+    c.print();
 
     let d = c.transpose();
-    console.table(d.matrix);
+    d.print();
 }
 
 function draw() {
