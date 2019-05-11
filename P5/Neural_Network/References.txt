@@ -1,0 +1,5 @@
+
+JS Math libraries
+    https://mathjs.org/
+    http://gpu.rocks/
+    https://evanw.github.io/lightgl.js/docs/matrix.html
