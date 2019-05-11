@@ -1,0 +1,31 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        let courses2 = new Set().add("node")
+            .add("c#")
+            .add("chem");
+            console.log(courses2);
+
+
+        let courses = new Set();
+        courses.add('eng');
+        courses.add('math');
+        courses.add('java');
+
+        for (let entry of courses) {
+            console.log(entry);
+        }
+
+        console.log(courses.size);
+        console.log(courses.has("eng"));
+        console.log(courses.add('bio'));
+
+        courses.clear();
+        console.log(courses);
+    </script>
+</body>
+
+</html>

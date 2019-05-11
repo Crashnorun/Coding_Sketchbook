@@ -1,0 +1,32 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        // create a variable that defines an anonomous function
+        var account = (function () {
+
+            // this is considred a private variable
+            var balance = 1000;
+
+            // anything in the 'return' is considered a public variable / function
+            return {
+                // these variables & functions are considered public
+                name: "john",
+                getBalance: function () { return balance; },
+                addIntrest: function (interest) { balance += interest; }
+            };
+        }());       // the () invoke the function right away 
+
+        console.log(account.name);
+        console.log(account.getBalance());
+        account.balance = 2000;             // this won't work since balance is private
+        console.log(account.getBalance());  // balance hasn't changed 
+        account.addIntrest(300);
+        console.log(account.getBalance());
+
+    </script>
+</body>
+
+</html>

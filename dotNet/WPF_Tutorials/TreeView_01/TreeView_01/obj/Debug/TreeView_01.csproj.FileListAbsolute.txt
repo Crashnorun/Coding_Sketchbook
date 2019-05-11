@@ -1,0 +1,15 @@
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\bin\Debug\TreeView_01.exe.config
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\bin\Debug\TreeView_01.exe
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\bin\Debug\TreeView_01.pdb
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.csprojAssemblyReference.cache
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\MainWindow.g.cs
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\App.g.cs
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01_MarkupCompile.cache
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01_MarkupCompile.lref
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\MainWindow.baml
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.g.resources
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.Properties.Resources.resources
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.csproj.GenerateResource.cache
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.csproj.CoreCompileInputs.cache
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.exe
+C:\Users\cportelli\Documents\Personal\GitHub\WPF_Tutorials\TreeView_01\TreeView_01\obj\Debug\TreeView_01.pdb

@@ -1,0 +1,33 @@
+<html>
+<header></header>
+
+<body>
+    <script>
+
+        let scores2 = new Map([["math", 90], ["eng", 97], ["bio", 50]]);
+        for (let key of scores2.keys()) {
+            console.log(key);                 // get the key
+            console.log(scores2.get(key));    // get the value
+        }
+
+        for (let value of scores2.values()) {
+            console.log(value);                 // get the value
+            
+        }
+
+        for (let entry of scores2.entries()) {
+            console.log(entry);                 // get the key and values
+        }
+
+        for (let entry of scores2.entries()) {
+            console.log(entry[0], entry[1]);    // get the key and values
+        }
+
+        for (let [k,v] of scores2.entries()) {
+            console.log(k, v);    // get the key and values
+        }
+
+    </script>
+</body>
+
+</html>
