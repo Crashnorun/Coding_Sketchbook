@@ -3,3 +3,4 @@ JS Math libraries
     https://mathjs.org/
     http://gpu.rocks/
     https://evanw.github.io/lightgl.js/docs/matrix.html
+    https://www.w3schools.com/js/js_array_methods.asp
