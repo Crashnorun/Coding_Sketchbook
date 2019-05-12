@@ -22,8 +22,7 @@ class Matrix {
     }
 
 
-
-    //#region  
+    //#region  Methods
 
     randomize() {
         for (let i = 0; i < this.rows; i++) {
@@ -31,15 +30,6 @@ class Matrix {
                 this.data[i][j] = Math.floor(Math.random() * 2 - 1);
             }
         }
-    }
-
-
-    static fromArray(arr) {
-        let m = new Matrix(arr.length, 1);
-        for (let i = 0; i < arr.length; i++) {
-            m.data[i][0] = arr[i];
-        }
-        return m;
     }
 
 
@@ -69,27 +59,6 @@ class Matrix {
                     this.data[i][j] *= n;
                 }
             }
-        }
-    }
-
-
-    static multiply(m1, m2) {
-        if (m1.cols !== m2.rows) {
-            console.log("Columns of A must match rows of B");
-        } else {
-            let result = new Matrix(m1.rows, m2.cols);
-            for (let i = 0; i < result.rows; i++) {
-                for (let j = 0; j < result.cols; j++) {
-
-                    let sum = 0;
-
-                    for (let k = 0; k < m1.cols; k++) {
-                        sum += m1.data[i][k] * m2.data[k][j];
-                    }
-                    result.data[i][j] = sum;
-                }
-            }
-            return result;
         }
     }
 
@@ -124,6 +93,55 @@ class Matrix {
 
 
     /**
+     * Description. Print the matrix to the console as a table
+     */
+    print() {
+        console.table(this.data);
+    }
+
+
+    /**
+     * Description. Return the size of the matrix
+     * @return {string} The size of the matrix as a string Rows:Cols
+     */
+    size() {
+        return this.rows.toString() + ":" + this.cols.toString();
+    }
+    //#endregion
+
+    //#region Static Methods
+
+    static fromArray(arr) {
+        let m = new Matrix(arr.length, 1);
+        for (let i = 0; i < arr.length; i++) {
+            m.data[i][0] = arr[i];
+        }
+        return m;
+    }
+
+
+    static multiply(m1, m2) {
+        if (m1.cols !== m2.rows) {
+            console.log("Columns of A must match rows of B");
+        } else {
+            let result = new Matrix(m1.rows, m2.cols);
+            for (let i = 0; i < result.rows; i++) {
+                for (let j = 0; j < result.cols; j++) {
+
+                    let sum = 0;
+
+                    for (let k = 0; k < m1.cols; k++) {
+                        sum += m1.data[i][k] * m2.data[k][j];
+                    }
+                    result.data[i][j] = sum;
+                }
+            }
+            return result;
+        }
+    }
+
+
+    /**
      * Description. Perform element wise subtraction m1 - m2
      * 
      * Summary. The two inputs must be of the same matrix size
@@ -144,37 +162,23 @@ class Matrix {
         return result;
     }
 
+
     /**
      * Description. Transpose a matrix
+     * 
+     * Summary. Static function that transposes a matrix
+     * @param {Matrix} Input matrix to transpose
      * @return {Matrix} Transposed matrix
      */
-    transpose() {
-        let result = new Matrix(this.cols, this.rows);
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
-                result.data[j][i] = this.data[i][j];
+    static transpose(m1) {
+        let result = new Matrix(m1.cols, m1.rows);
+        for (let i = 0; i < result.rows; i++) {
+            for (let j = 0; j < result.cols; j++) {
+                result.data[j][i] = m1.data[i][j];
             }
         }
         return result;
     }
 
-
-    /**
-     * Description. Print the matrix to the console as a table
-     */
-    print() {
-        console.table(this.data);
-    }
-
-
-    /**
-     * Description. Return the size of the matrix
-     * @return {string} The size of the matrix as a string Rows:Cols
-     */
-    size() {
-        return this.rows.toString() + ":" + this.cols.toString();
-    }
-
     //#endregion
-
 }

@@ -51,11 +51,16 @@ class NeuralNewtork {
         targets = Matrix.fromArray(targets);
 
         // calculate error
-        let error = Matrix.subtract(targets, outputs);
+        let output_errors = Matrix.subtract(targets, outputs);
+
+        // calculate the hidden layer errors
+        let weights_ho_t = Matrix.transpose(this.weights_ho);
+        
+        let hidden_errors = Matrix.multiply(weights_ho_t, output_errors);
 
         outputs.print();
         targets.print();
-        error.print();
+        output_errors.print();
     }
 }
 
