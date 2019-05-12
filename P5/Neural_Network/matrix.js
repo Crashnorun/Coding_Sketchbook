@@ -1,11 +1,11 @@
 
 class Matrix {
-    
-   /**
-    * Description. Creates a Matrix object
-    * @param {int} rows Number of rows for the matrix
-    * @param {int} cols Number of columns for the matrix
-    */
+
+    /**
+     * Description. Creates a Matrix object
+     * @param {int} rows Number of rows for the matrix
+     * @param {int} cols Number of columns for the matrix
+     */
     constructor(rows, cols) {
 
         this.rows = rows;
@@ -20,7 +20,7 @@ class Matrix {
             }
         }
     }
-    
+
 
 
     //#region  
@@ -71,8 +71,6 @@ class Matrix {
             }
         }
     }
-
-
 
 
     static multiply(m1, m2) {
@@ -131,22 +129,25 @@ class Matrix {
      * Summary. The two inputs must be of the same matrix size
      * @param {Matrix} m1 Matrix object
      * @param {Matrix} m2 Matrix object
-     * @return {Matrix} Result matrix objec
+     * @return {Matrix} Result matrix object m1 - m2
      */
     static subtract(m1, m2) {
-
+        // m1 and m2 must be of the same matrix size
         let result = new Matrix(m1.rows, m1.cols);
 
         for (let i = 0; i < result.rows; i++) {
             for (let j = 0; j < result.cols; j++) {
-                result.data[j][i] = m1.data[i][j] - m2.data[i][j];
+                result.data[i][j] = m1.data[i][j] - m2.data[i][j];
             }
         }
         // return a new matrix m1-m2
         return result;
     }
 
-
+    /**
+     * Description. Transpose a matrix
+     * @return {Matrix} Transposed matrix
+     */
     transpose() {
         let result = new Matrix(this.cols, this.rows);
         for (let i = 0; i < this.rows; i++) {
@@ -158,8 +159,20 @@ class Matrix {
     }
 
 
+    /**
+     * Description. Print the matrix to the console as a table
+     */
     print() {
         console.table(this.data);
+    }
+
+
+    /**
+     * Description. Return the size of the matrix
+     * @return {string} The size of the matrix as a string Rows:Cols
+     */
+    size() {
+        return this.rows.toString() + ":" + this.cols.toString();
     }
 
     //#endregion
