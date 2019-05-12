@@ -1,6 +1,11 @@
 
 class Matrix {
-    //#region CONSTRUCTOR
+    
+   /**
+    * Description. Creates a Matrix object
+    * @param {int} rows Number of rows for the matrix
+    * @param {int} cols Number of columns for the matrix
+    */
     constructor(rows, cols) {
 
         this.rows = rows;
@@ -15,7 +20,7 @@ class Matrix {
             }
         }
     }
-    //#endregion
+    
 
 
     //#region  
@@ -117,6 +122,28 @@ class Matrix {
                 }
             }
         }
+    }
+
+
+    /**
+     * Description. Perform element wise subtraction m1 - m2
+     * 
+     * Summary. The two inputs must be of the same matrix size
+     * @param {Matrix} m1 Matrix object
+     * @param {Matrix} m2 Matrix object
+     * @return {Matrix} Result matrix objec
+     */
+    static subtract(m1, m2) {
+
+        let result = new Matrix(m1.rows, m1.cols);
+
+        for (let i = 0; i < result.rows; i++) {
+            for (let j = 0; j < result.cols; j++) {
+                result.data[j][i] = m1.data[i][j] - m2.data[i][j];
+            }
+        }
+        // return a new matrix m1-m2
+        return result;
     }
 
 

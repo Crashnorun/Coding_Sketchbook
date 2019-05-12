@@ -1,6 +1,14 @@
 
 class NeuralNewtork {
 
+    /**
+     * Description. Creates a Neural Network object
+     * 
+     * Summary. Neural Network Constructor 
+     * @param {*} input_Nodes Number of inputs nodes
+     * @param {*} hidden_Nodes Number of hidden nodes
+     * @param {*} output_Nodes Number of output nodes
+     */
     constructor(input_Nodes, hidden_Nodes, output_Nodes) {
 
         this.input_Nodes = input_Nodes;
@@ -16,7 +24,6 @@ class NeuralNewtork {
         this.bias_Output = new Matrix(this.output_Nodes, 1);
         this.bias_Hidden.randomize();
         this.bias_Output.randomize();
-
     }
 
 
@@ -36,9 +43,19 @@ class NeuralNewtork {
         return output.toArray();
     }
 
-    train(inputs, answer){
 
+    train(inputs, targets) {
 
+        let outputs = this.feedforward(inputs);
+        outputs = Matrix.fromArray(outputs);        // convert array to matrix obj
+        targets = Matrix.fromArray(targets);
+
+        // calculate error
+        let error = Matrix.subtract(targets, outputs);
+
+        outputs.print();
+        targets.print();
+        error.print();
     }
 }
 

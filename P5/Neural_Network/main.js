@@ -9,7 +9,11 @@ function setup() {
     // testMatrixClass();
     // testNN();
 
+    let nn = new NeuralNewtork(2, 2, 2);
+    let inputs = [1, 0];
+    let tartets = [1,0];
 
+    nn.train(inputs, tartets);
 
 }
 
