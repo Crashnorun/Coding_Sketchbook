@@ -9,7 +9,6 @@ class NeuralNewtork {
 
         this.weights_ih = new Matrix(this.hidden_Nodes, this.input_Nodes);
         this.weights_ho = new Matrix(this.output_Nodes, this.hidden_Nodes);
-
         this.weights_ih.randomize();
         this.weights_ho.randomize();
 
@@ -36,6 +35,8 @@ class NeuralNewtork {
 
         return output.toArray();
     }
+
+    train(){}
 }
 
 

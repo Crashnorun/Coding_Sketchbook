@@ -81,7 +81,7 @@ class Matrix {
                     let sum = 0;
 
                     for (let k = 0; k < m1.cols; k++) {
-                        sum += a.data[i][k] * b.data[k][j];
+                        sum += m1.data[i][k] * m2.data[k][j];
                     }
                     result.data[i][j] = sum;
                 }
@@ -96,7 +96,7 @@ class Matrix {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 let val = this.data[i][j];
-                this.data[i][j] = fn[val, i, j];
+                this.data[i][j] = fn(val, i, j);
             }
         }
     }
