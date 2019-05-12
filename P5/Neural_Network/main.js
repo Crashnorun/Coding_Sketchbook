@@ -6,6 +6,15 @@
 let a, b;
 
 function setup() {
+    testMatrixClass();
+}
+
+function draw() {
+
+}
+
+function testMatrixClass() {
+
     a = new Matrix(2, 3);
     b = new Matrix(3, 2);
 
@@ -15,13 +24,11 @@ function setup() {
     a.print();
     b.print();
 
-    let c = Matrix.multiply(a,b);
+    let c = Matrix.multiply(a, b);
     c.print();
 
     let d = c.transpose();
     d.print();
-}
 
-function draw() {
 
 }

@@ -15,22 +15,27 @@ class NeuralNewtork {
 
         this.bias_Hidden = new Matrix(this.hidden_Nodes, 1);
         this.bias_Output = new Matrix(this.output_Nodes, 1);
-
+        this.bias_Hidden.randomize();
+        this.bias_Output.randomize();
 
     }
 
 
     feedforward(input_arr) {
 
+        // generating hidden outputs
         let inputs = Matrix.fromArray(input_arr);
-
         let hidden = Matrix.multiply(this.weights_ih, inputs);
         hidden.add(this.bias_Hidden);
-        // activation function
+        hidden.map(sigmoid);                    // activation function
 
+        // generating the outputs
+        let output = Matrix.multiply(this.weights_ho, hidden);
+        output.add(this.bias_Output);
+        output.map(sigmoid);
+
+        return output.toArray();
     }
-
-
 }
 
 

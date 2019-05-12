@@ -38,6 +38,17 @@ class Matrix {
     }
 
 
+    toArray() {
+        let arr = [];
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                arr.push(this.data[i][j]);
+            }
+        }
+        return arr;
+    }
+
+
     multiply(n) {
 
         if (n instanceof Matrix) {      // element wise multiplication
