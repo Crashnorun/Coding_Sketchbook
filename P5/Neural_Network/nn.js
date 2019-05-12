@@ -5,9 +5,9 @@ class NeuralNewtork {
      * Description. Creates a Neural Network object
      * 
      * Summary. Neural Network Constructor 
-     * @param {*} input_Nodes Number of inputs nodes
-     * @param {*} hidden_Nodes Number of hidden nodes
-     * @param {*} output_Nodes Number of output nodes
+     * @param {int} input_Nodes Number of inputs nodes
+     * @param {int} hidden_Nodes Number of hidden nodes
+     * @param {int} output_Nodes Number of output nodes
      */
     constructor(input_Nodes, hidden_Nodes, output_Nodes) {
 
