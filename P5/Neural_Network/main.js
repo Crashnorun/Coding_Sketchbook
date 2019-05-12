@@ -7,11 +7,8 @@ let a, b;
 
 function setup() {
     // testMatrixClass();
+    // testNN();
 
-    let nn = new NeuralNewtork(2, 2, 1);
-    let input = [1, 0];
-    let output = nn.feedforward(input);
-    console.log(output);
 
 
 }
@@ -37,5 +34,15 @@ function testMatrixClass() {
     let d = c.transpose();
     d.print();
 
+
+}
+
+
+function testNN() {
+
+    let nn = new NeuralNewtork(2, 2, 1);
+    let input = [1, 0];
+    let output = nn.feedforward(input);
+    console.log(output);
 
 }

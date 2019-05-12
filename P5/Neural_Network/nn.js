@@ -36,7 +36,10 @@ class NeuralNewtork {
         return output.toArray();
     }
 
-    train(){}
+    train(inputs, answer){
+
+
+    }
 }
 
 
