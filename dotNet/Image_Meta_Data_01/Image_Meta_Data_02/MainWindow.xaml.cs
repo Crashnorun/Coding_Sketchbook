@@ -48,7 +48,8 @@ namespace Image_Meta_Data_02
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Multiselect = false, Title = "Image Meta Data",
+                Multiselect = false,
+                Title = "Image Meta Data",
                 Filter = "Images (*.BMP; *.JPG; *.PNG; *.GIF; *.TIFF) |*.BMP; *.JPG; *.PNG; *.GIF; *.TIFF"
             };
             //ofd.Multiselect = false;
@@ -68,16 +69,16 @@ namespace Image_Meta_Data_02
 
         private void LoadMetaData()
         {
-            System.Drawing.Image img = System.Drawing.Image.FromFile(FilePath);
-            PropertyItem[] properties = img.PropertyItems;              // read image data
+            System.Drawing.Image img = System.Drawing.Image.FromFile(FilePath);                 // read image from file
+            PropertyItem[] properties = img.PropertyItems;                                      // read image data
             List<cls_ImageProperty> ImgProperties = new List<cls_ImageProperty>();
             int count = 1;
 
             foreach (PropertyItem item in properties)
             {
                 cls_ImageProperty imgProp = new cls_ImageProperty();
-                imgProp.Id = item.Id;
-                imgProp.DataType = (ExifPropertyDataTypes)item.Type;
+                imgProp.Id = item.Id;                                                           // property id
+                imgProp.DataType = (ExifPropertyDataTypes)item.Type;                            // property data type
                 imgProp.DataBuffer = item.Value;
                 imgProp.DataLength = item.Len;
                 imgProp.RowNumber = count;
@@ -85,16 +86,14 @@ namespace Image_Meta_Data_02
                 count++;
 
                 Debug.Print(imgProp.Id.ToString());
-
                 ImgProperties.Add(imgProp);
             }
 
-            // display image data in data grid view
-             dataGrid.ItemsSource = ImgProperties;
+            dataGrid.ItemsSource = ImgProperties;                                               // display image data in data grid view
             dataGrid.Visibility = Visibility.Visible;
         }
 
-      
+
         private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 

@@ -8,23 +8,53 @@ namespace Image_Meta_Data_02
 {
     public class cls_ImageProperty
     {
+        /// <summary>
+        /// Data table row number
+        /// </summary>
         public int RowNumber { get; set; }
+        /// <summary>
+        /// ID value
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Property Value
+        /// </summary>
         public string Value { get; set; }
+        /// <summary>
+        /// Property
+        /// </summary>
         public string Property { get; set; }
+        /// <summary>
+        /// Property Type
+        /// </summary>
         public Type PropertyType { get; set; }
+        /// <summary>
+        /// EXIF Data type
+        /// </summary>
         public ExifPropertyDataTypes DataType { get; set; }
+        /// <summary>
+        /// Data Length
+        /// </summary>
         public int DataLength { get; set; }
+        /// <summary>
+        /// Data Buffer
+        /// </summary>
         public byte[] DataBuffer { get; set; }
 
         private Dictionary<int, string> PropertyTags { get; set; }
+        private Dictionary<int, string> PropertyResUnit { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public cls_ImageProperty()
         {
             CreatePropertyTags();
         }
 
-
+        /// <summary>
+        /// Calculate value by converting bytes to string
+        /// </summary>
         public void CalculateValue()
         {
             string result = "";
@@ -32,13 +62,13 @@ namespace Image_Meta_Data_02
 
             switch (DataType)
             {
-                case ExifPropertyDataTypes.ByteArray:
+                case ExifPropertyDataTypes.ByteArray:                                           // Byte array
                 case ExifPropertyDataTypes.UByteArray:
-                    Value = BitConverter.ToString(DataBuffer);
+                    result = BitConverter.ToString(DataBuffer);
                     break;
 
-                case ExifPropertyDataTypes.String:
-                    Value = Encoding.UTF8.GetString(DataBuffer, 0, DataLength - 1);
+                case ExifPropertyDataTypes.String:                                              // String
+                    result = Encoding.UTF8.GetString(DataBuffer, 0, DataLength - 1);
                     break;
 
                 case ExifPropertyDataTypes.UShortArray:
@@ -51,7 +81,7 @@ namespace Image_Meta_Data_02
                         result += ", " + value.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                    Value = "[" + result + "]";
+                    //Value = "[" + result + "]";
                     break;
 
                 case ExifPropertyDataTypes.ULongArray:
@@ -64,7 +94,7 @@ namespace Image_Meta_Data_02
                         result += ", " + value.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                    Value = "[" + result + "]";
+                    //Value = "[" + result + "]";
                     break;
 
                 case ExifPropertyDataTypes.ULongFractionArray:
@@ -75,23 +105,33 @@ namespace Image_Meta_Data_02
                     {
                         uint numerator = BitConverter.ToUInt32(DataBuffer, i * item_size);
                         uint denominator = BitConverter.ToUInt32(DataBuffer, i * item_size + item_size / 2);
-                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
+                        //result += ", " + numerator.ToString() + "/" + denominator.ToString();
+                        double val = Convert.ToDouble(numerator) / Convert.ToDouble(denominator);
+                        result += ", " + val.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                    Value = "[" + result + "]";
+                   // Value = "[" + result + "]";
                     break;
 
                 case ExifPropertyDataTypes.LongArray:
                     result = "";
                     item_size = 4;
                     num_items = DataLength / item_size;
+                    //if (this.Id == 37500)
+                    //{
+                    //    result = Encoding.UTF8.GetString(DataBuffer);
+                    //    break;
+                    //}
+
                     for (int i = 0; i < num_items; i++)
                     {
                         int value = BitConverter.ToInt32(DataBuffer, i * item_size);
                         result += ", " + value.ToString();
+                        //result += ", " + Encoding.UTF8.GetString(DataBuffer);
+
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                    Value = "[" + result + "]";
+                   // Value = "[" + result + "]";
                     break;
 
                 case ExifPropertyDataTypes.LongFractionArray:
@@ -102,10 +142,12 @@ namespace Image_Meta_Data_02
                     {
                         int numerator = BitConverter.ToInt32(DataBuffer, i * item_size);
                         int denominator = BitConverter.ToInt32(DataBuffer, i * item_size + item_size / 2);
-                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
+                        //result += ", " + numerator.ToString() + "/" + denominator.ToString();
+                        double val = Convert.ToDouble(numerator) / Convert.ToDouble(denominator);
+                        result += ", " + val.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                    Value = "[" + result + "]";
+                   // Value = "[" + result + "]";
                     break;
             }
 
@@ -114,7 +156,15 @@ namespace Image_Meta_Data_02
             else
                 Property = Id.ToString();
 
-            Value = result;
+            if (Id == 0x0128)
+            {
+                int val = Convert.ToInt32(result);
+                Value = val.ToString() + " " + PropertyResUnit[val];
+            }
+            else
+            {
+                Value = result;
+            }
         }
 
 
@@ -268,10 +318,30 @@ namespace Image_Meta_Data_02
                 // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifflash
                 { 0x920A, "EXIF Focal Length" },
                 // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifmakernote
-                { 0x9286, "EXIF User Comment" }
+                { 0x9286, "EXIF User Comment" },
                 // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifdtsubsec
+
+                { 0xA001, "EXIF Color Space" },
+                { 0x5039, "YCbCrPositioning" },
+                { 0x9000, "EXIF Version" },
+                { 0x9003, "EXIF Original Date Time" },
+                { 0x9004, "EXIF Digitized Date Time" },
+                { 0x9101, "EXIF Compression configuration" },
+                { 0x9204, "EXIF Exposure Bias" },
+                { 0x9207, "EXIF Metering Mode" },           //0 - unknown 1 - Average 2 - CenterWeightedAverage 3 - Spot 4 - MultiSpot 5 - Pattern 6 - Partial 7 to 254 - reserved 255 - other
+                { 0x9209, "EXIF Flash" },                   // flash fired: 0b - flash did not fire 1b - flash fired
+                { 0x927C, "EXIF Maker Note" }
             };
             PropertyTags = _PropertyTags;
+
+            PropertyResUnit = new Dictionary<int, string>()                // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexiffocalresunit
+            {
+                { 1, "NA"},
+                { 2, "Inch"},
+                { 3, "CM"}
+            };
+
+
         }
 
 
@@ -737,7 +807,6 @@ public enum PropertyTagId : int
     ///<summary></summary>
     YResolution = 0x011B
 }
-
 
 
 // https://stackoverflow.com/questions/16900291/c-sharp-image-propertyitems-metadate-how-do-you-know-which-number-is-which-pro
