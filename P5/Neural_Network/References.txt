@@ -1,0 +1,9 @@
+
+JS Math libraries
+    https://mathjs.org/
+    http://gpu.rocks/
+    https://evanw.github.io/lightgl.js/docs/matrix.html
+    https://www.w3schools.com/js/js_array_methods.asp
+    http://neuralnetworksanddeeplearning.com/
+    http://ml4a.github.io/ml4a/
+    http://ml4a.github.io/ml4a/how_neural_networks_are_trained/
