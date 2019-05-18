@@ -9,7 +9,7 @@ let totHeight = 0;
 function setup() {
     let canvas = createCanvas(400, 400);
     background(0);
-noStroke();
+    noStroke();
 
     for (let i = 0; i < width; i += stripeWidth) {
         let totHeight = 0;
@@ -28,7 +28,6 @@ noStroke();
 }
 
 function draw() {
-
     let col = map(totHeight, 0, height, 255, 0)
     fill(color(col, col, 255));
 
@@ -44,5 +43,4 @@ function draw() {
         totHeight = 0;
         count += stripeWidth;
     }
-console.log(frameRate());
 }
