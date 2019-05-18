@@ -8,20 +8,20 @@ function setup() {
     let canvas = createCanvas(400, 400);
     background(0);
 
-    let numCols = height / 20;
-    let colorVal = 255 / numCols;
-    let count = 0;
+    for (let i = 0; i < width; i += stripeWidth) {
+        let totHeight = 0;
+        do {
+            let col = map(totHeight, 0, height, 255, 0)
+            fill(color(col, col, 255));
 
+            let rectHeight = Math.ceil(random(20, 50));
+            rect(i, totHeight, 20, rectHeight);
+            totHeight += rectHeight;
+            if (totHeight > height) totHeight = height;
 
-    for (let i = 0; i < height; i += 20) {
-        fill(color(colorVal * count, colorVal * count, 255));
-        
-        let rectHeight = random(5, 10);
-        rect(0, rectHeight, 20, 20);
-        count++;
-        console.log(colorVal * count);
+            //console.log("Rect height: " + rectHeight + " Tot Height: " + totHeight);
+        } while (totHeight < height);
     }
-
 }
 
 function draw() {
