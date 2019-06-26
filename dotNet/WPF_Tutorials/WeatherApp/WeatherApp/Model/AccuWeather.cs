@@ -22,29 +22,34 @@ namespace WeatherApp.Model
 
     public class TemperatureValue : INotifyPropertyChanged
     {
-
-        private int val;
-        public int Value {
+        private double val;
+        public double Value
+        {
             get { return val; }
-            set {
+            set
+            {
                 val = value;
                 OnPropertyChanged("Value");
             }
         }
 
         private string unit;
-        public string Unit {
+        public string Unit
+        {
             get { return unit; }
-            set {
+            set
+            {
                 unit = value;
                 OnPropertyChanged("Unit");
             }
         }
 
         public int unitType;
-        public int UnitType {
+        public int UnitType
+        {
             get { return unitType; }
-            set {
+            set
+            {
                 unitType = value;
                 OnPropertyChanged("UnitType");
             }
@@ -52,32 +57,64 @@ namespace WeatherApp.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged (string PropertyName)
+        private void OnPropertyChanged(string PropertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
         }
     }
 
-    public class Minimum : TemperatureValue { }
-
-    public class Maximum : TemperatureValue { }
-
-    public class Temperature
+    public class Temperature : INotifyPropertyChanged
     {
-        public Minimum Minimum { get; set; }
-        public Maximum Maximum { get; set; }
+        private TemperatureValue minimum;
+        public TemperatureValue Minimum
+        {
+            get { return minimum; }
+            set
+            {
+                minimum = value;
+                OnPropertyChanged("Minimum");
+            }
+        }
+
+        private TemperatureValue maximum;
+        public TemperatureValue Maximum
+        {
+            get { return maximum; }
+            set {
+                maximum = value;
+                OnPropertyChanged("Maximum");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Forecast : INotifyPropertyChanged
+    public class TimeOfDay : INotifyPropertyChanged
     {
-        public int Icon { get; set; }
+        private int icon;
+        public int Icon
+        {
+            get { return icon; }
+            set
+            {
+                icon = value;
+                OnPropertyChanged("Icon");
+            }
+        }
 
         private string iconPhrase;
-        public string IconPhrase {
+        public string IconPhrase
+        {
             get { return iconPhrase; }
 
-            set {
+            set
+            {
                 iconPhrase = value;
                 OnPropertyChanged("IconPhrase");
             }
@@ -87,36 +124,96 @@ namespace WeatherApp.Model
 
         private void OnPropertyChanged(string PropertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
         }
-
-        // public bool HasPrecipitation { get; set; }
-        // public string PrecipitationType { get; set; }
-        // public string PrecipitationIntensity { get; set; }
     }
 
-    public class Day : Forecast { }
-
-    public class Night : Forecast { }
-
-    public class DailyForecast
+    public class DailyForecast: INotifyPropertyChanged
     {
-        public DateTime Date { get; set; }
-        //  public int EpochDate { get; set; }
-        public Temperature Temperature { get; set; }
-        public Day Day { get; set; }
-        public Night Night { get; set; }
-        // public IList<string> Sources { get; set; }
-        // public string MobileLink { get; set; }
-        // public string Link { get; set; }
+        public List<string> Sources { get; set; }
+
+        private DateTime date;
+
+        public DateTime Date
+        {
+            get { return date; }
+            set
+            {
+                date = value;
+                OnPropertyChanged("Date");
+            }
+        }
+
+        private Temperature temperature;
+
+        public Temperature Temperature
+        {
+            get { return temperature; }
+            set
+            {
+                temperature = value;
+                OnPropertyChanged("Temperature");
+            }
+        }
+
+        private TimeOfDay day;
+
+        public TimeOfDay Day
+        {
+            get { return day; }
+            set
+            {
+                day = value;
+                OnPropertyChanged("Day");
+            }
+        }
+
+        private TimeOfDay night;
+
+        public TimeOfDay Night
+        {
+            get { return night; }
+            set
+            {
+                night = value;
+                OnPropertyChanged("Night");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class WeatherAPIResponce
+
+    public class AccuWeather
     {
-        //  public Headline Headline { get; set; }
-        public IList<DailyForecast> DailyForecasts { get; set; }
-    }
+        public List<DailyForecast> DailyForcasts { get; set; }
 
+        public AccuWeather()
+        {
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            {
+                DailyForcasts = new List<DailyForecast>();
+                for (int i = 0; i < 3; i++)
+                {
+                    DailyForecast dailyForcast = new DailyForecast
+                    {
+                        Date = DateTime.Now.AddDays(-i),
+                        Temperature = new Temperature
+                        {
+                            Maximum = new TemperatureValue { Value = 21 + i },
+                            Minimum = new TemperatureValue { Value = 5 - i }
+                        }
+                    };
+                    DailyForcasts.Add(dailyForcast);
+                }
+            }
+        }
+    }
 
 }

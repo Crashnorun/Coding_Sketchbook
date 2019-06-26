@@ -15,9 +15,9 @@ namespace WeatherApp.ViewModel
         public const string CITY = "349727";
         public const string BASE_URL = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{1}?apikey={0}";
 
-        public async Task<WeatherAPIResponce> GetWeatherInformationAsync(string CityID)
+        public async Task<AccuWeather> GetWeatherInformationAsync(string CityID)
         {
-            WeatherAPIResponce result = new WeatherAPIResponce();
+            AccuWeather result = new AccuWeather();
 
             string url = string.Format(BASE_URL, API_KEY, CityID);
 
@@ -25,7 +25,7 @@ namespace WeatherApp.ViewModel
             {
                 var responce = await client.GetAsync(url);
                 string json = await responce.Content.ReadAsStringAsync();
-                result = JsonConvert.DeserializeObject<WeatherAPIResponce>(json);
+                result = JsonConvert.DeserializeObject<AccuWeather>(json);
             }
 
             return result;
