@@ -44,7 +44,7 @@ namespace Image_Meta_Data_02
             btnRotate.Visibility = Visibility.Hidden;
         }
 
-
+        // load image
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog()

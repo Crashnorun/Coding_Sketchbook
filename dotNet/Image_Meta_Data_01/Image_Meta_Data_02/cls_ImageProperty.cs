@@ -110,7 +110,7 @@ namespace Image_Meta_Data_02
                         result += ", " + val.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                   // Value = "[" + result + "]";
+                    // Value = "[" + result + "]";
                     break;
 
                 case ExifPropertyDataTypes.LongArray:
@@ -131,7 +131,7 @@ namespace Image_Meta_Data_02
 
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                   // Value = "[" + result + "]";
+                    // Value = "[" + result + "]";
                     break;
 
                 case ExifPropertyDataTypes.LongFractionArray:
@@ -147,7 +147,7 @@ namespace Image_Meta_Data_02
                         result += ", " + val.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
-                   // Value = "[" + result + "]";
+                    // Value = "[" + result + "]";
                     break;
             }
 
@@ -156,14 +156,101 @@ namespace Image_Meta_Data_02
             else
                 Property = Id.ToString();
 
-            if (Id == 0x0128)
+            switch (Id)
             {
-                int val = Convert.ToInt32(result);
-                Value = val.ToString() + " " + PropertyResUnit[val];
-            }
-            else
-            {
-                Value = result;
+                case 0x0112:                                                                    // image rotation
+                    switch (Convert.ToInt32(result))
+                    {
+                        case 1: Value = "Horizontal (normal)"; break;
+                        case 2: Value = "Mirror Horizontal"; break;
+                        case 3: Value = "Rotate 180"; break;
+                        case 4: Value = "Mirror Vertical"; break;
+                        case 5: Value = "Mirror Horizontal & Rotate 270 CW"; break;
+                        case 6: Value = "Rotate 90 CW"; break;
+                        case 7: Value = "Mirror Horizontal and Rotate 90 CW"; break;
+                        case 8: Value = "Rotate 270 CW"; break;
+                        default: Value = "Unknown Orientation"; break;
+                    }
+                    break;
+                case 0x0128:                                                                    // resolution units
+                    int val = Convert.ToInt32(result);
+                    Value = val.ToString() + " " + PropertyResUnit[val];
+                    break;
+                case 0x9207:                                                                    // metering mode
+                    switch (Convert.ToInt32(result))
+                    {
+                        case 0: Value = "Unknown"; break;
+                        case 1: Value = "Average"; break;
+                        case 2: Value = "Center Weighted Average"; break;
+                        case 3: Value = "Spot"; break;
+                        case 4: Value = "Multi Spot"; break;
+                        case 5: Value = "Pattern / Multi Segment"; break;
+                        case 6: Value = "Partial"; break;
+                        case 255: Value = "Other"; break;
+                        default: Value = "Reserved"; break;
+                    }
+                    break;
+                case 0x0132:                                                                    // modify date
+                case 0x9003:                                                                    // original date time
+                case 0x9004:                                                                    // Created date time
+                    // DateTime dt = DateTime.Parse(result);
+                    Value = result;
+                    break;
+                case 0x0213:                                                                    // Y Cb Cr Positioning
+                    if (Convert.ToInt32(result) == 1) Value = "Centered";
+                    else if (Convert.ToInt32(result) == 2) Value = "Co-sited";
+                    break;
+                case 0x9101:                                                                    // components configuration
+                    /*
+                        0 = - 
+                        1 = Y 
+                        2 = Cb 
+                        3 = Cr	  	
+                        4 = R 
+                        5 = G 
+                        6 = B
+                        */
+                    break;
+
+                case 0x9209:                                                                    // flash
+                    switch (Convert.ToInt32(result))
+                    {
+                        case 0x0: Value = "No Flash"; break;
+                        case 0x1: Value = "Flash Fired"; break;
+                        case 0x5: Value = "Fired, Return Not Detected"; break;
+                        case 0x7: Value = "Fired, Return Detected"; break;
+                        case 0x8: Value = "On, Did Not Fire"; break;
+                        case 0x9: Value = "On, Fired"; break;
+                        case 0xd: Value = "On, Return Not Detected"; break;
+                        case 0xf: Value = "On, Return Detected"; break;
+
+                        case 0x10: Value = "Off, Did Not Fire"; break;
+                        case 0x14: Value = "Off, Did Not Fire, Return Not Detected"; break;
+                        case 0x18: Value = "Auto, Did Not Fire"; break;
+                        case 0x19: Value = "Auto, Fired"; break;
+                        case 0x1d: Value = "Auto, Fired, Return Not Detected"; break;
+                        case 0x1f: Value = "Auto, Fired, Return Detected"; break;
+
+                        case 0x20: Value = "No Flash Function"; break;
+                        case 0x30: Value = "Off, No Flash Function"; break;
+                        case 0x41: Value = "Fired, Red-Eye Reduction"; break;
+                        case 0x45: Value = "Fired, Red-Eye Reduction, Return Not Detected"; break;
+                        case 0x47: Value = "Fired, Red-Eye Reduction, Return Detected"; break;
+                        case 0x49: Value = "On, Red-Eye Reduction"; break;
+                        case 0x4d: Value = "On, Red-eye reduction, Return not detected"; break;
+                        case 0x4f: Value = "On, Red-eye reduction, Return detected"; break;
+
+                        case 0x50: Value = "Off, Red-eye reduction"; break;
+                        case 0x58: Value = "Auto, Did not fire, Red-eye reduction"; break;
+                        case 0x59: Value = "Fired, Red-Eye Reduction"; break;
+                        case 0x5d: Value = "Auto, Fired, Red-eye reduction, Return not detected"; break;
+                        case 0x5f: Value = "Auto, Fired, Red-eye reduction, Return detected"; break;
+                        default: break;
+                    }
+                    break;
+                default:
+                    Value = result;
+                    break;
             }
         }
 
@@ -176,7 +263,7 @@ namespace Image_Meta_Data_02
 
         }
 
-
+        // https://sno.phy.queensu.ca/~phil/exiftool/TagNames/EXIF.html <- great resource
         // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions
         // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-image-property-tag-constants
         // https://blogs.msdn.microsoft.com/kamalds/2012/04/08/working-with-exif-metadata/
@@ -330,7 +417,27 @@ namespace Image_Meta_Data_02
                 { 0x9204, "EXIF Exposure Bias" },
                 { 0x9207, "EXIF Metering Mode" },           //0 - unknown 1 - Average 2 - CenterWeightedAverage 3 - Spot 4 - MultiSpot 5 - Pattern 6 - Partial 7 to 254 - reserved 255 - other
                 { 0x9209, "EXIF Flash" },                   // flash fired: 0b - flash did not fire 1b - flash fired
-                { 0x927C, "EXIF Maker Note" }
+                { 0x927C, "EXIF Maker Note" },
+
+                { 0x9214, "Subject Area" },
+                { 0x9291, "Sub Sec Time Original" },
+                { 0x9292, "Sub Sec Time Digitized" },
+                { 0xA000, "Flash pix Version" },
+                { 0xA002, "Exif Image Width" },
+                { 0xA003, "Exif Image Height" },
+                { 0xA217, "Sensing Method" },
+                { 0xA301, "Scene Type" },
+                { 0xA402, "Exposure Mode" },
+                { 0xA403, "White Balance" },
+                { 0xA405, "Focal Length In 35mm Format" },
+                { 0xA406, "Scene Capture Type" },       //0 = standard, 1 = Landscape, 2 = Potrait, 3 = Night, 4 = Other
+                { 0xA432, "Lens Info" },
+                { 0xA433, "Lens Make" },
+                { 0xA434, "Lens Model" },
+
+                { 0x1D, "64-bit RGBA Fixed Point" },
+                { 0x1F, "64-bit CMYK" },
+                { 0x213, "Y Cb Cr Positioning" }            //1 = centered, 2 = Co-Sited
             };
             PropertyTags = _PropertyTags;
 
@@ -340,10 +447,7 @@ namespace Image_Meta_Data_02
                 { 2, "Inch"},
                 { 3, "CM"}
             };
-
-
         }
-
 
     }
 }
