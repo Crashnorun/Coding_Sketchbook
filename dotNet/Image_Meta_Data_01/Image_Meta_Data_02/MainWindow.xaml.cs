@@ -30,19 +30,19 @@ namespace Image_Meta_Data_02
         {
             InitializeComponent();
             dataGrid.Visibility = Visibility.Hidden;
-            btnRotate.Visibility = Visibility.Hidden;
+           // btnRotate.Visibility = Visibility.Hidden;
         }
 
         // rotate image button
-        private void BtnRotate_Click(object sender, RoutedEventArgs e)
-        {
-            // rotate image 90 degrees with every click
-            RotateTransform xform = imgBox.LayoutTransform as RotateTransform;      // extract the current rotation 
-            if (xform != null)
-                imgBox.LayoutTransform = new RotateTransform(xform.Angle + 90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
-            else
-                imgBox.LayoutTransform = new RotateTransform(90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
-        }
+        //private void BtnRotate_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // rotate image 90 degrees with every click
+        //    RotateTransform xform = imgBox.LayoutTransform as RotateTransform;      // extract the current rotation 
+        //    if (xform != null)
+        //        imgBox.LayoutTransform = new RotateTransform(xform.Angle + 90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
+        //    else
+        //        imgBox.LayoutTransform = new RotateTransform(90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
+        //}
 
         // load image button
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
@@ -88,18 +88,49 @@ namespace Image_Meta_Data_02
 
                 Debug.Print(imgProp.Id.ToString());
                 ImgProperties.Add(imgProp);
+
+
+                if (imgProp.Id == 0x0112)                                                       // rotate the image if necessary
+                {
+                    switch (imgProp.Value)
+                    {
+                        case "Mirror Horizontal": FlipImage(-1); break;
+                        case "Rotate 180": RotateImage(180); break;
+                        case "Miror Vertical": FlipImage(Yscale: -1); break;
+                        case "Mirror Horizontal and Rotate 270 CW": FlipImage(-1); RotateImage(90); break;
+                        case "Rotate 90 CW": RotateImage(270); break;
+                        case "Mirror Horizontal and Rotate 90 CW": FlipImage(-1); RotateImage(270); break;
+                        case "Rotate 270 CW": RotateImage(90); break;
+                    }
+                }
             }
 
             dataGrid.ItemsSource = ImgProperties;                                               // display image data in data grid view
             dataGrid.Visibility = Visibility.Visible;
-            btnRotate.Visibility = Visibility.Visible;
+          //  btnRotate.Visibility = Visibility.Visible;
         }
 
         private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 
         }
-      
+
+
+        private void RotateImage(int degrees)
+        {
+            RotateTransform xform = imgBox.LayoutTransform as RotateTransform;      // extract the current rotation 
+            if (xform != null)
+                imgBox.LayoutTransform = new RotateTransform(xform.Angle + degrees, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
+            else
+                imgBox.LayoutTransform = new RotateTransform(degrees, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
+        }
+
+        private void FlipImage(double Xscale = 1, double Yscale = 1)
+        {
+            ScaleTransform xform = imgBox.LayoutTransform as ScaleTransform;      // extract the current scale 
+            imgBox.LayoutTransform = new ScaleTransform(Xscale, Yscale);
+        }
+
     }
 }
 
