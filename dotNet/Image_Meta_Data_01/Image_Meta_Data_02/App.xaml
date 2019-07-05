@@ -49,6 +49,15 @@
             </Style.Triggers>
         </Style>
 
+
+        <!--<ControlTemplate x:Key="myScrollBar" TargetType="ScrollBar">
+            <Border Name ="ScrollViewer">
+                <Border.Background>
+                    <SolidColorBrush x:Name="BorderBrush" Color="Black"/>
+                </Border.Background>
+            </Border>
+        </ControlTemplate>-->
+
     </Application.Resources>
     
 </Application>

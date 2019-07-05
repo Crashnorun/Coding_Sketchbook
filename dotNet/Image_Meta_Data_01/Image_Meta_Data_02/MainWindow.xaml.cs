@@ -129,5 +129,6 @@ namespace Image_Meta_Data_02
  * https://stackoverflow.com/questions/16900291/c-sharp-image-propertyitems-metadate-how-do-you-know-which-number-is-which-pro
  * https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?redirectedfrom=MSDN&view=netframework-4.8#System_Drawing_Imaging_PropertyItem_Id
  * https://github.com/anton-iermolenko/Photo-library-toolkit/blob/master/PhotoLibaryToolkit/Framework/ImageConstants.cs
+ * Flip UI element: https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/how-to-flip-a-uielement-horizontally-or-vertically
  */
 #endregion

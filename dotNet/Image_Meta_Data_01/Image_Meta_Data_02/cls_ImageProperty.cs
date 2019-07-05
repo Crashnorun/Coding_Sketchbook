@@ -56,6 +56,7 @@ namespace Image_Meta_Data_02
 
         #endregion
 
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -63,6 +64,9 @@ namespace Image_Meta_Data_02
         {
             CreatePropertyTags();
         }
+
+
+        #region ---- METHODS ----
 
         /// <summary>
         /// Calculate value by converting bytes to string and find the value
@@ -652,6 +656,7 @@ namespace Image_Meta_Data_02
             };
         }
 
+        #endregion
     }
 }
 

@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -34,11 +35,16 @@
                   Background="{x:Null}" BorderThickness="0" 
                   CellStyle="{DynamicResource dgCellStyle}" 
                   GridLinesVisibility="Horizontal"
-                  HorizontalGridLinesBrush="LightGray">
+                  HorizontalGridLinesBrush="LightGray" 
+                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
             <DataGrid.Resources>
                 <Style TargetType="ScrollBar">
                     <Style.Triggers>
+
+                        <Trigger Property="MinWidth"  Value="5">
+                        </Trigger>
+                       
                         <Trigger Property="Orientation" Value="Vertical">
                             <Setter Property="Width" Value="3"/>
                         </Trigger>
@@ -47,6 +53,9 @@
                             <Setter Property="Height" Value="3"/>
                         </Trigger>
 
+                        <Trigger Property="Width" Value="30">
+
+                        </Trigger>
                     </Style.Triggers>
 
                     <!--<Setter Property="Width" Value="5"/>-->
