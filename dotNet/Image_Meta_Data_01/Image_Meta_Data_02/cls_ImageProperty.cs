@@ -1181,6 +1181,7 @@ public enum PropertyTagId : int
  *      https://www.media.mit.edu/pia/Research/deepview/exif.html
  *      https://www.exiv2.org/tags.html
  *      https://www.awaresystems.be/imaging/tiff/tifftags/privateifd/exif.html
+ *      http://documentation.axiell.com/alm/en/ds_eiefimagedirectory.html
  * MSDN EXIF property descriptions: 
  *      https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-constant-property-item-descriptions
  *      https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-constant-image-property-tag-constants
