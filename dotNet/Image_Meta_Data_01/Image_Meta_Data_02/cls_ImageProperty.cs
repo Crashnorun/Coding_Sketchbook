@@ -26,7 +26,7 @@ namespace Image_Meta_Data_02
         public string Value { get; set; }
 
         /// <summary>
-        /// Property
+        /// Property Name
         /// </summary>
         public string Property { get; set; }
 
@@ -46,11 +46,12 @@ namespace Image_Meta_Data_02
         public int DataLength { get; set; }
 
         /// <summary>
-        /// Data Buffer
+        /// Data Buffer , Raw Byte Array
         /// </summary>
         public byte[] DataBuffer { get; set; }
 
         private Dictionary<int, string> PropertyTags { get; set; }
+
         private Dictionary<int, string> PropertyResUnit { get; set; }
 
         #endregion
@@ -64,33 +65,21 @@ namespace Image_Meta_Data_02
         }
 
         /// <summary>
-        /// Calculate value by converting bytes to string
+        /// Calculate value by converting bytes to string and find the value
         /// </summary>
         public void CalculateValue()
         {
-            string result = FindDataValue();
+            string result = FindDataValue();                                                    // convert bytes to sring
 
             if (PropertyTags.ContainsKey(Id))
                 Property = PropertyTags[Id];
             else
                 Property = Id.ToString();
 
-            switch (Id)
+            switch (Id)                                                                         // some special conversions are necessary
             {
                 case 0x0112: Value = FindImageRotation(result); break;                          // image rotation
-                case 0x5030:
-                case 0x0128:                                                                    // resolution units
-                    int val = Convert.ToInt32(result);
-                    Value = PropertyResUnit[val];
-                    break;
                 case 0x9207: Value = FindMeteringMode(result); break;                           // metering mode
-                case 0x0132:                                                                    // modify date
-                case 0x9003:                                                                    // original date time
-                case 0x9004: Value = FindDateTime(result); break;                               // Created date time
-                case 0x0213:                                                                    // Y Cb Cr Positioning
-                    int temp = Convert.ToInt32(result);
-                    Value = temp == 1? "Centered": temp == 2? "Co-sited" : result; 
-                    break;
                 case 0x9101: Value = FindCompressionConfiguration(); break;                     // components configuration
                 case 0x9209: Value = FindFlashValue(result); break;                             // flash
                 case 0x927c: Value = FindMakerNotes(result); break;
@@ -101,11 +90,21 @@ namespace Image_Meta_Data_02
                 case 0xa403: Value = Convert.ToInt32(result) == 0 ? "Auto" : "Manual"; break;
                 case 0xa406: Value = FindSceneCaptureType(result); break;
                 case 0x000C: Value = FindGPSSpeedReference(result); break;
-                case 0x0010:
-                case 0x0017: Value = result == "T" ? "True North" : result == "M" ? "Magnetic North" : result; break;   // GPS North direction
                 case 0x8822: Value = FindExposureProgram(result); break;
                 case 0x829A: Value = result += " seconds"; break;
                 case 0x9000: Value = Encoding.UTF8.GetString(DataBuffer); break;
+                case 0x0132:                                                                    // modify date
+                case 0x9003:                                                                    // original date time
+                case 0x9004: Value = FindDateTime(result); break;                               // Created date time
+                case 0x0010:
+                case 0x0017: Value = result == "T" ? "True North" : result == "M" ? "Magnetic North" : result; break;   // GPS North direction
+                case 0x5030:
+                case 0x0128:                                                                    // resolution units
+                    int val = Convert.ToInt32(result);
+                    Value = PropertyResUnit[val]; break;
+                case 0x0213:                                                                    // Y Cb Cr Positioning
+                    int temp = Convert.ToInt32(result);
+                    Value = temp == 1 ? "Centered" : temp == 2 ? "Co-sited" : result; break;
                 default: Value = result; break;
             }
         }
@@ -128,7 +127,6 @@ namespace Image_Meta_Data_02
                     break;
 
                 case ExifPropertyDataTypes.UShortArray:
-                    result = string.Empty;
                     item_size = 2;
                     num_items = DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
@@ -141,7 +139,6 @@ namespace Image_Meta_Data_02
                     break;
 
                 case ExifPropertyDataTypes.ULongArray:
-                    result = string.Empty;
                     item_size = 4;
                     num_items = DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
@@ -154,7 +151,6 @@ namespace Image_Meta_Data_02
                     break;
 
                 case ExifPropertyDataTypes.ULongFractionArray:
-                    result = string.Empty;
                     item_size = 8;
                     num_items = DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
@@ -170,7 +166,6 @@ namespace Image_Meta_Data_02
                     break;
 
                 case ExifPropertyDataTypes.LongArray:
-                    result = string.Empty;
                     item_size = 4;
                     num_items = DataLength / item_size;
 
@@ -186,7 +181,6 @@ namespace Image_Meta_Data_02
                     break;
 
                 case ExifPropertyDataTypes.LongFractionArray:
-                    result = string.Empty;
                     item_size = 8;
                     num_items = DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
@@ -210,7 +204,6 @@ namespace Image_Meta_Data_02
                     }
                     break;
             }
-
             return result;
         }
 
@@ -444,11 +437,15 @@ namespace Image_Meta_Data_02
             }
         }
 
-
+        /// <summary>
+        /// Convert date to human readable date
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns>Human readable date</returns>
         private string FindDateTime(string result)
         {
             string[] vals = result.Split(' ');
-            string date = vals[0].Replace(':','/');
+            string date = vals[0].Replace(':', '/');
             string time = vals[1];
             DateTime dateTime = DateTime.Parse(date + " " + time);
             return dateTime.ToLongDateString() + " " + dateTime.ToLongTimeString();
@@ -588,7 +585,7 @@ namespace Image_Meta_Data_02
                 { 0x8769, "EXIF IFD" },
                 { 0x8773, "ICC Profile" },
 
-                
+
                 { 0x8822, "EXIF Exposure Prog" },       // https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifexposureprog
                 // stopped here: https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytagexifspectralsense
                 // started here: https://docs.microsoft.com/en-us/windows/desktop/gdiplus/-gdiplus-constant-property-item-descriptions#propertytaggpsifd
