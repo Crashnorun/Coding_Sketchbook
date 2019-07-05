@@ -24,17 +24,6 @@ namespace Image_Meta_Data_02
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region References
-        /*
-         * https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-open-files-using-the-openfiledialog-component
-         * https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.image?view=netframework-4.8
-         * https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
-         * https://stackoverflow.com/questions/16900291/c-sharp-image-propertyitems-metadate-how-do-you-know-which-number-is-which-pro
-         * https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?redirectedfrom=MSDN&view=netframework-4.8#System_Drawing_Imaging_PropertyItem_Id
-         * https://github.com/anton-iermolenko/Photo-library-toolkit/blob/master/PhotoLibaryToolkit/Framework/ImageConstants.cs
-         */
-        #endregion
-
         public string FilePath;
 
         public MainWindow()
@@ -44,7 +33,18 @@ namespace Image_Meta_Data_02
             btnRotate.Visibility = Visibility.Hidden;
         }
 
-        // load image
+        // rotate image button
+        private void BtnRotate_Click(object sender, RoutedEventArgs e)
+        {
+            // rotate image 90 degrees with every click
+            RotateTransform xform = imgBox.LayoutTransform as RotateTransform;      // extract the current rotation 
+            if (xform != null)
+                imgBox.LayoutTransform = new RotateTransform(xform.Angle + 90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
+            else
+                imgBox.LayoutTransform = new RotateTransform(90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
+        }
+
+        // load image button
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog()
@@ -80,10 +80,10 @@ namespace Image_Meta_Data_02
                 cls_ImageProperty imgProp = new cls_ImageProperty();
                 imgProp.Id = item.Id;                                                           // property id
                 imgProp.DataType = (ExifPropertyDataTypes)item.Type;                            // property data type
-                imgProp.DataBuffer = item.Value;
+                imgProp.DataBuffer = item.Value;                                                // property value
                 imgProp.DataLength = item.Len;
                 imgProp.RowNumber = count;
-                imgProp.CalculateValue();
+                imgProp.CalculateValue();                                                       // convert value to usuable info
                 count++;
 
                 Debug.Print(imgProp.Id.ToString());
@@ -95,20 +95,22 @@ namespace Image_Meta_Data_02
             btnRotate.Visibility = Visibility.Visible;
         }
 
-
         private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 
         }
-
-        private void BtnRotate_Click(object sender, RoutedEventArgs e)
-        {
-            // rotate image 90 degrees with every click
-            RotateTransform xform = imgBox.LayoutTransform as RotateTransform;      // extract the current rotation 
-            if (xform != null)
-                imgBox.LayoutTransform = new RotateTransform(xform.Angle + 90, imgBox.ActualWidth/2, imgBox.ActualHeight/2);
-            else
-                imgBox.LayoutTransform = new RotateTransform(90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
-        }
+      
     }
 }
+
+
+#region ---- REFERENCES ----
+/*
+ * https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-open-files-using-the-openfiledialog-component
+ * https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.image?view=netframework-4.8
+ * https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
+ * https://stackoverflow.com/questions/16900291/c-sharp-image-propertyitems-metadate-how-do-you-know-which-number-is-which-pro
+ * https://docs.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?redirectedfrom=MSDN&view=netframework-4.8#System_Drawing_Imaging_PropertyItem_Id
+ * https://github.com/anton-iermolenko/Photo-library-toolkit/blob/master/PhotoLibaryToolkit/Framework/ImageConstants.cs
+ */
+#endregion
