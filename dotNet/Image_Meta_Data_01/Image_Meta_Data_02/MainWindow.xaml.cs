@@ -30,19 +30,7 @@ namespace Image_Meta_Data_02
         {
             InitializeComponent();
             dataGrid.Visibility = Visibility.Hidden;
-           // btnRotate.Visibility = Visibility.Hidden;
         }
-
-        // rotate image button
-        //private void BtnRotate_Click(object sender, RoutedEventArgs e)
-        //{
-        //    // rotate image 90 degrees with every click
-        //    RotateTransform xform = imgBox.LayoutTransform as RotateTransform;      // extract the current rotation 
-        //    if (xform != null)
-        //        imgBox.LayoutTransform = new RotateTransform(xform.Angle + 90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
-        //    else
-        //        imgBox.LayoutTransform = new RotateTransform(90, imgBox.ActualWidth / 2, imgBox.ActualHeight / 2);
-        //}
 
         // load image button
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
@@ -107,14 +95,12 @@ namespace Image_Meta_Data_02
 
             dataGrid.ItemsSource = ImgProperties;                                               // display image data in data grid view
             dataGrid.Visibility = Visibility.Visible;
-          //  btnRotate.Visibility = Visibility.Visible;
         }
 
         private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
 
         }
-
 
         private void RotateImage(int degrees)
         {
