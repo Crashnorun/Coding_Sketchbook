@@ -97,12 +97,15 @@ namespace Image_Meta_Data_02
                 case 0x8822: Value = FindExposureProgram(result); break;
                 case 0x829A: Value = result += " seconds"; break;
                 case 0x9000: Value = Encoding.UTF8.GetString(DataBuffer); break;
+                case 0x8830: Value = FindSensitivityType(result); break;
+                case 0xA401: Value = FindCustomRendered(result); break;
                 case 0x0132:                                                                    // modify date
                 case 0x9003:                                                                    // original date time
                 case 0x9004: Value = FindDateTime(result); break;                               // Created date time
                 case 0x0010:
                 case 0x0017: Value = result == "T" ? "True North" : result == "M" ? "Magnetic North" : result; break;   // GPS North direction
                 case 0x5030:
+                case 0xA210:
                 case 0x0128:                                                                    // resolution units
                     int val = Convert.ToInt32(result);
                     Value = PropertyResUnit[val]; break;
@@ -455,6 +458,38 @@ namespace Image_Meta_Data_02
             return dateTime.ToLongDateString() + " " + dateTime.ToLongTimeString();
         }
 
+
+        private string FindSensitivityType(string result)
+        {
+            switch (Convert.ToInt32(result))
+            {
+                case 0: return "Unknown";
+                case 1: return "Standard Output Sensitivity";
+                case 2: return "Recommended Exposure Index";
+                case 3: return "ISO Speed";
+                case 4: return "Standard Output Sensitivity and Recommended Exposure Index";
+                case 5: return "Standard Output Sensitivity and ISO Speed";
+                case 6: return "Recomended Exposure Index and ISO Speed";
+                case 7: return "Standard Output Sensitivity, Recomended Exposure Index and ISO Speed";
+                default: return result;
+            }
+        }
+
+
+        private string FindCustomRendered(string result)
+        {
+            switch (Convert.ToInt32(result))
+            {
+                case 0: return "Normal";
+                case 1: return "Custom";
+                case 3: return "HDR";
+                case 6: return "Panorama";
+                case 8: return "Portrait";
+                default: return result;
+            }
+        }
+
+
         /// <summary>
         /// Creates a dictionary of most of the EXIF tags and their integer value
         /// </summary>
@@ -644,7 +679,16 @@ namespace Image_Meta_Data_02
                 { 0x502E, "Thumbnail Y Resolution" },
                 { 0x5030, "Thumbnail Resolution Unit" },
                 { 0x5091, "Chrominance Table" },
-                { 0x5090, "Liminance Table" }
+                { 0x5090, "Liminance Table" },
+                { 0x9205, "Max Apature Value" },
+                { 0x8830, "Sensitivity Type" },
+                { 0x8832, "Recommended Exposure Index" },
+                { 0xA20E, "Focal Plane X Resolution" },
+                { 0xA20F, "Focal Plane Y Resolution" },
+                { 0xA210, "Focal Plane Resolution Unit" },
+                { 0xA401, "Custom Rendered" },
+                { 0xA431, "Body Serial Number" },
+                { 0xA435, "Lense Serial Number" }
             };
             PropertyTags = _PropertyTags;
 
@@ -652,7 +696,9 @@ namespace Image_Meta_Data_02
             {
                 { 1, "NA"},
                 { 2, "Inch"},
-                { 3, "CM"}
+                { 3, "CM"},
+                { 4, "MM" },
+                { 5, "UM" }
             };
         }
 
