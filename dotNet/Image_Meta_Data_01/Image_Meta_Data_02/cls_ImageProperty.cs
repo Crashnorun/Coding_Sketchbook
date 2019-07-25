@@ -688,7 +688,14 @@ namespace Image_Meta_Data_02
                 { 0xA210, "Focal Plane Resolution Unit" },
                 { 0xA401, "Custom Rendered" },
                 { 0xA431, "Body Serial Number" },
-                { 0xA435, "Lense Serial Number" }
+                { 0xA435, "Lense Serial Number" },
+                
+                // animated gifs
+                { 0x5100, "Frame Delay" },                  // number of frames in the image
+                { 0x5101, "Loop Count" },                   // 0 = infinitely
+                { 0x5102, "Global Color Palette" },
+                { 0x5103, "Index Background" },
+                { 0x5104, "Index Transparent" }
             };
             PropertyTags = _PropertyTags;
 
