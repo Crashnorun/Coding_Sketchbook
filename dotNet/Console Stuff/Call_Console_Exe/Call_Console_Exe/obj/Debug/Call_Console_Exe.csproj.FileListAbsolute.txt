@@ -1,0 +1,7 @@
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\bin\Debug\Call_Console_Exe.exe.config
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\bin\Debug\Call_Console_Exe.exe
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\bin\Debug\Call_Console_Exe.pdb
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\obj\Debug\Call_Console_Exe.csprojAssemblyReference.cache
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\obj\Debug\Call_Console_Exe.csproj.CoreCompileInputs.cache
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\obj\Debug\Call_Console_Exe.exe
+C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Console Stuff\Call_Console_Exe\Call_Console_Exe\obj\Debug\Call_Console_Exe.pdb
