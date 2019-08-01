@@ -15,7 +15,7 @@ namespace WeatherApp.ViewModel
         public const string CITY = "349727";
         public const string BASE_URL = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{1}?apikey={0}";
 
-        public async Task<AccuWeather> GetWeatherInformationAsync(string CityID)
+        public static async Task<AccuWeather> GetWeatherInformationAsync(string CityID)
         {
             AccuWeather result = new AccuWeather();
 
@@ -30,5 +30,7 @@ namespace WeatherApp.ViewModel
 
             return result;
         }
+
+
     }
 }
