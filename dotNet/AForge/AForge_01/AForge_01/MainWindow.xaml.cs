@@ -49,11 +49,11 @@ namespace AForge_01
             Bitmap grayImage = filter.Apply(img);                                               // apply filter
             grayImage.Save(tempFile);                                                           // save new image
 
-            ImgBox1.Source = new BitmapImage(new Uri(filePath));              // original image
-            ImgBox2.Source = new BitmapImage(new Uri(tempFile));              // new image
+            ImgBox1.Source = new BitmapImage(new Uri(filePath));                                // original image
+            ImgBox2.Source = new BitmapImage(new Uri(tempFile));                                // new image
+            OriginalName.Text = System.IO.Path.GetFileName(filePath);
+            TempName.Text = System.IO.Path.GetFileName(tempFile);
         }
-
-
 
     }
 

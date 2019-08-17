@@ -15,17 +15,24 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <Button x:Name="btnProcess" Content="Process" Margin="10,10,0,0"
                 HorizontalAlignment="Left"  VerticalAlignment="Top" 
                 Width="74" BorderBrush="#FFDDDDDD" Click="btnProcess_Click"
-                Grid.Column="0" Grid.Row="1"/>
+                Grid.Column="0" Grid.Row="2"/>
 
         <Image x:Name="ImgBox1" Margin="10,10,10,10" Grid.Column="0" Grid.Row="0"/>
 
         <Image x:Name="ImgBox2" Margin="10,10,10,10" Grid.Column="1" Grid.Row="0"/>
+        
+        <TextBlock x:Name="OriginalName" Margin="10,10,0,0" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Grid.Column="0" Grid.Row="1"/>
 
-
+        <TextBlock x:Name="TempName" Margin="10,10,0,0" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
