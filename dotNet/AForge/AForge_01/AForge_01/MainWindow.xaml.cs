@@ -30,7 +30,6 @@ namespace AForge_01
     public partial class MainWindow : Window
     {
         public string filePath = @"C:\Users\Charlie\Pictures\IMG_6517_A.jpg";                   // image path
-        private bool dragStarted = false;
         private Grayscale filter;
         private string tempPath;
         string tempFile;
@@ -38,7 +37,7 @@ namespace AForge_01
         public MainWindow()
         {
             InitializeComponent();
-            //ImgBox1.Source = new BitmapImage(new Uri(filePath, UriKind.Relative));              // original image
+
             filterScale.Visibility = Visibility.Hidden;
             tempPath = System.IO.Path.GetTempPath();                                            // get temp path
             tempFile = System.IO.Path.Combine(tempPath, "tempImg.jpg");                         // get full temp path
@@ -54,16 +53,6 @@ namespace AForge_01
             filterScale.Value = 0.2;
         }
 
-        //private void Slider_DragStarted(object sender, DragStartedEventArgs e)
-        //{
-        //    this.dragStarted = true;
-        //}
-
-        //private void filterScale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    if (!dragStarted)
-        //        applyFilter(e.NewValue);
-        //}
 
         private void applyFilter(double filterValue)
         {
@@ -83,34 +72,24 @@ namespace AForge_01
 
         }
 
-        private void Slider_DragCompleted(object sender, DragCompletedEventArgs e)
-        {
-            //System.Diagnostics.Debug.Print(((Slider)sender).Value.ToString());
-            applyFilter(((Slider)sender).Value);
-            this.dragStarted = false;
-        }
-
-        private void filterScale_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            System.Diagnostics.Debug.Print(((Slider)sender).Value.ToString());
-            applyFilter(((Slider)sender).Value);
-        }
-
-
-        private void filterScale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            System.Diagnostics.Debug.Print(((Slider)sender).Value.ToString());
-            applyFilter(((Slider)sender).Value);
-        }
-
-        private void filterScale_OnThumbDragStarted(DragStartedEventArgs e)
-        {
-
-        }
 
         private void filterScale_DragStarted(object sender, DragStartedEventArgs e)
         {
+            System.Diagnostics.Debug.Print(((Slider)sender).Value.ToString());
+            applyFilter(((Slider)sender).Value);
+        }
 
+
+        private void filterScale_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ((MainWindow)System.Windows.Application.Current.MainWindow).UpdateLayout();
+        }
+
+
+        private void filterScale_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            System.Diagnostics.Debug.Print(((Slider)sender).Value.ToString());
+            applyFilter(((Slider)sender).Value);
         }
     }
 

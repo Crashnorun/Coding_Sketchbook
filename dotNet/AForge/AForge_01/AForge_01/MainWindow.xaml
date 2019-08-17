@@ -40,8 +40,8 @@
                 Grid.Column="1" Grid.Row="2"
                 Minimum="0" Maximum="1" 
                 Foreground="Blue" Width="300"
-                Thumb.DragCompleted="Slider_DragCompleted" MouseDown="filterScale_MouseDown"
-                Thumb.DragStarted="filterScale_DragStarted"/>
+                Thumb.DragStarted="filterScale_DragStarted" MouseUp="filterScale_MouseUp"
+                Thumb.DragCompleted="filterScale_DragCompleted"/>
 
     </Grid>
 </Window>
