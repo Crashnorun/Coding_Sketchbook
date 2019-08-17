@@ -27,15 +27,18 @@ namespace AForge_01
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string filePath = @"C:\Users\Charlie\Pictures\IMG_6517_A.jpg";                      // image path
+
         public MainWindow()
         {
             InitializeComponent();
+            ImgBox1.Source = new BitmapImage(new Uri(filePath, UriKind.Relative));              // original image
 
         }
 
         private void btnProcess_Click(object sender, RoutedEventArgs e)
         {
-            string filePath = @"C:\Users\Charlie\Pictures\IMG_6517_A.jpg";                      // image path
+
             string tempPath = System.IO.Path.GetTempPath();                                     // get temp path
 
             string tempFile = System.IO.Path.Combine(tempPath, "tempImg.jpg");                  // get full temp path
@@ -46,28 +49,12 @@ namespace AForge_01
             Bitmap grayImage = filter.Apply(img);                                               // apply filter
             grayImage.Save(tempFile);                                                           // save new image
 
-            ImgBox1.Source = new BitmapImage(new Uri(filePath, UriKind.Relative));              // original image
-            ImgBox2.Source = new BitmapImage(new Uri(tempPath, UriKind.Relative));              // new image
-
-            Application.Current.Windows[0].UpdateLayout();
-            UIRefresh.Refresh(this);
+            ImgBox1.Source = new BitmapImage(new Uri(filePath));              // original image
+            ImgBox2.Source = new BitmapImage(new Uri(tempFile));              // new image
         }
 
 
 
     }
-
-    public static class UIRefresh
-    {
-        private static Action EmptyDelegate = delegate () { };
-
-        public static void Refresh(this UIElement uIElement)
-        {
-            uIElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
-        }
-
-    }
-
-
 
 }
