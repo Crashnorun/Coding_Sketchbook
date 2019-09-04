@@ -1,6 +1,5 @@
-
-#import clr
-#clr.AddReference('Microsoft.Office.Interop.Excel')
+# import clr
+# clr.AddReference('Microsoft.Office.Interop.Excel')
 
 
 #from Microsoft.Office.Interop import Excel
