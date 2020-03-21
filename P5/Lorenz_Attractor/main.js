@@ -19,12 +19,15 @@ function setup() {
     x = 1;
     y = 0;
     z = 0;
+
+    camera(07,-109,111,1.5, -60,73);
+    console.log("exit setup");
 }
 
 
 
 function draw() {
-
+orbitControl();
     beginShape(POINTS);
     
     let xt = x + t * sigma * (y - x);
@@ -39,5 +42,5 @@ function draw() {
     z = zt;
 
     endShape();
-    console.log(x);
+
 }
