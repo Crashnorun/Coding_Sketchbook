@@ -5,6 +5,7 @@
  */
 
 let pts = [];
+let pt;
 let beta = 8 / 3;
 let rho = 28;
 let sigma = 10;
@@ -15,54 +16,52 @@ let slideX, slideY, slideZ;
 
 function setup() {
     createCanvas(600, 600, WEBGL);
-    background(0);
-    stroke('purple');
+    background(255);
+
+    stroke('blue');
     strokeWeight(4);
-    noStroke();
-    fill('red');
+    //fill('red');
 
     x = 0.1;
     y = 0;
     z = 0;
 
-    slideX = createSlider(-100, 100, 0, 1);
-    slideY = createSlider(-100, 100, 0, 1);
-    slideZ = createSlider(-100, 100, 100, 1);
+    slideX = createSlider(-600, 600, 0, 1);
+    slideY = createSlider(-600, 600, 0, 1);
+    slideZ = createSlider(-600, 600, 600, 1);
 
-    //camera(07, -109, 111, 1.5, -60, 73);
-    // camera(8, -60, 25, 8, 5, 25);
-    // camera(slideX.value(), 0, 100, 0, 0, 0, 0, 0, 1);
-    camera(0, 0, 100, 0, 0, 0, 0, 0, 1);
-    // cam = camera();
-    console.log(cam);
+    cam = camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
+    // console.log(cam);
     console.log("exit setup");
 }
 
 
 
 function draw() {
-    orbitControl();
-    // beginShape(LINES);
-    // camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 0, 1);
+    background(255);
+    // orbitControl();
+
+    camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
+
     let xt = x + t * sigma * (y - x);
     let yt = y + t * (x * (rho - z) - y);
     let zt = z + t * (x * y - beta * z);
 
-     push();
-     translate(xt, yt, zt);
-     sphere(0.25);
-     pop();
 
-    // vertex(x, y, z);
     //point(xt, yt, zt);
     x = xt;
     y = yt;
     z = zt;
+    pt = new Pt(x, y, z);
+    pts.push(pt);
 
-    //  endShape();
-    // background(200);
-
-    // rotateX(frameCount * 0.01);
-    // rotateY(frameCount * 0.01);
-    // box(150);
+    beginShape(POINTS);
+    for (let i = 0; i < pts.length; i++) {
+        /*push();
+        translate(pts[i].x, pts[i].y, pts[i].z);
+        sphere(0.1);
+        pop();*/
+        vertex(pts[i].x, pts[i].y, pts[i].z);
+    }
+    endShape();
 }
