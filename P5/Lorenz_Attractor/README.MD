@@ -14,3 +14,7 @@ Further info on the Lorenz Attractor can be found [here on the wikipedia site](h
 This project was done in JavaScript using [P5Js framework](https://p5js.org/).
 
 ![](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/P5/Lorenz_Attractor/Images/Image_01.png)
+
+## Interesting articles
+- [Paul Bourke 01](http://paulbourke.net/fractals/lorenz/)
+- [Paul Bourke 02](http://paulbourke.net/fractals/)
