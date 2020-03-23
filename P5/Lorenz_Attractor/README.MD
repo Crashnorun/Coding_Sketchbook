@@ -13,3 +13,4 @@ Further info on the Lorenz Attractor can be found [here on the wikipedia site](h
 
 This project was done in JavaScript using [P5Js framework](https://p5js.org/).
 
+![](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/P5/Lorenz_Attractor/Images/Image_01.png)
