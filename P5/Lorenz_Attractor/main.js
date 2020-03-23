@@ -26,9 +26,13 @@ function setup() {
     y = 0;
     z = 0;
 
+    /*slideX = createSlider(-600, 600, -101, 1);
+    slideY = createSlider(-600, 600, 44, 1);
+    slideZ = createSlider(-600, 600, -14, 1);*/
+
     slideX = createSlider(-600, 600, 0, 1);
-    slideY = createSlider(-600, 600, 0, 1);
-    slideZ = createSlider(-600, 600, 600, 1);
+    slideY = createSlider(-600, 600, 130, 1);
+    slideZ = createSlider(-600, 600, 50, 1);
 
     cam = camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
     // console.log(cam);
