@@ -35,10 +35,14 @@ namespace Rooms_Extract_Data
             // Selection sel = uidoc.Selection;
 
             // Retrieve elements from database
-            FilteredElementCollector col = new FilteredElementCollector(doc)
+            /*FilteredElementCollector col = new FilteredElementCollector(doc)
                 .WhereElementIsNotElementType()
                 .OfCategory(BuiltInCategory.INVALID)
-                .OfClass(typeof(Room));
+                .OfClass(typeof(Room));*/
+
+            FilteredElementCollector col = new FilteredElementCollector(doc)
+            .WhereElementIsNotElementType()
+            .OfCategory(BuiltInCategory.OST_Rooms);
 
             // Filtered element collector is iterable
             foreach (Element e in col)
