@@ -51,7 +51,7 @@ function setup() {
 
 function draw() {
     background(255);
-     orbitControl();
+    // orbitControl();
 
     //camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
     /* camera(slideX.value(), slideY.value(), slideZ.value(),
