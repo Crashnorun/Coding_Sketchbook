@@ -24,8 +24,9 @@ function setup() {
     background(255);
 
     stroke('blue');
-    strokeWeight(4);
-    //fill('red');
+    strokeWeight(1);
+
+    fill('red');
 
     // starting conditions
     x = 0.1;
@@ -54,7 +55,7 @@ function draw() {
 
     //camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
     camera(slideX.value(), slideY.value(), slideZ.value(),
-        slideX.value(), 0, slideZ.value()-600, 0, 1, 0);
+        slideX.value(), 0, slideZ.value() - 600, 0, 1, 0);
 
     let xt = x + t * sigma * (y - x);
     let yt = y + t * (x * (rho - z) - y);
@@ -65,15 +66,23 @@ function draw() {
     y = yt;
     z = zt;
     pt = new Pt(x, y, z);
+   
+    let r = map(x, 0, 200, 0, 255, true);
+    let g = map(y, 0, 200, 0, 255, true);
+    let b = map(z, 0, 200, 0, 255, true);
+    pt.col = [r, g, b];
+   
     pts.push(pt);
 
-    beginShape(POINTS);
+    //beginShape();
     for (let i = 0; i < pts.length; i++) {
-        /*push();
+        push();
         translate(pts[i].x, pts[i].y, pts[i].z);
+        console.log(pts[i].col);
+        //fill(color(pts[i].col[0], pts[i].col[1], pts[i].col[2]));
         sphere(0.1);
-        pop();*/
-        vertex(pts[i].x, pts[i].y, pts[i].z);
+        pop();
+        //vertex(pts[i].x, pts[i].y, pts[i].z);
     }
-    endShape();
+   // endShape();
 }
