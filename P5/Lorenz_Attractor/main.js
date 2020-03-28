@@ -2,6 +2,11 @@
 
 /**
  * Reference: https://www.algosome.com/articles/render-lorenz-attractor.html
+ * Default values:
+ *  beta = 8 / 3;
+ *  rho = 28;
+ *  sigma = 10;
+ *  t = 0.02445;
  */
 
 let pts = [];
@@ -22,6 +27,7 @@ function setup() {
     strokeWeight(4);
     //fill('red');
 
+    // starting conditions
     x = 0.1;
     y = 0;
     z = 0;
@@ -30,6 +36,7 @@ function setup() {
     slideY = createSlider(-600, 600, 44, 1);
     slideZ = createSlider(-600, 600, -14, 1);*/
 
+    // Camera positioning 
     slideX = createSlider(-600, 600, 0, 1);
     slideY = createSlider(-600, 600, 130, 1);
     slideZ = createSlider(-600, 600, 50, 1);
@@ -50,7 +57,6 @@ function draw() {
     let xt = x + t * sigma * (y - x);
     let yt = y + t * (x * (rho - z) - y);
     let zt = z + t * (x * y - beta * z);
-
 
     //point(xt, yt, zt);
     x = xt;
