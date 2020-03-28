@@ -52,7 +52,9 @@ function draw() {
     background(255);
     // orbitControl();
 
-    camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
+    //camera(slideX.value(), slideY.value(), slideZ.value(), 0, 0, 0, 0, 1, 0);
+    camera(slideX.value(), slideY.value(), slideZ.value(),
+        slideX.value(), 0, slideZ.value()-600, 0, 1, 0);
 
     let xt = x + t * sigma * (y - x);
     let yt = y + t * (x * (rho - z) - y);
