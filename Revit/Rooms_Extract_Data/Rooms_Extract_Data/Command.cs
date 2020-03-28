@@ -15,7 +15,8 @@ namespace Rooms_Extract_Data
     [Transaction(TransactionMode.Manual)]
     public class Command : IExternalCommand
     {
-        string fileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
+        //string FileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
+        public string FileName = Properties.Resources.FileName_BasicRooms;
 
 
         public Result Execute(
@@ -26,7 +27,7 @@ namespace Rooms_Extract_Data
             UIApplication uiapp = commandData.Application;              // access to the main window and active document
             Application app = uiapp.Application;                        // current application
 
-            if (uiapp.ActiveUIDocument == null) uiapp.OpenAndActivateDocument(fileName);
+            if (uiapp.ActiveUIDocument == null) uiapp.OpenAndActivateDocument(FileName);
 
             UIDocument uidoc = uiapp.ActiveUIDocument;                  //  current active project
             Document doc = uidoc.Document;                              // databse level document
@@ -46,11 +47,26 @@ namespace Rooms_Extract_Data
 
             // Filtered element collector is iterable
             foreach (Element e in col)
+            {
                 Debug.Print(e.Name);
+                Room rm = e as Room;
+                BoundingBoxXYZ boundingBox = rm.ClosedShell.GetBoundingBox();
+                XYZ minPt = boundingBox.Min;
+                XYZ madPt = boundingBox.Max;
+
+                Options options = new Options();
+                options.ComputeReferences = true;
+                options.View = doc.ActiveView;
+                // options.DetailLevel = ViewDetailLevel.Fine;
+                
+                GeometryElement geo = rm.get_Geometry(options);
+                Solid solid = (Solid)geo.GetEnumerator();
+            }
+               
 
             // Modify document within a transaction
 
-            using (Transaction tx = new Transaction(doc))
+          /*  using (Transaction tx = new Transaction(doc))
             {
                 tx.Start("Transaction Name");
 
@@ -58,7 +74,7 @@ namespace Rooms_Extract_Data
                     e.Name = "Charlie";
 
                 tx.Commit();
-            }
+            }*/
 
             return Result.Succeeded;
         }

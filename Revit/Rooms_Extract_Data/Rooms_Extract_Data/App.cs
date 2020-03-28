@@ -13,7 +13,8 @@ namespace Rooms_Extract_Data
 
     class App : IExternalApplication
     {
-        private string FileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
+        // private string FileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
+        private string FileName = Properties.Resources.FileName_BasicRooms;
 
         public Result OnStartup(UIControlledApplication a)
         {
@@ -46,4 +47,6 @@ namespace Rooms_Extract_Data
 /*
  * Refernces:
  * Load file on startup: https://forums.autodesk.com/t5/revit-api-forum/how-to-load-a-rvt-file-automatically-when-start-the-revit/m-p/5500878
+ * Revit geometry options: https://thebuildingcoder.typepad.com/blog/2010/01/geometry-options.html
+ * 
  */
