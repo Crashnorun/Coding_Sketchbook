@@ -8,6 +8,8 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+
+using Newtonsoft.Json;
 #endregion
 
 namespace Rooms_Extract_Data
@@ -17,7 +19,8 @@ namespace Rooms_Extract_Data
     {
         //string FileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
         public string FileName = Properties.Resources.FileName_BasicRooms;
-        List<Point> pts = new List<Point>();
+        List<mPoint> pts = new List<mPoint>();
+        List<mRoom> Rooms = new List<mRoom>();
 
         public Result Execute(
           ExternalCommandData commandData,
@@ -60,6 +63,19 @@ namespace Rooms_Extract_Data
                 options.IncludeNonVisibleObjects = true;
                 options.DetailLevel = ViewDetailLevel.Fine;
 
+                mRoom room = new mRoom()
+                {
+                    Name = rm.Name,
+                    Number = rm.Number,
+                    MinPt = new mPoint(minPt),
+                    MaxPt = new mPoint(maxPt),
+                    Height = rm.UnboundedHeight,
+                    Perimiter = rm.Perimeter,
+                    Area = rm.Area,
+                    Volume = rm.Volume
+                };
+
+
                 GeometryElement geo = rm.get_Geometry(options);
                 foreach (GeometryObject obj in geo)
                 {
@@ -85,6 +101,8 @@ namespace Rooms_Extract_Data
                         {
                             foreach (Face face in faceArr)
                             {
+                                mFace mface = new mFace();
+
                                 IList<CurveLoop> crvLoops = face.GetEdgesAsCurveLoops();
                                 foreach (CurveLoop crvLoop in crvLoops)
                                 {
@@ -99,47 +117,58 @@ namespace Rooms_Extract_Data
                                         Arc arc = crv as Arc;
                                         if (ln != null)
                                         {
-                                            Point pt = new Point(ln.GetEndPoint(0));
-                                            Debug.Print(pt.ToString());
-                                            pts.Add(pt);
+                                            mPoint stpt = new mPoint(ln.GetEndPoint(0));
+                                            Debug.Print(stpt.ToString());
+                                            pts.Add(stpt);
+                                            mPoint endpt = new mPoint(ln.GetEndPoint(1));
+                                            Debug.Print(endpt.ToString());
+                                            pts.Add(endpt);
+
+                                            mLine mline = new mLine(stpt, endpt);
+                                            mface.Lines.Add(mline);
                                         }
                                         else if (arc !=null)
                                         {
-                                            Point pt = new Point(arc.GetEndPoint(0));
-                                            Debug.Print(pt.ToString());
-                                            pts.Add(pt);
+                                            mPoint stpt = new mPoint(arc.GetEndPoint(0));
+                                            Debug.Print(stpt.ToString());
+                                            pts.Add(stpt);
 
                                             double startParam = arc.GetEndParameter(0);
                                             double endParam = arc.GetEndParameter(1);
                                             double midParam = (startParam + endParam) / 2;
 
-                                            pt = new Point(arc.Evaluate(midParam, false));
-                                            Debug.Print(pt.ToString());
-                                            pts.Add(pt);
+                                            mPoint midpt = new mPoint(arc.Evaluate(midParam, false));
+                                            Debug.Print(midpt.ToString());
+                                            pts.Add(midpt);
 
-                                            pt = new Point(arc.GetEndPoint(1));
-                                            Debug.Print(pt.ToString());
-                                            pts.Add(pt);
+                                            mPoint endpt = new mPoint(arc.GetEndPoint(1));
+                                            Debug.Print(endpt.ToString());
+                                            pts.Add(endpt);
+
+                                            mCurve mcrv = new mCurve(stpt, midpt, endpt);
+                                            mface.Curves.Add(mcrv);
                                         }
                                         iterator.MoveNext();
                                     }
                                 }
+                                room.Faces.Add(mface);
                             }
                         }
                     }
                 }
+                Rooms.Add(room);
             }
 
+            string val = JsonConvert.SerializeObject(Rooms, Formatting.Indented);
+            System.IO.File.WriteAllText(Environment.CurrentDirectory + @"\myRooms.rooms", val);
+            Debug.Print(Environment.CurrentDirectory + @"\myRooms.rooms");
 
             // Modify document within a transaction
 
             /*  using (Transaction tx = new Transaction(doc))
               {
                   tx.Start("Transaction Name");
-
-                  foreach (Element e in col)
-                      e.Name = "Charlie";
-
+                  foreach (Element e in col)  e.Name = "Charlie";
                   tx.Commit();
               }*/
 

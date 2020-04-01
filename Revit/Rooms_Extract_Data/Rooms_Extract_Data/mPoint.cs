@@ -7,20 +7,20 @@ using Autodesk.Revit.DB;
 
 namespace Rooms_Extract_Data
 {
-    public class Point
+    public class mPoint
     {
         public double x;
         public double y;
         public double z;
 
-        public Point (double x, double y, double z)
+        public mPoint (double x, double y, double z)
         {
             this.x = x;
             this.y = y;
             this.z = z;
         }
 
-        public Point(XYZ pt)
+        public mPoint(XYZ pt)
         {
             this.x = pt.X;
             this.y = pt.Y;

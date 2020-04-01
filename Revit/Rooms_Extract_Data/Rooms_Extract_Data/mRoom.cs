@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rooms_Extract_Data.Elements
+namespace Rooms_Extract_Data
 {
-    public class Room
+    public class mRoom
     {
 
         public string LevelName { get; set; }
@@ -21,15 +21,22 @@ namespace Rooms_Extract_Data.Elements
         public string Number { get; set; }
 
 
-        public double Perimiter { get; }
+        public double Perimiter { get; set; }
 
-        public double Area { get; }
+        public double Area { get; set; }
 
-        public double Volumne { get; }
+        public double Volume { get; set; }
+
+        public List<mFace> Faces { get; set; }
+
+        public mPoint MaxPt { get; set; }
+        public mPoint MinPt { get; set; }
 
 
-
-
+        public mRoom()
+        {
+            Faces = new List<mFace>();
+        }
 
     }
 }
