@@ -8,6 +8,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using mTypes;
 
 using Newtonsoft.Json;
 #endregion
@@ -19,9 +20,9 @@ namespace Rooms_Extract_Data
     {
         //string FileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
         public string FileName = Properties.Resources.FileName_BasicRooms;
-        List<mPoint> pts = new List<mPoint>();
-        List<mRoom> Rooms = new List<mRoom>();
-
+        public List<mPoint> pts = new List<mPoint>();
+        public List<mRoom> Rooms = new List<mRoom>();
+        
         public Result Execute(
           ExternalCommandData commandData,
           ref string message,
@@ -67,8 +68,8 @@ namespace Rooms_Extract_Data
                 {
                     Name = rm.Name,
                     Number = rm.Number,
-                    MinPt = new mPoint(minPt),
-                    MaxPt = new mPoint(maxPt),
+                    MinPt = new mPoint(minPt.X, minPt.Y, minPt.Z),
+                    MaxPt = new mPoint(maxPt.X, maxPt.Y, maxPt.Z),
                     Height = rm.UnboundedHeight,
                     Perimiter = rm.Perimeter,
                     Area = rm.Area,
@@ -117,10 +118,13 @@ namespace Rooms_Extract_Data
                                         Arc arc = crv as Arc;
                                         if (ln != null)
                                         {
-                                            mPoint stpt = new mPoint(ln.GetEndPoint(0));
+                                            XYZ temp = ln.GetEndPoint(0);
+                                            mPoint stpt = new mPoint(temp.X, temp.Y, temp.Z);
                                             Debug.Print(stpt.ToString());
                                             pts.Add(stpt);
-                                            mPoint endpt = new mPoint(ln.GetEndPoint(1));
+
+                                            temp = ln.GetEndPoint(1);
+                                            mPoint endpt = new mPoint(temp.X, temp.Y, temp.Z);
                                             Debug.Print(endpt.ToString());
                                             pts.Add(endpt);
 
@@ -129,7 +133,8 @@ namespace Rooms_Extract_Data
                                         }
                                         else if (arc !=null)
                                         {
-                                            mPoint stpt = new mPoint(arc.GetEndPoint(0));
+                                            XYZ temp = arc.GetEndPoint(0);
+                                            mPoint stpt = new mPoint(temp.X, temp.Y, temp.Z);
                                             Debug.Print(stpt.ToString());
                                             pts.Add(stpt);
 
@@ -137,11 +142,13 @@ namespace Rooms_Extract_Data
                                             double endParam = arc.GetEndParameter(1);
                                             double midParam = (startParam + endParam) / 2;
 
-                                            mPoint midpt = new mPoint(arc.Evaluate(midParam, false));
+                                            temp = arc.Evaluate(midParam, false);
+                                            mPoint midpt = new mPoint(temp.X, temp.Y, temp.Z);
                                             Debug.Print(midpt.ToString());
                                             pts.Add(midpt);
 
-                                            mPoint endpt = new mPoint(arc.GetEndPoint(1));
+                                            temp = arc.GetEndPoint(1);
+                                            mPoint endpt = new mPoint(temp.X, temp.Y, temp.Z);
                                             Debug.Print(endpt.ToString());
                                             pts.Add(endpt);
 
