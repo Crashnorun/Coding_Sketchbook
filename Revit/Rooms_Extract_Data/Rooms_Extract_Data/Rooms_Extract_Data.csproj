@@ -34,6 +34,15 @@
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramW6432)\Autodesk\Revit 2019\Revit.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-Light|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug-Light\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="RevitAPI">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
@@ -68,8 +77,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)*.addin" "%25AppData%25\Autodesk\REVIT\Addins\2019"
-copy "$(ProjectDir)bin\debug\*.dll" "%25AppData%25\Autodesk\REVIT\Addins\2019"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName)=="Debug" (
+     copy "$(ProjectDir)*.addin" "%25AppData%25\Autodesk\REVIT\Addins\2019"
+     copy "$(ProjectDir)bin\debug\*.dll" "%25AppData%25\Autodesk\REVIT\Addins\2019"
+)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

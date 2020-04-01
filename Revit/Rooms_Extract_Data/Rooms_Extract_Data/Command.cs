@@ -88,10 +88,11 @@ namespace Rooms_Extract_Data
                                 IList<CurveLoop> crvLoops = face.GetEdgesAsCurveLoops();
                                 foreach (CurveLoop crvLoop in crvLoops)
                                 {
+                                    CurveLoopIterator iterator = crvLoop.GetCurveLoopIterator();
+
                                     for (int i = 0; i < crvLoop.NumberOfCurves(); i++)
                                     {
-                                        CurveLoop crvl = crvLoops[i];
-                                        CurveLoopIterator iterator = crvl.GetCurveLoopIterator();
+ 
                                         Curve crv = iterator.Current;
 
                                         Line ln = crv as Line;
@@ -112,7 +113,7 @@ namespace Rooms_Extract_Data
                                             double endParam = arc.GetEndParameter(1);
                                             double midParam = (startParam + endParam) / 2;
 
-                                            pt = new Point(arc.Evaluate(midParam, true));
+                                            pt = new Point(arc.Evaluate(midParam, false));
                                             Debug.Print(pt.ToString());
                                             pts.Add(pt);
 
@@ -125,9 +126,6 @@ namespace Rooms_Extract_Data
                                 }
                             }
                         }
-
-
-
                     }
                 }
             }
