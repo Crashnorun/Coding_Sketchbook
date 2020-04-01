@@ -17,7 +17,7 @@ namespace Rooms_Extract_Data
     {
         //string FileName = @"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\Revit\Rooms_Extract_Data\Models\Simple_Room_01.rvt";
         public string FileName = Properties.Resources.FileName_BasicRooms;
-
+        List<Point> pts = new List<Point>();
 
         public Result Execute(
           ExternalCommandData commandData,
@@ -59,42 +59,70 @@ namespace Rooms_Extract_Data
                 //options.View = doc.ActiveView;
                 options.IncludeNonVisibleObjects = true;
                 options.DetailLevel = ViewDetailLevel.Fine;
-                
+
                 GeometryElement geo = rm.get_Geometry(options);
-                foreach(GeometryObject obj in geo)
+                foreach (GeometryObject obj in geo)
                 {
                     Solid solid = obj as Solid;
                     if (solid != null)
                     {
                         EdgeArray ea = solid.Edges;
-                        if(ea!= null)
+                        if (ea != null)
                         {
                             foreach (Edge ed in ea)
                             {
                                 Curve crv = ed.AsCurve();
                                 Line ln = crv as Line;
-                                if(ln != null)
+                                if (ln != null)
                                 {
-                                    Debug.Print(string.Format("Startpoint {0} Endpoint {1}",ln.GetEndPoint(0).ToString(), ln.GetEndPoint(1)));
+                                    Debug.Print(string.Format("Startpoint {0} Endpoint {1}", ln.GetEndPoint(0).ToString(), ln.GetEndPoint(1)));
                                 }
                             }
                         }
+
+                        FaceArray fa = solid.Faces;
+                        if (fa != null)
+                        {
+                            foreach (Face f in fa)
+                            {
+                                IList<CurveLoop> cl = f.GetEdgesAsCurveLoops();
+                                foreach (CurveLoop c in cl)
+                                {
+                                    for (int i = 0; i < cl.Count; i++)
+                                    {
+                                        Curve crv = cl.GetEnumerator() as Curve;
+
+                                        Line ln = crv as Line;
+                                        if (ln != null)
+                                        {
+                                            Point pt = new Point(ln.GetEndPoint(0));
+                                            Debug.Print(pt.ToString());
+                                            pts.Add(pt);
+                                        }
+                                        else { }
+                                    }
+                                }
+                            }
+                        }
+
+
+
                     }
                 }
             }
-               
+
 
             // Modify document within a transaction
 
-          /*  using (Transaction tx = new Transaction(doc))
-            {
-                tx.Start("Transaction Name");
+            /*  using (Transaction tx = new Transaction(doc))
+              {
+                  tx.Start("Transaction Name");
 
-                foreach (Element e in col)
-                    e.Name = "Charlie";
+                  foreach (Element e in col)
+                      e.Name = "Charlie";
 
-                tx.Commit();
-            }*/
+                  tx.Commit();
+              }*/
 
             return Result.Succeeded;
         }
