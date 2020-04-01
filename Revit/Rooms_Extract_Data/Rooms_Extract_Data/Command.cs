@@ -80,34 +80,47 @@ namespace Rooms_Extract_Data
                             }
                         }
 
-                        FaceArray fa = solid.Faces;
-                        if (fa != null)
+                        FaceArray faceArr = solid.Faces;
+                        if (faceArr != null)
                         {
-                            foreach (Face f in fa)
+                            foreach (Face face in faceArr)
                             {
-                                IList<CurveLoop> cl = f.GetEdgesAsCurveLoops();
-                                foreach (CurveLoop c in cl)
+                                IList<CurveLoop> crvLoops = face.GetEdgesAsCurveLoops();
+                                foreach (CurveLoop crvLoop in crvLoops)
                                 {
-                                    for (int i = 0; i < cl.Count; i++)
+                                    for (int i = 0; i < crvLoop.NumberOfCurves(); i++)
                                     {
-                                        CurveLoop crvl = cl[i];
+                                        CurveLoop crvl = crvLoops[i];
                                         CurveLoopIterator iterator = crvl.GetCurveLoopIterator();
+                                        Curve crv = iterator.Current;
 
-                                        for (int j = 0; j< crvl.NumberOfCurves(); j++)
+                                        Line ln = crv as Line;
+                                        Arc arc = crv as Arc;
+                                        if (ln != null)
                                         {
-                                            Curve crv = iterator.Current;
-
-                                            Line ln = crv as Line;
-                                            if (ln != null)
-                                            {
-                                                Point pt = new Point(ln.GetEndPoint(0));
-                                                Debug.Print(pt.ToString());
-                                                pts.Add(pt);
-                                            }
-                                            else { }
-
-                                            iterator.MoveNext();
+                                            Point pt = new Point(ln.GetEndPoint(0));
+                                            Debug.Print(pt.ToString());
+                                            pts.Add(pt);
                                         }
+                                        else if (arc !=null)
+                                        {
+                                            Point pt = new Point(arc.GetEndPoint(0));
+                                            Debug.Print(pt.ToString());
+                                            pts.Add(pt);
+
+                                            double startParam = arc.GetEndParameter(0);
+                                            double endParam = arc.GetEndParameter(1);
+                                            double midParam = (startParam + endParam) / 2;
+
+                                            pt = new Point(arc.Evaluate(midParam, true));
+                                            Debug.Print(pt.ToString());
+                                            pts.Add(pt);
+
+                                            pt = new Point(arc.GetEndPoint(1));
+                                            Debug.Print(pt.ToString());
+                                            pts.Add(pt);
+                                        }
+                                        iterator.MoveNext();
                                     }
                                 }
                             }
