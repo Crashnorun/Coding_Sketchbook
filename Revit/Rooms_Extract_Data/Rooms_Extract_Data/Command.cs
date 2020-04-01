@@ -90,16 +90,24 @@ namespace Rooms_Extract_Data
                                 {
                                     for (int i = 0; i < cl.Count; i++)
                                     {
-                                        Curve crv = cl.GetEnumerator() as Curve;
+                                        CurveLoop crvl = cl[i];
+                                        CurveLoopIterator iterator = crvl.GetCurveLoopIterator();
 
-                                        Line ln = crv as Line;
-                                        if (ln != null)
+                                        for (int j = 0; j< crvl.NumberOfCurves(); j++)
                                         {
-                                            Point pt = new Point(ln.GetEndPoint(0));
-                                            Debug.Print(pt.ToString());
-                                            pts.Add(pt);
+                                            Curve crv = iterator.Current;
+
+                                            Line ln = crv as Line;
+                                            if (ln != null)
+                                            {
+                                                Point pt = new Point(ln.GetEndPoint(0));
+                                                Debug.Print(pt.ToString());
+                                                pts.Add(pt);
+                                            }
+                                            else { }
+
+                                            iterator.MoveNext();
                                         }
-                                        else { }
                                     }
                                 }
                             }
