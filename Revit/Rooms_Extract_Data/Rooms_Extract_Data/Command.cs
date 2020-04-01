@@ -22,7 +22,7 @@ namespace Rooms_Extract_Data
         public string FileName = Properties.Resources.FileName_BasicRooms;
         public List<mPoint> pts = new List<mPoint>();
         public List<mRoom> Rooms = new List<mRoom>();
-        
+
         public Result Execute(
           ExternalCommandData commandData,
           ref string message,
@@ -109,13 +109,16 @@ namespace Rooms_Extract_Data
                                 {
                                     CurveLoopIterator iterator = crvLoop.GetCurveLoopIterator();
 
+
                                     for (int i = 0; i < crvLoop.NumberOfCurves(); i++)
                                     {
- 
+                                        iterator.MoveNext();
                                         Curve crv = iterator.Current;
 
                                         Line ln = crv as Line;
                                         Arc arc = crv as Arc;
+                                        HermiteSpline spln = crv as HermiteSpline;
+
                                         if (ln != null)
                                         {
                                             XYZ temp = ln.GetEndPoint(0);
@@ -131,7 +134,7 @@ namespace Rooms_Extract_Data
                                             mLine mline = new mLine(stpt, endpt);
                                             mface.Lines.Add(mline);
                                         }
-                                        else if (arc !=null)
+                                        else if (arc != null)
                                         {
                                             XYZ temp = arc.GetEndPoint(0);
                                             mPoint stpt = new mPoint(temp.X, temp.Y, temp.Z);
@@ -155,7 +158,17 @@ namespace Rooms_Extract_Data
                                             mCurve mcrv = new mCurve(stpt, midpt, endpt);
                                             mface.Curves.Add(mcrv);
                                         }
-                                        iterator.MoveNext();
+                                        else
+                                        {
+                                            mSpline spl = new mSpline();
+
+                                            foreach (XYZ pt in spln.ControlPoints)
+                                            {
+                                                mPoint stpt = new mPoint(pt.X, pt.Y, pt.Z);
+                                                spl.Points.Add(stpt);
+                                            }
+                                            mface.Splines.Add(spl);
+                                        }
                                     }
                                 }
                                 room.Faces.Add(mface);
