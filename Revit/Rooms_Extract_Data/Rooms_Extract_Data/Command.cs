@@ -52,15 +52,35 @@ namespace Rooms_Extract_Data
                 Room rm = e as Room;
                 BoundingBoxXYZ boundingBox = rm.ClosedShell.GetBoundingBox();
                 XYZ minPt = boundingBox.Min;
-                XYZ madPt = boundingBox.Max;
+                XYZ maxPt = boundingBox.Max;
 
                 Options options = new Options();
                 options.ComputeReferences = true;
-                options.View = doc.ActiveView;
-                // options.DetailLevel = ViewDetailLevel.Fine;
+                //options.View = doc.ActiveView;
+                options.IncludeNonVisibleObjects = true;
+                options.DetailLevel = ViewDetailLevel.Fine;
                 
                 GeometryElement geo = rm.get_Geometry(options);
-                Solid solid = (Solid)geo.GetEnumerator();
+                foreach(GeometryObject obj in geo)
+                {
+                    Solid solid = obj as Solid;
+                    if (solid != null)
+                    {
+                        EdgeArray ea = solid.Edges;
+                        if(ea!= null)
+                        {
+                            foreach (Edge ed in ea)
+                            {
+                                Curve crv = ed.AsCurve();
+                                Line ln = crv as Line;
+                                if(ln != null)
+                                {
+                                    Debug.Print(string.Format("Startpoint {0} Endpoint {1}",ln.GetEndPoint(0).ToString(), ln.GetEndPoint(1)));
+                                }
+                            }
+                        }
+                    }
+                }
             }
                
 
