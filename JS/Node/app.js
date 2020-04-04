@@ -31,14 +31,17 @@ console.log(`Free Memory: ${os.freemem()}`);
 //-------------------------
 
 
+// read dir synronously
 const files = fs.readdirSync('./');
 console.log(files);
 
-fs.readdir('$', function (err, files2) {
+
+// read dir asynronously
+fs.readdir('./', function (err, files2) {
     if (err) console.log("Error", err);
     else console.log('Result', files2);
 });
-
+//-----------------------
 
 
 console.log("--DONE--");
