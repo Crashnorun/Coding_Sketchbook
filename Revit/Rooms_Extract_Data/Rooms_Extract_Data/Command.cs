@@ -118,6 +118,7 @@ namespace Rooms_Extract_Data
                                         Line ln = crv as Line;
                                         Arc arc = crv as Arc;
                                         HermiteSpline spln = crv as HermiteSpline;
+                                        NurbSpline nrbs = crv as NurbSpline;
 
                                         if (ln != null)
                                         {
@@ -158,7 +159,7 @@ namespace Rooms_Extract_Data
                                             mCurve mcrv = new mCurve(stpt, midpt, endpt);
                                             mface.Curves.Add(mcrv);
                                         }
-                                        else
+                                        else if (spln != null)
                                         {
                                             mSpline spl = new mSpline();
 
@@ -168,6 +169,9 @@ namespace Rooms_Extract_Data
                                                 spl.Points.Add(stpt);
                                             }
                                             mface.Splines.Add(spl);
+                                        } else if(nrbs != null)
+                                        {
+                                            // need to implement nurbs curve
                                         }
                                     }
                                 }

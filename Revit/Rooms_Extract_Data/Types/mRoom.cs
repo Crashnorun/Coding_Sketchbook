@@ -31,7 +31,7 @@ namespace mTypes
 
         public mPoint MaxPt { get; set; }
         public mPoint MinPt { get; set; }
-
+        public Dictionary<string,object> Attributes { get; set; }
 
         public mRoom()
         {
