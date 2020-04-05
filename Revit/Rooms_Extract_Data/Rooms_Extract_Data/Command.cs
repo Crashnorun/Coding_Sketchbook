@@ -181,6 +181,10 @@ namespace Rooms_Extract_Data
                     }
                 }
                 Rooms.Add(room);
+
+                WorksharingTooltipInfo info = WorksharingUtils.GetWorksharingTooltipInfo(doc, rm.Id);
+                Debug.Print(string.Format("Creator: {0}, | Last changed by: {1} | Owner: {2}", 
+                    info.Creator, info.LastChangedBy, info.Owner));
             }
 
             string val = JsonConvert.SerializeObject(Rooms, Formatting.Indented);
