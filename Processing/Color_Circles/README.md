@@ -6,3 +6,6 @@ This project creates a seires of arcs with random stroke widths, random start an
 
 ## Color Circles 02
 ![Color Circles 02](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/Processing/Color_Circles/Color_Circles_02/Color_Circles_02/Color_Circles_02.gif)
+
+## Color Circles 03
+![Color Circles 03](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/Processing/Color_Circles/Color_Circles_03/Color_Circles_03/Color_Circles_03.gif)
