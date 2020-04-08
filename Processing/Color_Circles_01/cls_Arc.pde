@@ -1,6 +1,7 @@
 
 
-class cls_Arc {
+
+class cls_Arc implements Comparable<cls_Arc> {
 
   float start, stop;
   int stroke, radius;
@@ -36,19 +37,29 @@ class cls_Arc {
       stroke + " - Color: " + col);
   }
 
-  int compareTo(cls_Arc arc) {
-    if (arc.stroke > this.stroke) {
+  int compareTo(cls_Arc otherArc) {
+
+    if (otherArc.stroke > this.stroke) {
       return 1;
-    } else if (arc.stroke > this.stroke) {
+    } else if (otherArc.stroke < this.stroke) {
       return -1;
     } else {
       return 0;
     }
   }
+  
 }
 
 class ArcSorter implements Comparator<cls_Arc> {
+
   int compare(cls_Arc arc1, cls_Arc arc2) {
-    return arc1.compareTo(arc2);
+
+    if (arc1.stroke < arc2.stroke) {
+      return -1;
+    } else if (arc1.stroke > arc2.stroke) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import java.util.Comparator;
-
+import java.util.Collections;
 
 //----GLOBAL VARIABLES--------------------
 int rad;
@@ -36,6 +36,8 @@ void setup() {
     arcs.add(new cls_Arc(start, stop, stroke, rad, col));
   }
   
+  Collections.sort(arcs, new ArcSorter());
+  Collections.reverse(arcs);
  //ArrayList.sort(arcs);
   
 }
