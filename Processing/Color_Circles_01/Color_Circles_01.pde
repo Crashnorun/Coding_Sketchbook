@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 
 //----GLOBAL VARIABLES--------------------
 int rad;
@@ -33,6 +35,9 @@ void setup() {
    
     arcs.add(new cls_Arc(start, stop, stroke, rad, col));
   }
+  
+ //ArrayList.sort(arcs);
+  
 }
 //----------------------------------------
 
