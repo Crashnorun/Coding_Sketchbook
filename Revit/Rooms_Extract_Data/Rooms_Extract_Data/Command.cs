@@ -73,7 +73,9 @@ namespace Rooms_Extract_Data
                     Height = rm.UnboundedHeight,
                     Perimiter = rm.Perimeter,
                     Area = rm.Area,
-                    Volume = rm.Volume
+                    Volume = rm.Volume,
+                    LevelName = rm.Level.Name,
+                    UpperLevelName = rm.UpperLimit == null? null:rm.UpperLimit.Name
                 };
 
 
