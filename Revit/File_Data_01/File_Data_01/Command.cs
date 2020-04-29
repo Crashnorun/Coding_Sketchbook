@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -20,7 +21,7 @@ namespace File_Data_01
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIApplication uiapp = commandData.Application;
-            Application app = uiapp.Application;
+            Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
 
             if (uidoc == null)
@@ -31,6 +32,7 @@ namespace File_Data_01
             Document doc = uidoc.Document;
 
             string filename = Path.GetFileName(doc.PathName);
+            string folder = Path.GetDirectoryName(doc.PathName);
             log.Add("File name: " + filename);
             Debug.Print("FileName: " + filename);
 
@@ -38,6 +40,10 @@ namespace File_Data_01
             FamilyInstanceData(doc);
             DetailLineData(doc);
             ViewData(doc);
+
+            if (log.Count > 0 && doc != null) File.WriteAllLines(folder + @"\Element Data Log.csv", log);
+
+            MessageBox.Show("Data Export Complete","Data Export",MessageBoxButtons.OK);
             Debug.Print("---- DONE ----");
 
             /*  using (Transaction tx = new Transaction(doc))
@@ -50,12 +56,17 @@ namespace File_Data_01
         }
 
 
-        // find all family symbols
+        /// <summary>
+        ///  find all family symbol data
+        /// </summary>
+        /// <param name="doc">Active revit document</param>
         public void FamilySymbolData(Document doc)
         {
             Debug.Print("---- FAMILY SYBMOL DATA ----");
 
-            log.Add(Environment.NewLine);
+            if (doc == null) return;
+
+            //log.Add(Environment.NewLine);
             log.Add("Family Symbol Data");
             log.Add("Element ID, Family Name, Name, Creator, Last Changed, Owner, Family File Path");
 
@@ -90,20 +101,26 @@ namespace File_Data_01
                     if (sym == null) log.Add(ex.Message);
                     else log.Add(sym.Id + "," + ex.Message);
                 }
-                log.Add(Environment.NewLine);
+                //log.Add(Environment.NewLine);
             }
-            log.Add(Environment.NewLine);
+            //log.Add(Environment.NewLine);
             Debug.Print("---- FAMILY SYBMOL DATA ----");
         }
 
 
+        /// <summary>
+        /// Find all family instance data
+        /// </summary>
+        /// <param name="doc">Active revit document</param>
         public void FamilyInstanceData(Document doc)
         {
+            if (doc == null) return;
+
             Debug.Print("---- FAMILY INSTANCE DATA ----");
 
-            log.Add(Environment.NewLine);
+            //log.Add(Environment.NewLine);
             log.Add("Family Instance Data");
-            log.Add("Element ID, Name, Creator, Last Changed, Owner, Family File Path");
+            log.Add("Element ID, Name, Creator, Last Changed, Owner");
 
             FilteredElementCollector col = new FilteredElementCollector(doc)
                 .OfClass(typeof(FamilyInstance));
@@ -118,28 +135,34 @@ namespace File_Data_01
 
                     log.Add(inst.Id + "," + inst.Name + "," + info.Creator + "," + info.LastChangedBy + "," + info.Owner);
 
-                    Debug.Print(string.Format("Element ID: {0}, Name: {1}, Creator: {2}, Owner: {3}, Last Edited By: {4}",
-                    inst.Id, inst.Name, info.Creator, info.Owner, info.LastChangedBy));
-
+                    Debug.Print(string.Format("Element ID: {0}, Name: {1}, Creator: {2}, Last Edited By: {3}, Owner: {4}",
+                    inst.Id, inst.Name, info.Creator, info.LastChangedBy, info.Owner));
                 }
                 catch (Exception ex)
                 {
                     if (inst == null) log.Add(ex.Message);
                     else log.Add(inst.Id + "," + ex.Message);
                 }
-                log.Add(Environment.NewLine);
+                //log.Add(Environment.NewLine);
             }
-            log.Add(Environment.NewLine);
+            //log.Add(Environment.NewLine);
             Debug.Print("---- FAMILY INSTANCE DATA ----");
         }
 
+
+        /// <summary>
+        /// Find all detail line data
+        /// </summary>
+        /// <param name="doc">Active revit document</param>
         public void DetailLineData(Document doc)
         {
+            if (doc == null) return;
+
             Debug.Print("---- DETAIL LINE DATA ----");
 
-            log.Add(Environment.NewLine);
+            //log.Add(Environment.NewLine);
             log.Add("Detail Line Data");
-            log.Add("Element ID, Name, Creator, Last Changed, Owner, Family File Path");
+            log.Add("Element ID, Name, Creator, Last Changed, Owner");
 
             FilteredElementCollector col = new FilteredElementCollector(doc)
                 .OfClass(typeof(CurveElement));
@@ -150,22 +173,40 @@ namespace File_Data_01
                 {
                     WorksharingTooltipInfo info = WorksharingUtils.GetWorksharingTooltipInfo(doc, e.Id);
 
-                    log.Add(e.Id, e.Name, info.Creator, info.LastChangedBy, info.Owner);
+                    log.Add(e.Id + "," + e.Name + "," + info.Creator + "," + info.LastChangedBy + "," + info.Owner);
 
-                    Debug.Print(string.Format("Element ID: {0}, Name: {1}, Creator: {2}, Owner: {3}, Last Edited By: {4}",
+                    Debug.Print(string.Format("Element ID: {0}, Name: {1}, Creator: {2}, Last Edited By: {3}, Owner: {4}",
                     e.Id, e.Name, info.Creator, info.LastChangedBy, info.Owner));
 
                 }
-                catch (Exception ex) { }
+                catch (Exception ex)
+                {
+                    if (e == null) log.Add(ex.Message);
+                    else log.Add(e.Id + "," + ex.Message);
+                }
+                //log.Add(Environment.NewLine);
             }
+            //log.Add(Environment.NewLine);
             Debug.Print("---- DETAIL LINE DATA ----");
         }
 
+
+        /// <summary>
+        /// Find all view data
+        /// </summary>
+        /// <param name="doc"></param>
         public void ViewData(Document doc)
         {
+            if (doc == null) return;
+
             Debug.Print("---- VIEW DATA ----");
+
+            //log.Add(Environment.NewLine);
+            log.Add("View Data");
+            log.Add("Element ID, Name, Creator, Last Changed, Owner");
+
             FilteredElementCollector col = new FilteredElementCollector(doc)
-             .OfClass(typeof(View));
+             .OfClass(typeof(Autodesk.Revit.DB.View));
 
             foreach (Element e in col)
             {
@@ -173,11 +214,19 @@ namespace File_Data_01
                 {
                     WorksharingTooltipInfo info = WorksharingUtils.GetWorksharingTooltipInfo(doc, e.Id);
 
-                    Debug.Print(string.Format("Name: {0}, Creator: {1}, Owner: {2}, Last Edited By: {3}",
-                    e.Name, info.Creator, info.Owner, info.LastChangedBy));
+                    log.Add(e.Id + "," + e.Name + "," + info.Creator + "," + info.LastChangedBy + "," + info.Owner);
+
+                    Debug.Print(string.Format("Name: {0}, Creator: {1}, Last Edited By: {2}, Owner: {3}",
+                    e.Name, info.Creator, info.LastChangedBy, info.Owner));
                 }
-                catch (Exception ex) { }
+                catch (Exception ex)
+                {
+                    if (e == null) log.Add(ex.Message);
+                    else log.Add(e.Id + "," + ex.Message);
+                }
+                //log.Add(Environment.NewLine);
             }
+            //log.Add(Environment.NewLine);
             Debug.Print("---- VIEW DATA ----");
         }
     }
