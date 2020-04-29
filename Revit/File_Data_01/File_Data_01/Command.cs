@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -14,10 +15,9 @@ namespace File_Data_01
     [Transaction(TransactionMode.Manual)]
     public class Command : IExternalCommand
     {
-        public Result Execute(
-          ExternalCommandData commandData,
-          ref string message,
-          ElementSet elements)
+        List<string> log = new List<string>();
+
+        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             UIApplication uiapp = commandData.Application;
             Application app = uiapp.Application;
@@ -30,8 +30,14 @@ namespace File_Data_01
             }
             Document doc = uidoc.Document;
 
+            string filename = Path.GetFileName(doc.PathName);
+            log.Add("File name: " + filename);
+            Debug.Print("FileName: " + filename);
+
             FamilySymbolData(doc);
             FamilyInstanceData(doc);
+            DetailLineData(doc);
+            ViewData(doc);
             Debug.Print("---- DONE ----");
 
             /*  using (Transaction tx = new Transaction(doc))
@@ -47,6 +53,12 @@ namespace File_Data_01
         // find all family symbols
         public void FamilySymbolData(Document doc)
         {
+            Debug.Print("---- FAMILY SYBMOL DATA ----");
+
+            log.Add(Environment.NewLine);
+            log.Add("Family Symbol Data");
+            log.Add("Element ID, Family Name, Name, Creator, Last Changed, Owner, Family File Path");
+
             FilteredElementCollector col = new FilteredElementCollector(doc)
                  .OfClass(typeof(FamilySymbol));
 
@@ -62,26 +74,37 @@ namespace File_Data_01
 
                     if (famDoc == null)
                     {
-                        Debug.Print(string.Format("FamilyName: {0}, Name: {1}, Creator: {2}, Owner: {3}, Last Edited By: {4}, FilePath: {5}",
-                        sym.FamilyName, sym.Name, info.Creator, info.Owner, info.LastChangedBy, "NA"));
+                        log.Add(sym.Id + "," + sym.FamilyName + "," + sym.Name + "," + info.Creator + "," + info.LastChangedBy + "," + info.Owner + "," + "NA");
+                        Debug.Print(string.Format("Element ID: {0}, FamilyName: {1}, Name: {2}, Creator: {3}, Owner: {4}, Last Edited By: {5}, FilePath: {6}",
+                        sym.Id, sym.FamilyName, sym.Name, info.Creator, info.Owner, info.LastChangedBy, "NA"));
                     }
                     else
                     {
-                        Debug.Print(string.Format("FamilyName: {0}, Name: {1}, Creator: {2}, Owner: {3}, Last Edited By: {4}, FilePath: {5}",
-                        sym.FamilyName, sym.Name, info.Creator, info.Owner, info.LastChangedBy, famDoc.PathName));
+                        log.Add(sym.Id + "," + sym.FamilyName + "," + sym.Name + "," + info.Creator + "," + info.LastChangedBy + "," + info.Owner + "," + famDoc.PathName);
+                        Debug.Print(string.Format("Element ID: {0}, FamilyName: {1}, Name: {2}, Creator: {3}, Last Edited By: {4}, Owner: {5}, FilePath: {6}",
+                        sym.Id, sym.FamilyName, sym.Name, info.Creator, info.Owner, info.LastChangedBy, famDoc.PathName));
                     }
-
-
                 }
                 catch (Exception ex)
                 {
-
+                    if (sym == null) log.Add(ex.Message);
+                    else log.Add(sym.Id + "," + ex.Message);
                 }
+                log.Add(Environment.NewLine);
             }
+            log.Add(Environment.NewLine);
+            Debug.Print("---- FAMILY SYBMOL DATA ----");
         }
+
 
         public void FamilyInstanceData(Document doc)
         {
+            Debug.Print("---- FAMILY INSTANCE DATA ----");
+
+            log.Add(Environment.NewLine);
+            log.Add("Family Instance Data");
+            log.Add("Element ID, Name, Creator, Last Changed, Owner, Family File Path");
+
             FilteredElementCollector col = new FilteredElementCollector(doc)
                 .OfClass(typeof(FamilyInstance));
 
@@ -93,18 +116,70 @@ namespace File_Data_01
                 {
                     WorksharingTooltipInfo info = WorksharingUtils.GetWorksharingTooltipInfo(doc, inst.Id);
 
-                    Debug.Print(string.Format("Name: {0}, Creator: {1}, Owner: {2}, Last Edited By: {3}",
-                    inst.Name, info.Creator, info.Owner, info.LastChangedBy));
+                    log.Add(inst.Id + "," + inst.Name + "," + info.Creator + "," + info.LastChangedBy + "," + info.Owner);
+
+                    Debug.Print(string.Format("Element ID: {0}, Name: {1}, Creator: {2}, Owner: {3}, Last Edited By: {4}",
+                    inst.Id, inst.Name, info.Creator, info.Owner, info.LastChangedBy));
 
                 }
                 catch (Exception ex)
                 {
-
+                    if (inst == null) log.Add(ex.Message);
+                    else log.Add(inst.Id + "," + ex.Message);
                 }
+                log.Add(Environment.NewLine);
             }
-
+            log.Add(Environment.NewLine);
+            Debug.Print("---- FAMILY INSTANCE DATA ----");
         }
 
+        public void DetailLineData(Document doc)
+        {
+            Debug.Print("---- DETAIL LINE DATA ----");
+
+            log.Add(Environment.NewLine);
+            log.Add("Detail Line Data");
+            log.Add("Element ID, Name, Creator, Last Changed, Owner, Family File Path");
+
+            FilteredElementCollector col = new FilteredElementCollector(doc)
+                .OfClass(typeof(CurveElement));
+
+            foreach (Element e in col)
+            {
+                try
+                {
+                    WorksharingTooltipInfo info = WorksharingUtils.GetWorksharingTooltipInfo(doc, e.Id);
+
+                    log.Add(e.Id, e.Name, info.Creator, info.LastChangedBy, info.Owner);
+
+                    Debug.Print(string.Format("Element ID: {0}, Name: {1}, Creator: {2}, Owner: {3}, Last Edited By: {4}",
+                    e.Id, e.Name, info.Creator, info.LastChangedBy, info.Owner));
+
+                }
+                catch (Exception ex) { }
+            }
+            Debug.Print("---- DETAIL LINE DATA ----");
+        }
+
+        public void ViewData(Document doc)
+        {
+            Debug.Print("---- VIEW DATA ----");
+            FilteredElementCollector col = new FilteredElementCollector(doc)
+             .OfClass(typeof(View));
+
+            foreach (Element e in col)
+            {
+                try
+                {
+                    WorksharingTooltipInfo info = WorksharingUtils.GetWorksharingTooltipInfo(doc, e.Id);
+
+                    Debug.Print(string.Format("Name: {0}, Creator: {1}, Owner: {2}, Last Edited By: {3}",
+                    e.Name, info.Creator, info.Owner, info.LastChangedBy));
+                }
+                catch (Exception ex) { }
+            }
+            Debug.Print("---- VIEW DATA ----");
+        }
     }
 }
 
