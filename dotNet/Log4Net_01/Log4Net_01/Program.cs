@@ -34,6 +34,8 @@ namespace Log4Net_01
  * References: 
  * https://www.youtube.com/watch?v=2lAdQ_QwNww
  * https://www.codeproject.com/Articles/140911/log-net-Tutorial
+ * Log4net documentation: https://logging.apache.org/log4net/
+ * Config examples: https://logging.apache.org/log4net/release/config-examples.html
  * 
  * Steps:
  * 1. Add nuget package
