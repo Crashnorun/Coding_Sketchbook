@@ -21,7 +21,22 @@ namespace Log4Net_01
 
             Console.WriteLine("Hello world");
 
-            log.Error("This is my error message");
+            log.Debug("Developer: Tuttorial example");
+            log.Info("Maintenance: water under the bridge");
+            log.Warn("Maintenance: water is hot");
+
+            var i = 0;
+
+            try
+            {
+                var x = 10 / i;          
+            }
+            catch (DivideByZeroException ex)
+            {
+                log.Error("Developer: tried to divide by zero", ex);
+            }
+
+            log.Fatal("Maintenance: water is bad");
 
             Console.ReadLine();
         }
