@@ -12,39 +12,30 @@ The goal of this project is to read image EXIF data
 ## Supported EXIF tags:
 | Tag Name | Tag ID | Type | Description |
 |----|----|----|----|
-Artist            | 0x013B | String
-BitsPerSample     | 0x0102 | Int16 | Number of bits per color component. See also SamplesPerPixel
-CellHeight        | 0x0109 | Int16
-CellWidth         | 0x0108 | Int16 
-ChrominanceTable  | 0x5091
-ColorMap          | 0x0140
-ColorTransferFunction | 0x501A
-Compression | 0x0103 | Int16 | [Exif compression values](https://exiftool.org/TagNames/EXIF.html#Compression)
-Copyright | 0x8298 | String | May contain copyright info from the photographer or the editor
-DateTime | 0x0132 | String | Modify Date
-DocumentName | 0x010D | String
-    ///<summary></summary>
-    DotRange = 0x0150,
-    ///<summary></summary>
-    Camera_Make = 0x010F,
-    ///<summary></summary>
-    Camera_Model = 0x0110,
-    ///<summary></summary>
-    ExifAperture = 0x9202,
-    ///<summary></summary>
-    ExifBrightness = 0x9203,
-    ///<summary></summary>
-    ExifCfaPattern = 0xA302,
-    ///<summary></summary>
-    ExifColorSpace = 0xA001,
-    ///<summary></summary>
-    ExifCompBPP = 0x9102,
-    ///<summary></summary>
-    ExifCompConfig = 0x9101,
-    ///<summary></summary>
-    ExifDTDigitized = 0x9004,
-    ///<summary></summary>
-    ExifDTDigSS = 0x9292,
+Artist                  | 0x013B | String
+BitsPerSample           | 0x0102 | Int16      | Number of bits per color component. See also SamplesPerPixel
+CellHeight              | 0x0109 | Int16
+CellWidth               | 0x0108 | Int16 
+ChrominanceTable        | 0x5091
+ColorMap                | 0x0140
+ColorTransferFunction   | 0x501A
+Compression             | 0x0103 | Int16    | [Exif compression values](https://exiftool.org/TagNames/EXIF.html#Compression)
+Copyright               | 0x8298 | String   | May contain copyright info from the photographer or the editor
+DateTime                | 0x0132 | String   | Modify Date
+DocumentName            | 0x010D | String
+DotRange                | 0x0150
+Camera_Make             | 0x010F | string
+Camera_Model            | 0x0110 | string
+ExifAperture            | 0x9202 | rational64 | F stop value
+ExifBrightness          | 0x9203 | rational64
+ExifCfaPattern          | 0xA302 | undef
+ExifColorSpace          | 0xA001 | Int16 | 0x1 = sRGB, 0x2 = Adobe RGB, 0xfffd = Wide Gamut RGB, 0xfffe = ICC Profile, 0xffff = Uncalibrated
+
+ExifCompBPP             | 0x9102
+ExifCompConfig          | 0x9101
+ExifDTDigitized         | 0x9004
+    
+ExifDTDigSS = 0x9292,
     ///<summary></summary>
     ExifDTOrig = 0x9003,
     ///<summary></summary>
