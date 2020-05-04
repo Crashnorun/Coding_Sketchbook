@@ -51,6 +51,8 @@ namespace Log4Net_01
  * https://www.codeproject.com/Articles/140911/log-net-Tutorial
  * Log4net documentation: https://logging.apache.org/log4net/
  * Config examples: https://logging.apache.org/log4net/release/config-examples.html
+ * SQL Example: https://www.c-sharpcorner.com/article/configure-log4net-with-database-tutorial-for-beginners/
+ * SQL example video: https://www.youtube.com/watch?v=sBgfLluBkX0
  * 
  * Steps:
  * 1. Add nuget package
