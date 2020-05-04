@@ -45,6 +45,7 @@ ExifExposureIndex       | 0xA215 | rational64
 
 
 **TO DO: Finish adding these to the table above**
+
     ExifExposureProg = 0x8822,
     ExifExposureTime = 0x829A,
     ExifFileSource = 0xA300,
