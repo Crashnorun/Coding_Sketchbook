@@ -2,7 +2,7 @@
 
 The goal of this project is to read image EXIF data
 
-![Screen Capture 01](ttps://github.com/Crashnorun/Coding_Sketchbook/blob/master/dotNet/Image_Meta_Data_01/Imges/Screen_Capture_01.jpg)
+![Screen Capture 01](https://github.com/Crashnorun/Coding_Sketchbook/blob/master/dotNet/Image_Meta_Data_01/Imges/Screen_Capture_01.jpg)
 
 
 ## Supported file formats
