@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 [assembly: log4net.Config.XmlConfigurator(Watch =true)]
 
@@ -18,9 +19,14 @@ namespace Log4Net_01
 
         static void Main(string[] args)
         {
-
             Console.WriteLine("Hello world");
 
+            // check if db exists
+            if (!DoesDBExist())
+            {
+                // create db
+
+            }
             log.Debug("Developer: Tuttorial example");
             log.Info("Maintenance: water under the bridge");
             log.Warn("Maintenance: water is hot");
@@ -40,6 +46,18 @@ namespace Log4Net_01
 
             Console.ReadLine();
         }
+
+        static bool DoesDBExist()
+        {
+           return File.Exists(@"c:\Logs\CrashnorunLogs.mdf");
+        }
+
+        static bool CreateDB()
+        {
+
+
+            return false;
+        }
     }
 }
 
@@ -53,6 +71,8 @@ namespace Log4Net_01
  * Config examples: https://logging.apache.org/log4net/release/config-examples.html
  * SQL Example: https://www.c-sharpcorner.com/article/configure-log4net-with-database-tutorial-for-beginners/
  * SQL example video: https://www.youtube.com/watch?v=sBgfLluBkX0
+ * Create basic SQL db video: https://www.youtube.com/watch?v=GVV-LUcmCOE&t=156s
+ * Create sql db programatically: https://www.youtube.com/watch?v=Tvw0fyhGPL4
  * 
  * Steps:
  * 1. Add nuget package
