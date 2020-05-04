@@ -30,11 +30,10 @@ ExifAperture            | 0x9202 | rational64 | F stop value
 ExifBrightness          | 0x9203 | rational64
 ExifCfaPattern          | 0xA302 | undef
 ExifColorSpace          | 0xA001 | Int16 | <ul> <li> 0x1 = sRGB </li> <li> 0x2 = Adobe RGB </li> <li> 0xfffd = Wide Gamut RGB </li> <li>  0xfffe = ICC Profile </li> <li> 0xffff = Uncalibrated </li> </ul>
-ExifCompBPP             | 0x9102
-ExifCompConfig          | 0x9101
+ExifCompBPP             | 0x9102 | rational64
+ExifCompConfig          | 0x9101 | undef | <ul> <li> 0 = - </li> <li> 1 = Y </li> <li> 2 = Cb </li> <li> 3 = Cr </li> <li>	4 = R </li> <li> 5 = G </li> <li> 6 = B </li> </ul>
 ExifDTDigitized         | 0x9004
-    
-ExifDTDigSS = 0x9292,
+ExifDTDigSS             | 0x9292
     ///<summary></summary>
     ExifDTOrig = 0x9003,
     ///<summary></summary>
