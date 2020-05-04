@@ -32,19 +32,15 @@ ExifCfaPattern          | 0xA302 | undef
 ExifColorSpace          | 0xA001 | Int16 | <ul> <li> 0x1 = sRGB </li> <li> 0x2 = Adobe RGB </li> <li> 0xfffd = Wide Gamut RGB </li> <li>  0xfffe = ICC Profile </li> <li> 0xffff = Uncalibrated </li> </ul>
 ExifCompBPP             | 0x9102 | rational64
 ExifCompConfig          | 0x9101 | undef | <ul> <li> 0 = - </li> <li> 1 = Y </li> <li> 2 = Cb </li> <li> 3 = Cr </li> <li>	4 = R </li> <li> 5 = G </li> <li> 6 = B </li> </ul>
-ExifDTDigitized         | 0x9004
-ExifDTDigSS             | 0x9292
-    ///<summary></summary>
-    ExifDTOrig = 0x9003,
-    ///<summary></summary>
-    ExifDTOrigSS = 0x9291,
-    ///<summary></summary>
-    ExifDTSubsec = 0x9290,
-    ///<summary></summary>
-    ExifExposureBias = 0x9204,
-    ///<summary></summary>
-    ExifExposureIndex = 0xA215,
-    ///<summary></summary>
+ExifDTDigitized         | 0x9004 | string | date time digitized
+ExifDTDigSS             | 0x9292 | string | fractional seconds for Create Date
+ExifDTOrig              | 0x9003 | string | date time when orignal photo was taken
+ExifDTOrigSS            | 0x9291 | string | fractional seconds for Original date time
+ExifDTSubsec            | 0x9290 | string | fractional seconds for Modify Date
+ExifExposureBias        | 0x9204 | string | exposure bias value 
+ExifExposureIndex       | 0xA215 | rational64
+
+
     ExifExposureProg = 0x8822,
     ///<summary></summary>
     ExifExposureTime = 0x829A,
