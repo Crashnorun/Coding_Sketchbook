@@ -2,6 +2,12 @@
 
 The goal of this project is to read image EXIF data
 
+## Supported file formats
+* BMP
+* JPG
+* PNG
+* GIF
+* TIFF
 
 ## Resources:
 
