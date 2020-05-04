@@ -29,7 +29,11 @@ Camera_Model            | 0x0110 | string
 ExifAperture            | 0x9202 | rational64 | F stop value
 ExifBrightness          | 0x9203 | rational64
 ExifCfaPattern          | 0xA302 | undef
-ExifColorSpace          | 0xA001 | Int16 | 0x1 = sRGB, 0x2 = Adobe RGB, 0xfffd = Wide Gamut RGB, 0xfffe = ICC Profile, 0xffff = Uncalibrated
+ExifColorSpace          | 0xA001 | Int16 | * 0x1 = sRGB 
+* 0x2 = Adobe RGB
+* 0xfffd = Wide Gamut RGB 
+* 0xfffe = ICC Profile
+* 0xffff = Uncalibrated
 
 ExifCompBPP             | 0x9102
 ExifCompConfig          | 0x9101
