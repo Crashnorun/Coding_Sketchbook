@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
-[assembly: log4net.Config.XmlConfigurator(Watch =true)]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Log4Net_01
 {
@@ -13,7 +16,7 @@ namespace Log4Net_01
     {
         // good pratice is to create a logger for each class and name the logger the same as the class. The class name can be hard coded or can use reflection
         // private static readonly log4net.ILog log = log4net.LogManager.GetLogger("Program.cs");
-         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // private static readonly log4net.ILog log = LogHelper.GetLogger();               // this will return the full file path where the class file was compiled
 
 
@@ -21,12 +24,15 @@ namespace Log4Net_01
         {
             Console.WriteLine("Hello world");
 
-            // check if db exists
-            if (!DoesDBExist())
+            if (!DoesDBExist())                                                                 // check if db exists
             {
-                // create db
-
+                if (!CreateDB())                                                                // create db
+                {
+                    System.Diagnostics.Debug.Print("Unable to create DB");
+                    return;
+                }
             }
+
             log.Debug("Developer: Tuttorial example");
             log.Info("Maintenance: water under the bridge");
             log.Warn("Maintenance: water is hot");
@@ -35,7 +41,7 @@ namespace Log4Net_01
 
             try
             {
-                var x = 10 / i;          
+                var x = 10 / i;
             }
             catch (DivideByZeroException ex)
             {
@@ -47,18 +53,53 @@ namespace Log4Net_01
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Determin of the datbase already exists
+        /// </summary>
+        /// <returns>TRUE if the database is found, FALSE if not found</returns>
         static bool DoesDBExist()
         {
-           return File.Exists(@"c:\Logs\CrashnorunLogs.mdf");
+            //return File.Exists(@"c:\Logs\CrashnorunLogs.mdf");
+            // return File.Exists(@"C:\Users\cportelliKD\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Log4Net_01\Log4Net_01\CrashnorunLogs.mdf");
+            return File.Exists(ConfigurationManager.AppSettings["LogDirectory"] + Properties.Resources.DBName + Properties.Resources.AccessSuffix);
+        }
+
+
+        static bool DoesTableExist()
+        {
+            return false;
         }
 
         static bool CreateDB()
         {
+            string mainCon = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
+            SqlConnection sqlconn = new SqlConnection(mainCon);
+            string sqlquery = "create database " + Properties.Resources.DBName;
+            SqlCommand sqlcommand = new SqlCommand(sqlquery, sqlconn);
+            sqlconn.Open();
 
+            int i = sqlcommand.ExecuteNonQuery();
+
+            sqlconn.Close();
 
             return false;
         }
+
+        static bool CreateTable()
+        {
+            return false;
+        }
     }
+
+    enum DBType
+    {
+        Unknown = 0,
+        LogFile = 1,
+        SQL = 2,
+        SQLLite = 3,
+        MSAccess = 4
+    };
+
 }
 
 
