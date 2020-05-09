@@ -60,6 +60,7 @@ background(0);
             let averageVect = p5.Vector.div(totalMove[i], circs[i].numCollisions);
             circs[i].cent = p5.Vector.add(circs[i].cent, averageVect);
             circs[i].Render();
+            circs[i].numCollisions = 0;
         }
     }
 }
