@@ -23,15 +23,16 @@ namespace Log4Net_01
         static void Main(string[] args)
         {
             Console.WriteLine("Hello world");
+            Main2();
 
-            if (!DoesDBExist())                                                                 // check if db exists
+          /*  if (!DoesDBExist())                                                                 // check if db exists
             {
                 if (!CreateDB())                                                                // create db
                 {
                     System.Diagnostics.Debug.Print("Unable to create DB");
                     return;
                 }
-            }
+            }*/
 
             log.Debug("Developer: Tuttorial example");
             log.Info("Maintenance: water under the bridge");
@@ -89,6 +90,26 @@ namespace Log4Net_01
         {
             return false;
         }
+
+
+        static void Main2()
+        {
+            log4net.Layout.PatternLayout layout = new log4net.Layout.PatternLayout();
+            layout.ConversionPattern = "%date [%thread] %username %property{log4net:HostName} %level %logger - %m%newline%exception";
+            layout.ActivateOptions();
+
+            log4net.Appender.FileAppender appender = new log4net.Appender.FileAppender();
+            appender.File = @"c:\Logs\CustomFileLog.txt";
+            appender.AppendToFile = true;
+            appender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
+            appender.Layout = layout;
+
+            log4net.Repository.Hierarchy.Logger l = (log4net.Repository.Hierarchy.Logger)log.Logger;
+            l.AddAppender(appender);
+
+            appender.ActivateOptions();
+        }
+
     }
 
     enum DBType
@@ -114,6 +135,8 @@ namespace Log4Net_01
  * SQL example video: https://www.youtube.com/watch?v=sBgfLluBkX0
  * Create basic SQL db video: https://www.youtube.com/watch?v=GVV-LUcmCOE&t=156s
  * Create sql db programatically: https://www.youtube.com/watch?v=Tvw0fyhGPL4
+ * 
+ * adding log appender programatically: http://mail-archives.apache.org/mod_mbox/logging-log4net-user/200602.mbox/%3CDDEB64C8619AC64DBC074208B046611C769745@kronos.neoworks.co.uk%3E
  * 
  * Steps:
  * 1. Add nuget package
