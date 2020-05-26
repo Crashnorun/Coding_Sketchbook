@@ -8,24 +8,45 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
+// [assembly: log4net.Config.XmlConfigurator(ConfigFile = @"c:\Logs\Log4net_RollingFileLog_Att.txt", Watch = true)]
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Log4Net_01
 {
     class Program
     {
+
+        #region ---- PROPERTIES ----
+
         // good pratice is to create a logger for each class and name the logger the same as the class. The class name can be hard coded or can use reflection
         // private static readonly log4net.ILog log = log4net.LogManager.GetLogger("Program.cs");
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // private static readonly log4net.ILog log = LogHelper.GetLogger();               // this will return the full file path where the class file was compiled
 
+        #endregion
 
         static void Main(string[] args)
         {
             Console.WriteLine("Hello world");
-            Main2();
+            // LogHelper.SetLogger(log, @"C:\Logs\Log4Net_RollingFileLog_Prog.txt", true);
+            log.Debug("Entering: Main");
 
-          /*  if (!DoesDBExist())                                                                 // check if db exists
+
+            Console.WriteLine(MathFunctions.Add(10, 23.5));
+
+            Console.WriteLine(MathFunctions.Subtract(10, 23.5));
+
+            Console.WriteLine(MathFunctions.Divide(10, 12));
+
+            Console.WriteLine(MathFunctions.Divide(10, 0));
+
+            log.Info("Maintenance: water under the bridge");
+            log.Warn("Maintenance: water is hot");
+            log.Fatal("Maintenance: water is bad");
+
+            Console.ReadLine();
+
+            /*if (!DoesDBExist())                                                                 // check if db exists
             {
                 if (!CreateDB())                                                                // create db
                 {
@@ -33,26 +54,10 @@ namespace Log4Net_01
                     return;
                 }
             }*/
-
-            log.Debug("Developer: Tuttorial example");
-            log.Info("Maintenance: water under the bridge");
-            log.Warn("Maintenance: water is hot");
-
-            var i = 0;
-
-            try
-            {
-                var x = 10 / i;
-            }
-            catch (DivideByZeroException ex)
-            {
-                log.Error("Developer: tried to divide by zero", ex);
-            }
-
-            log.Fatal("Maintenance: water is bad");
-
-            Console.ReadLine();
         }
+
+
+        #region ---- DB Methods ----
 
         /// <summary>
         /// Determin of the datbase already exists
@@ -64,7 +69,6 @@ namespace Log4Net_01
             // return File.Exists(@"C:\Users\cportelliKD\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Log4Net_01\Log4Net_01\CrashnorunLogs.mdf");
             return File.Exists(ConfigurationManager.AppSettings["LogDirectory"] + Properties.Resources.DBName + Properties.Resources.AccessSuffix);
         }
-
 
         static bool DoesTableExist()
         {
@@ -91,24 +95,7 @@ namespace Log4Net_01
             return false;
         }
 
-
-        static void Main2()
-        {
-            log4net.Layout.PatternLayout layout = new log4net.Layout.PatternLayout();
-            layout.ConversionPattern = "%date [%thread] %username %property{log4net:HostName} %level %logger - %m%newline%exception";
-            layout.ActivateOptions();
-
-            log4net.Appender.FileAppender appender = new log4net.Appender.FileAppender();
-            appender.File = @"c:\Logs\CustomFileLog.txt";
-            appender.AppendToFile = true;
-            appender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
-            appender.Layout = layout;
-
-            log4net.Repository.Hierarchy.Logger l = (log4net.Repository.Hierarchy.Logger)log.Logger;
-            l.AddAppender(appender);
-
-            appender.ActivateOptions();
-        }
+        #endregion 
 
     }
 
@@ -137,7 +124,9 @@ namespace Log4Net_01
  * Create sql db programatically: https://www.youtube.com/watch?v=Tvw0fyhGPL4
  * 
  * adding log appender programatically: http://mail-archives.apache.org/mod_mbox/logging-log4net-user/200602.mbox/%3CDDEB64C8619AC64DBC074208B046611C769745@kronos.neoworks.co.uk%3E
- * 
+ *  https://stackoverflow.com/questions/308436/log4net-programmatically-specify-multiple-loggers-with-multiple-file-appenders
+ *  
+ *  
  * Steps:
  * 1. Add nuget package
  * 2. Modify config file
