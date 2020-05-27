@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 
  // [assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net_02.config", Watch = true)]
-//[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Log4Net_01
 {

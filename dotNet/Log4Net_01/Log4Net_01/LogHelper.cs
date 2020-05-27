@@ -25,16 +25,13 @@ namespace Log4Net_01
         {
             Active = System.IO.File.Exists(FileDirectory);                      // if file exist start logging
 
-
             // delete any pre existing appenders
             if (ResetAppenders) log.Logger.Repository.ResetConfiguration();
-
 
             // create Pattern Layout
             log4net.Layout.PatternLayout layout = new log4net.Layout.PatternLayout();
             layout.ConversionPattern = "%date [%thread] %username %property{log4net:HostName} %level %logger - %m%newline%exception";
             layout.ActivateOptions();
-
 
             // create Appender
             log4net.Appender.FileAppender appender = new log4net.Appender.FileAppender();
@@ -44,7 +41,6 @@ namespace Log4Net_01
             appender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
             appender.Layout = layout;                                           // set appender layout
             appender.ActivateOptions();
-
 
             // assign appender to logger
             log4net.Repository.Hierarchy.Logger l = (log4net.Repository.Hierarchy.Logger)log.Logger;
