@@ -8,8 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-// [assembly: log4net.Config.XmlConfigurator(ConfigFile = @"c:\Logs\Log4net_RollingFileLog_Att.txt", Watch = true)]
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+ // [assembly: log4net.Config.XmlConfigurator(ConfigFile = "Log4Net_02.config", Watch = true)]
+//[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Log4Net_01
 {
@@ -28,7 +28,7 @@ namespace Log4Net_01
         static void Main(string[] args)
         {
             Console.WriteLine("Hello world");
-            // LogHelper.SetLogger(log, @"C:\Logs\Log4Net_RollingFileLog_Prog.txt", true);
+             LogHelper.SetLogger(log, @"C:\Logs\Log4Net_RollingFileLog_Prog.txt", true);
             log.Debug("Entering: Main");
 
 
