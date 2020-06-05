@@ -18,6 +18,7 @@ namespace Call_Console_Exe
 
         static void Main(string[] args)
         {
+            System.Diagnostics.Trace.WriteLine("Hellow world");
             // Start the child process.
             Process p = new Process();
 
