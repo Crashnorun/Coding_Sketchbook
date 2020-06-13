@@ -25,22 +25,39 @@ void setup() {
 void draw() {
 
   loadPixels();
-  for (int x = 0; x < img.width; x++) {
-    for (int y = 0; y < img.height; y++) {
-      int index = x + (y * img.width);
-      color col = img.pixels[index];
+  for (int y = 0; y < img.height; y++) {
+    for (int x = 0; x < img.width; x++) {
+
+      int i = index(x, y);
+      color col = img.pixels[i];
 
       float r = red(col);
       float g = green(col);
       float b = blue(col);
 
-      int newR = round(4 *r / 255) * (255/4);
-      int newG = round(4* g / 255) * (255/4);
-      int newB = round(4*b / 255) * (255/4);
+      int factor = 4;
 
-      img.pixels[index] = color(newR, newG, newB);
+      int newR = round(factor * r / 255) * (255 / factor);
+      int newG = round(factor * g / 255) * (255 / factor);
+      int newB = round(factor * b / 255) * (255 / factor);
+      img.pixels[i] = color(newR, newG, newB);
+
+      float errR = r - newR;
+      float errG = g - newG;
+      float errB = b - newB;
+
+      img.pixels[index(x+1, y)] =
+        img.pixels[index(x-1, y+1)] =
+        img.pixels[index(x, y+1)] = 
+        img.pixels[index(x+1, y+1)] =
     }
   }
   img.updatePixels();
   image(img, 0, img.height);
+}
+
+
+int index(int x, int y) {
+  int index = x + (y * img.width);
+  return index;
 }
