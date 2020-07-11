@@ -6,8 +6,8 @@
 
 let circs = [];
 let totalMove = [];
-const numpts = 100;
-const maxRad = 40;
+const numpts = 200;
+const maxRad = 25;
 let col;
 
 function setup() {
@@ -15,7 +15,7 @@ function setup() {
     createCanvas(600, 600);
     background(0);
     col = color(0, 10);
-    frameRate(10);
+    frameRate(20);
 
     for (let i = 0; i < numpts; i++) {
         let radius = random(5, maxRad);                 // get a random radius number
