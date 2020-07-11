@@ -12,8 +12,9 @@ class Circ {
 
     Render() {
        // noStroke();
-        fill(100, 100, 234);
-        circle(this.cent.x, this.cent.y, this.radius);
+       let num = this.radius* (156/50); 
+       fill(num, num, 255);
+        circle(this.cent.x, this.cent.y, this.radius*2);
     }
 
 }
