@@ -18,6 +18,8 @@ namespace NLog_Example
             logger.Error("Erroring");
             logger.Debug(new Exception("hello exception"), "Debuging exception");
 
+            #region Calling Basic Functions
+
             MathFunctions.Add(1, 1.0);
 
             MathFunctions.Divide(0, 0);
@@ -26,6 +28,9 @@ namespace NLog_Example
 
             MathFunctions.Add(new List<int> { 12, 12 });
 
+            #endregion
+
+            #region Extract GoogleSheet ID
 
             string URL = "https://docs.google.com/spreadsheets/d/1bB4BzHTexDvW53PDTlX9nFqHLznicL7YqXP8ACFqJIs/edit#gid=0";
             Uri uriResult;
@@ -49,6 +54,14 @@ namespace NLog_Example
             }
             SheetID = SheetID.Remove(SheetID.Length - 1, 1);
 
+            #endregion
+
+
+            Person bob = new Person("bob", 34);
+            CallingPerson(bob);
+
+
+
             Console.ReadKey();
         }
 
@@ -71,10 +84,35 @@ namespace NLog_Example
 
             // print the parameter names and their values
             for (int i = 0; i < ParamValues.Length; i++)
-                logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
+            {
+
+                // if a parameter is a nested list
+                if (pars[i].ParameterType.Name.Contains("List"))
+                {
+
+                }
+                // if a parameter is an object
+                else if (pars[i].GetType() == typeof(object))
+                {
+
+                }
+                else
+                {
+                    logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
+                }
+
+            }
+
 
             MethodInfo methodInfo = (MethodInfo)Method;
         }
+
+
+        public static void CallingPerson(Person person)
+        {
+            InvokeMethod(MethodBase.GetCurrentMethod(), person);
+        }
+
 
     }
 }
