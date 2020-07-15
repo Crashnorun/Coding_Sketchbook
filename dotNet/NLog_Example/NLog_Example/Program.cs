@@ -87,9 +87,9 @@ namespace NLog_Example
             {
 
                 // if a parameter is a nested list
-                if (pars[i].ParameterType.Name.Contains("List"))
+                if (pars[i].ParameterType.Name.Contains("List") && logger.IsEnabled(NLog.LogLevel.Debug))
                 {
-
+                    // write out the entire list.
                 }
                 // if a parameter is an object
                 else if (pars[i].GetType() == typeof(object))
