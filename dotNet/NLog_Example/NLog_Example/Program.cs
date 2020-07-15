@@ -73,6 +73,7 @@ namespace NLog_Example
         /// <param name="ParamValues"></param>
         /// <References>https://forums.asp.net/t/1421332.aspx?How+to+get+current+method+parameter+values+programatically+
         /// https://docs.microsoft.com/en-us/dotnet/api/system.reflection.methodbase.invoke?view=netcore-3.1
+        /// https://stackoverflow.com/questions/37519896/check-nlog-minlevel-before-logging
         /// </References>
         public static void InvokeMethod(MethodBase Method, params object[] ParamValues)
         {
