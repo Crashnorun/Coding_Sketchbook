@@ -79,7 +79,7 @@ namespace NLog_Example
         {
             // get the method name
             logger.Debug("Method name: " + Method.Name);
-
+            
             // get the method parameters
             ParameterInfo[] pars = Method.GetParameters();
 
@@ -90,17 +90,15 @@ namespace NLog_Example
                 // if a parameter is a nested list
                 if (pars[i].ParameterType.Name.Contains("List") && logger.IsEnabled(NLog.LogLevel.Debug))
                 {
-                    // write out the entire list.
+                    // recursiverly write out the entire list.
                 }
                 // if a parameter is an object
-                else if (pars[i].GetType() == typeof(object))
+                else if (pars[i].GetType() == typeof(object).BaseType)
                 {
 
                 }
-                else
-                {
-                    logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
-                }
+                else logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
+
 
             }
 

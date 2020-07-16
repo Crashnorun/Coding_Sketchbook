@@ -76,7 +76,7 @@ namespace NLog_Example
         /// <returns></returns>
         public static double Divide(double Num1, double Num2)
         {
-            Program.InvokeMethod(MethodBase.GetCurrentMethod(), Num1, Num2);
+            Program.InvokeMethod(MethodBase.GetCurrentMethod(),  Num1, Num2);
 
             if (Num1 == double.NaN)
             {
