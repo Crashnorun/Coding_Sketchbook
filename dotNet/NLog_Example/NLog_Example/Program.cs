@@ -17,6 +17,8 @@ namespace NLog_Example
             logger.Debug("Debugging");
             logger.Error("Erroring");
             logger.Debug(new Exception("hello exception"), "Debuging exception");
+            logger.Debug("{HostPlatform}", "Charlie");
+            
 
             #region Calling Basic Functions
 
