@@ -14,17 +14,18 @@ namespace NLog_Example
 
         static void Main(string[] args)
         {
+            //NLog.LogManager.Configuration.Variables["HostPlatform"] = "Bob";
+            //logger.SetProperty("HostPlatform", "Ron");
+            logger.Properties["HostPlatform"] = Assembly.GetExecutingAssembly().FullName;
             logger.Debug("Debugging");
             logger.Error("Erroring");
-            logger.Debug(new Exception("hello exception"), "Debuging exception");
-            logger.Debug("{HostPlatform}", "Charlie");
+            logger.Error(new Exception("hello exception").StackTrace, "Debuging exception");
             
-
             #region Calling Basic Functions
 
             MathFunctions.Add(1, 1.0);
 
-            MathFunctions.Divide(0, 0);
+            MathFunctions.Divide(10, 0);
 
             MathFunctions.Subtract(10, 20);
 
@@ -80,7 +81,7 @@ namespace NLog_Example
         public static void InvokeMethod(MethodBase Method, params object[] ParamValues)
         {
             // get the method name
-            logger.Debug("Method name: " + Method.Name);
+            logger.Debug("Method name: " + Method.ReflectedType.FullName + "." + Method.Name);
             
             // get the method parameters
             ParameterInfo[] pars = Method.GetParameters();
@@ -100,8 +101,6 @@ namespace NLog_Example
 
                 }
                 else logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
-
-
             }
 
 

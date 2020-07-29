@@ -74,7 +74,7 @@ namespace NLog_Example
         /// <param name="Num1"></param>
         /// <param name="Num2"></param>
         /// <returns></returns>
-        public static double Divide(double Num1, double Num2)
+        public static double Divide(int Num1, int Num2)
         {
             Program.InvokeMethod(MethodBase.GetCurrentMethod(),  Num1, Num2);
 
@@ -92,7 +92,10 @@ namespace NLog_Example
             double x = 0;
 
             try { x = Num1 / Num2; }
-            catch (DivideByZeroException ex) { logger.Error("Developer: tried to divide by zero", ex); }
+            catch (DivideByZeroException ex) {
+                logger.Properties["HostPlatform"] = Assembly.GetExecutingAssembly().FullName;
+                logger.Error(ex,"Developer: tried to divide by zero");
+            }
 
             return x;
         }
