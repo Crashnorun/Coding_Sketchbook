@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,13 +15,20 @@ namespace NLog_Example
 
         static void Main(string[] args)
         {
+
+            string fileName = @"C:\Logs\NLog_Example.txt";
+            FileInfo fi = new FileInfo(fileName);
+
+            //do
+            //{
+
             //NLog.LogManager.Configuration.Variables["HostPlatform"] = "Bob";
             //logger.SetProperty("HostPlatform", "Ron");
             logger.Properties["HostPlatform"] = Assembly.GetExecutingAssembly().FullName;
             logger.Debug("Debugging");
             logger.Error("Erroring");
             logger.Error(new Exception("hello exception").StackTrace, "Debuging exception");
-            
+
             #region Calling Basic Functions
 
             MathFunctions.Add(1, 1.0);
@@ -63,7 +71,9 @@ namespace NLog_Example
             Person bob = new Person("bob", 34);
             CallingPerson(bob);
 
+            fi = new FileInfo(fileName);
 
+            // } while ((fi.Length / 1048576) < 10);
 
             Console.ReadKey();
         }
@@ -78,11 +88,13 @@ namespace NLog_Example
         /// https://docs.microsoft.com/en-us/dotnet/api/system.reflection.methodbase.invoke?view=netcore-3.1
         /// https://stackoverflow.com/questions/37519896/check-nlog-minlevel-before-logging
         /// </References>
-        public static void InvokeMethod(MethodBase Method, params object[] ParamValues)
+        public static void InvokeMethod(NLog.Logger Logger, MethodBase Method, params object[] ParamValues)
         {
+            Logger.SetProperty("Name", Method.ReflectedType.FullName + "." + Method.Name);
+
             // get the method name
-            logger.Debug("Method name: " + Method.ReflectedType.FullName + "." + Method.Name);
-            
+            Logger.Debug("Method name: " + Method.Name);
+
             // get the method parameters
             ParameterInfo[] pars = Method.GetParameters();
 
@@ -91,7 +103,7 @@ namespace NLog_Example
             {
 
                 // if a parameter is a nested list
-                if (pars[i].ParameterType.Name.Contains("List") && logger.IsEnabled(NLog.LogLevel.Debug))
+                if (pars[i].ParameterType.Name.Contains("List") && Logger.IsEnabled(NLog.LogLevel.Debug))
                 {
                     // recursiverly write out the entire list.
                 }
@@ -100,17 +112,16 @@ namespace NLog_Example
                 {
 
                 }
-                else logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
+                else Logger.Debug(string.Format("\t Parameter: {0}, Value: {1}", pars[i].Name, ParamValues[i]));
             }
 
-
-            MethodInfo methodInfo = (MethodInfo)Method;
+            // MethodInfo methodInfo = (MethodInfo)Method;
         }
 
 
         public static void CallingPerson(Person person)
         {
-            InvokeMethod(MethodBase.GetCurrentMethod(), person);
+            InvokeMethod(logger, MethodBase.GetCurrentMethod(), person);
         }
 
 
