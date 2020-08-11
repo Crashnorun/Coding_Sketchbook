@@ -10,6 +10,7 @@ using System.Data.OleDb;
 /// <references>
 /// https://docs.microsoft.com/en-us/previous-versions/office/troubleshoot/office-developer/automate-access-using-visual-c
 /// https://www.c-sharpcorner.com/article/read-microsoft-access-database-in-C-Sharp/
+/// https://stackoverflow.com/questions/17086726/c-sharp-query-with-space-in-sqlt-table
 /// </references>
 /// </summary>
 
@@ -26,6 +27,8 @@ namespace AccessDB2JSON
             string ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + FilePath;
 
             AccessDB(FilePath, ConnectionString);
+
+            Console.ReadKey();
         }
 
 
@@ -35,7 +38,7 @@ namespace AccessDB2JSON
             //oAccess = new Access.ApplictionClass();
             //oAccess.OpenCurrentDatabase(FilePath, true);
 
-            string str = "Select * From Glass Samples";
+            string str = "select * from [Glass Samples]";
 
             OleDbConnection conn = new OleDbConnection(ConnectionString);
 
@@ -46,7 +49,7 @@ namespace AccessDB2JSON
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine("Company: " + reader["Company"] + " Name: " + reader["Name"]);
+                    Console.WriteLine("Company: " + reader["Company"] + " Name: " + reader["Name"] + " Label: " + reader["Label"]);
                 }
             }
         }
