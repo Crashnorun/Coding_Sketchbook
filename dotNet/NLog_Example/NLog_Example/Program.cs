@@ -15,12 +15,13 @@ namespace NLog_Example
 
         static void Main(string[] args)
         {
+            string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string logConfigFile = "NLog.config";
+            string filePath = folderPath + @"\" + logConfigFile;
 
-            string fileName = @"C:\Logs\NLog_Example.txt";
-            FileInfo fi = new FileInfo(fileName);
-
-            //do
-            //{
+            Assembly ass = Assembly.GetExecutingAssembly();
+            string fiPath = Path.GetDirectoryName(ass.CodeBase);
+            
 
             //NLog.LogManager.Configuration.Variables["HostPlatform"] = "Bob";
             //logger.SetProperty("HostPlatform", "Ron");
@@ -71,9 +72,8 @@ namespace NLog_Example
             Person bob = new Person("bob", 34);
             CallingPerson(bob);
 
-            fi = new FileInfo(fileName);
+            TestMultipleLogFiles();
 
-            // } while ((fi.Length / 1048576) < 10);
 
             Console.ReadKey();
         }
@@ -122,6 +122,40 @@ namespace NLog_Example
         public static void CallingPerson(Person person)
         {
             InvokeMethod(logger, MethodBase.GetCurrentMethod(), person);
+        }
+
+
+        public static void TestMultipleLogFiles()
+        {
+            string fileName = @"C:\Logs\NLog_Example.txt";
+            FileInfo fi = new FileInfo(fileName);
+
+            do
+            {
+
+                logger.Properties["HostPlatform"] = Assembly.GetExecutingAssembly().FullName;
+                logger.Debug("Debugging");
+                logger.Error("Erroring");
+                logger.Error(new Exception("hello exception").StackTrace, "Debuging exception");
+
+                #region Calling Basic Functions
+
+                MathFunctions.Add(1, 1.0);
+
+                MathFunctions.Divide(10, 0);
+
+                MathFunctions.Subtract(10, 20);
+
+                MathFunctions.Add(new List<int> { 12, 12 });
+
+                #endregion
+
+                Person bob = new Person("bob", 34);
+                CallingPerson(bob);
+
+                fi = new FileInfo(fileName);
+
+            } while ((fi.Length / 1048576) < 10);
         }
 
 
