@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Interop.Access;
 using System.Data.OleDb;
+using System.Reflection;
+using System.Data;
+
 
 /// <summary>
 /// <references>
@@ -34,25 +37,79 @@ namespace AccessDB2JSON
 
         static void AccessDB(string FilePath, string ConnectionString)
         {
-            //Access.Application oAccess = null;
-            //oAccess = new Access.ApplictionClass();
-            //oAccess.OpenCurrentDatabase(FilePath, true);
-
-            string str = "select * from [Glass Samples]";
+            List<GlassSample> glassSamples = new List<GlassSample>();
 
             OleDbConnection conn = new OleDbConnection(ConnectionString);
-
+            string str = "select * from [Glass Samples]";
             OleDbCommand cmd = new OleDbCommand(str, conn);
             conn.Open();
+
+
 
             using (OleDbDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine("Company: " + reader["Company"] + " Name: " + reader["Name"] + " Label: " + reader["Label"]);
+                    var table = reader.GetSchemaTable();
+                    foreach (DataRow row in table.Rows) Console.WriteLine(row[0]);
+
+                    /*Console.WriteLine("Company: " + reader["Company"] + " Name: " + reader["Name"] + " Label: " + reader["Label"]);
+                    Console.WriteLine(reader.FieldCount);*/
+                    string val = string.Empty;
+
+                    GlassSample sample = new GlassSample();
+
+                    try { sample.Label = reader[1].ToString(); } catch (Exception ex) { }
+                    try { sample.Company = reader[2].ToString(); } catch (Exception ex) { }
+                    try { sample.Name = reader[3].ToString(); } catch (Exception ex) { }
+                    try { sample.Category = reader[4].ToString(); } catch (Exception ex) { }
+
+                    try { sample.GlassBase = reader[5].ToString(); } catch (Exception ex) { }
+                    try { sample.BaseSpec = reader[6].ToString(); } catch (Exception ex) { }
+                    try { sample.GlassThick1 = reader[7].ToString(); } catch (Exception ex) { }
+
+                    try { sample.GlassBase2 = reader[8].ToString(); } catch (Exception ex) { }
+                    try { sample.BaseSpec2 = reader[9].ToString(); } catch (Exception ex) { }
+                    try { sample.GlassThick2 = reader[10].ToString(); } catch (Exception ex) { }
+
+                    try { sample.GlassThick3 = reader[11].ToString(); } catch (Exception ex) { }
+                    try { sample.BaseSpec3 = reader[12].ToString(); } catch (Exception ex) { }
+                    try { sample.GlassThick3 = reader[13].ToString(); } catch (Exception ex) { }
+
+                    try { sample.Coating = reader[14].ToString(); } catch (Exception ex) { }
+                    try { sample.CoatingSurface = reader[15].ToString(); } catch (Exception ex) { }
+                    try { sample.CoatingSurface2 = reader[16].ToString(); } catch (Exception ex) { }
+                    try { sample.SurfaceModif = reader[17].ToString(); } catch (Exception ex) { }
+                    try { sample.Lamination = reader[18].ToString(); } catch (Exception ex) { }
+                    try { sample.Transmittance = reader[19].ToString(); } catch (Exception ex) { }
+                    try { sample.ReflectExt = reader[20].ToString(); } catch (Exception ex) { }
+                    try { sample.ReflectInt = reader[21].ToString(); } catch (Exception ex) { }
+                    try { sample.UValue = double.Parse(reader[22].ToString()); } catch (Exception ex) { }
+                    try { sample.SHGC = double.Parse(reader[23].ToString()); } catch (Exception ex) { }
+                    try { sample.LSG = double.Parse(reader[24].ToString()); } catch (Exception ex) { }
+                    try { sample.SampleDimensions = reader[25].ToString(); } catch (Exception ex) { }
+                    try { sample.CheckedOut = (bool)reader[26]; } catch (Exception ex) { }
+
+
+                    glassSamples.Add(sample);
+
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        val += reader[i].ToString() + " ";
+                    }
+
+                    Console.WriteLine(val);
                 }
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(glassSamples, Newtonsoft.Json.Formatting.Indented);
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string path = System.IO.Path.GetDirectoryName(assembly.Location) + "GlassData.json";
+                System.IO.File.WriteAllText(path, json);
             }
+            conn.Close();
         }
 
     }
 }
+
