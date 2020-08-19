@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,10 @@ namespace Hashes
             HashString("charlie");
             HashString("Charlie");
 
-            HashSet();
+            //HashSet();
+
+            ReadDirectorySize();
+
 
             Console.ReadKey();
         }
@@ -32,7 +36,7 @@ namespace Hashes
             List<int> nums = new List<int>();
             HashSet<object> hashes = new HashSet<object>();
 
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 nums.Add(i);
                 hashes.Add(i);
@@ -41,6 +45,33 @@ namespace Hashes
 
             var eles = new HashSet<Type>(hashes.Select(t => t.GetType())).ToList();
 
+            double num;
+
+            num = (double)nums[0];
+        }
+
+
+
+        public static void ReadDirectorySize()
+        {
+            string root = @"C:\Users\cportelli\Documents\Personal";
+            string[] dirs = Directory.GetDirectories(root);
+
+            foreach (string dir in dirs)
+            {
+                DirectoryInfo info = new DirectoryInfo(dir);
+                try
+                {
+                    long totalSize = info.EnumerateFiles().Sum(file => file.Length);
+                    
+                    if(totalSize > 100)
+                    {
+                        info.EnumerateDirectories();
+                        Console.WriteLine(string.Format("{0} : {1}", dir, totalSize));
+                    }
+                }
+                catch (Exception ex) { }
+            }
         }
 
     }
