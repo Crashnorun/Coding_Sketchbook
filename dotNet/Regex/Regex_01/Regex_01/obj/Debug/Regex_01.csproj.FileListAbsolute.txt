@@ -1,7 +1,0 @@
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\bin\Debug\Regex_01.exe.config
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\bin\Debug\Regex_01.exe
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\bin\Debug\Regex_01.pdb
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\obj\Debug\Regex_01.csprojAssemblyReference.cache
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\obj\Debug\Regex_01.csproj.CoreCompileInputs.cache
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\obj\Debug\Regex_01.exe
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\Regex\Regex_01\Regex_01\obj\Debug\Regex_01.pdb

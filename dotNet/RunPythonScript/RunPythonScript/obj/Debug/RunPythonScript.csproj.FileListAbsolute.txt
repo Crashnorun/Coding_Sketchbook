@@ -1,7 +1,0 @@
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\bin\Debug\RunPythonScript.exe.config
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\bin\Debug\RunPythonScript.exe
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\bin\Debug\RunPythonScript.pdb
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\obj\Debug\RunPythonScript.csprojAssemblyReference.cache
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\obj\Debug\RunPythonScript.csproj.CoreCompileInputs.cache
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\obj\Debug\RunPythonScript.exe
-C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook\dotNet\RunPythonScript\RunPythonScript\obj\Debug\RunPythonScript.pdb
