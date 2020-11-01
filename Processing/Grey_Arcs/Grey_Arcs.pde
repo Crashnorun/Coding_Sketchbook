@@ -10,8 +10,8 @@ void setup() {
   size(600, 600, P2D);
   background(50);
   stroke(200);
-  strokeWeight(4);
-   smooth(8);
+  strokeWeight(1);
+  smooth(8);
   // rectMode(CENTER);
   RectColor = color(50, 5);
 
@@ -19,14 +19,14 @@ void setup() {
 
   for (int i = 0; i < NumArcs; i++) {
     float radius = random(MinRadius, MaxRadius);
-    float start = random(0,180);
-    float angle = random(start + 10,360);
-    float speed = random(2.5);
+    float start = random(0, 180);
+    float angle = random(start + 10, 360);
+    float speed = random(0.5);
     float temp = random (1.1);
     boolean filled = temp > 0.5 ? true : false;
     temp = random(1.1);
     boolean clockwise = temp > 0.5 ? true : false;
-    float thickness = random(2,10);
+    float thickness = random(10, 20);
 
     ARC arc = new ARC(radius, start, angle, speed, filled, clockwise, thickness);
     Arcs.add(arc);
