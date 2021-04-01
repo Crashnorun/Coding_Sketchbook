@@ -12,7 +12,7 @@ int index;
 void settings() {
   println("Entering SETTINGS");
   img = loadImage(imageName);                    // load image
-  img.resize(300, 0);                            // resize image
+  img.resize(500, 0);                            // resize image
   imgWidth = img.width;
   imgHeight = img.height;
 
