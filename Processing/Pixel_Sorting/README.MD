@@ -6,3 +6,4 @@
 * [Kim Asendorf github act](https://github.com/kimasendorf/ASDFPixelSort)
 * [Coding train Coding challenge #47: Pixel Sorting in processing](https://www.youtube.com/watch?v=JUDYkxU6J0o&list=WL&index=14&t=891s)
 * [Unsupervised Classification Using Pixel Sorting Technique](https://www.isprs.org/proceedings/XXVII/congress/part3/31_XXVII-part3.pdf)
+* [HOW TO GLITCH IMAGES USING PIXEL SORTING](http://datamoshing.com/2016/06/16/how-to-glitch-images-using-pixel-sorting/)
