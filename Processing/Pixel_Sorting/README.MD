@@ -1,4 +1,4 @@
-#References
+# References
 
 * [Pixel sorting by Satyarth Mishra](http://satyarth.me/articles/pixel-sorting/)
 * [Satyarth Mishra's github act](https://github.com/satyarth/pixelsort/)
