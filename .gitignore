@@ -380,4 +380,4 @@ MigrationBackup/
 .ionide/
 
 P5/Circle_Packing/Images/Circles_04.stg
-Processing/Pixel_Sorting/Animations/.stg
+Processing\Pixel_Sorting\Animations\*.stg
