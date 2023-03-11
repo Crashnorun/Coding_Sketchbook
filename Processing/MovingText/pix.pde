@@ -18,7 +18,8 @@ class Pix {
     col = c;
     loc = new PVector(x, y);
     ang = (float)angle;
-    velocity = 3;
+    velocity = random(5);    // option 1
+    // velocity = 3;          // option 2
 
     calculateTarget();
   }

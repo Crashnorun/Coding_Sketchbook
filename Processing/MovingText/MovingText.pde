@@ -4,6 +4,7 @@ PFont font;
 int num;
 ArrayList<Pix> dots;
 int count = 0;
+color backgroundColor;
 
 
 // ---- GLOBAL SETTINGS ----
@@ -23,6 +24,8 @@ void setup() {
 
   background(0);
   //frameRate(10);
+  backgroundColor = color(0,50);
+  
   textAlign(CENTER);
   textFont(font, 48);
   text("CHANGE", width/2, height/2);
@@ -55,7 +58,9 @@ void draw() {
 
   if (count ==0) delay(1000);
   count++;
-  background(0);
+  
+  fill(backgroundColor);
+  rect(0,0,width, height);
 
   for (int i = 0; i < dots.size(); i++) {
     dots.get(i).MoveVector();
@@ -78,7 +83,8 @@ void draw() {
 
 // find random angle
 double RandomAngle() {
-  return random(0, 2*PI);
+  return random(0, 2*PI);            // option 3
+  // return random(PI*0.25, PI*0.75);      // option 4
 }
 
 
