@@ -2,7 +2,8 @@
 boolean fullScreen = false;
 PFont font;
 int num;
-ArrayList dots;
+ArrayList<Pix> dots;
+int count = 0;
 
 
 // ---- GLOBAL SETTINGS ----
@@ -11,7 +12,7 @@ void settings() {
   if (fullScreen)
     fullScreen(P2D, SPAN);
   else
-    size(200, 50);
+    size(600, 500);
 
   font =  loadFont("Arial-BoldMT-48.vlw");
 }
@@ -21,13 +22,12 @@ void settings() {
 void setup() {
 
   background(0);
-
+  //frameRate(10);
   textAlign(CENTER);
   textFont(font, 48);
   text("CHANGE", width/2, height/2);
 
   loadPixels();
-
 
   num = 0;
   dots = new ArrayList<Pix>();
@@ -45,7 +45,7 @@ void setup() {
       }
     }
   }
-
+  println("Num dots: " + dots.size());
   // TestFindingWhiteText();
 }
 
@@ -53,9 +53,13 @@ void setup() {
 // ---- DRAW ----
 void draw() {
 
+  if (count ==0) delay(1000);
+  count++;
+  background(0);
 
   for (int i = 0; i < dots.size(); i++) {
-    Pix p = dots.get(i);
+    dots.get(i).MoveVector();
+    dots.get(i).Redraw();
   }
 
   // start moving the pixels
@@ -93,8 +97,8 @@ void TestFindingWhiteText() {
       if (red(pixels[index]) >= 0.1) {
         double ang = RandomAngle();
 
-        pix p = new pix(x, y, pixels[index], ang);
-        pixs.add(p);
+        Pix p = new Pix(x, y, pixels[index], ang);
+        dots.add(p);
         //println(x + " , " + y + " | " + red(pixels[index]));
         point(x, y);
       }

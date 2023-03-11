@@ -66,4 +66,8 @@ class Pix {
     dist = dist *random(1, 1.25);
     return dist;
   }
+
+  String ToString() {
+    return loc.x + " " + loc.y;
+  }
 }
