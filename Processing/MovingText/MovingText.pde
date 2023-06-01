@@ -13,9 +13,10 @@ void settings() {
   if (fullScreen)
     fullScreen(P2D, SPAN);
   else
-    size(600, 500);
+    size(1920, 1080);
 
-  font =  loadFont("Arial-BoldMT-48.vlw");
+  //font =  loadFont("Arial-BoldMT-48.vlw");
+  font =  loadFont("ArialMT-50.vlw");
 }
 
 
@@ -24,11 +25,11 @@ void setup() {
 
   background(0);
   //frameRate(10);
-  backgroundColor = color(0,50);
-  
-  textAlign(CENTER);
-  textFont(font, 48);
-  text("CHANGE", width/2, height/2);
+  backgroundColor = color(0, 50);
+
+  textAlign(LEFT, CENTER);
+  textFont(font, 100);
+  text("About", 100, height/2);
 
   loadPixels();
 
@@ -55,12 +56,14 @@ void setup() {
 
 // ---- DRAW ----
 void draw() {
+  SaveFrame(count);
+  if (count ==1500) exit();
 
-  if (count ==0) delay(1000);
+  if (count ==0) delay(2000);
   count++;
-  
+
   fill(backgroundColor);
-  rect(0,0,width, height);
+  rect(0, 0, width, height);
 
   for (int i = 0; i < dots.size(); i++) {
     dots.get(i).MoveVector();
@@ -127,4 +130,15 @@ void TestFindingWhiteText(int num) {
       point(x, y);
     }
   }
+}
+
+void SaveFrame(int count) {
+  String prefix = "000";
+
+  if (count < 10) prefix = "000";
+  else if (count>=10 && count < 100) prefix = "00";
+  else if (count >=100 && count < 1000) prefix = "0";
+  else if (count>=1000) prefix =  "";
+
+  save(prefix + count + ".jpg");
 }
