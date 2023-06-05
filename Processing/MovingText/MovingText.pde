@@ -29,7 +29,7 @@ void setup() {
 
   textAlign(LEFT, CENTER);
   textFont(font, 100);
-  text("About", 100, height/2);
+  text("Teach", 100, height/2);
 
   loadPixels();
 
@@ -86,8 +86,9 @@ void draw() {
 
 // find random angle
 double RandomAngle() {
-  return random(0, 2*PI);            // option 3
+  // return random(0, 2*PI);            // option 3
   // return random(PI*0.25, PI*0.75);      // option 4
+   return (PI/2);                        // option 5
 }
 
 
