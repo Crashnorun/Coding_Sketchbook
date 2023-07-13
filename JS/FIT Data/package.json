@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "fit-decoder": "^1.0.5",
+    "fs.promises": "^0.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.7"
+  }
+}

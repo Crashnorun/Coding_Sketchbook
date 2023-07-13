@@ -1,0 +1,13 @@
+// C:\Users\PortelliC\Downloads\230314 charles Suunto app data680331\workouts
+
+import fitDecoder from "fit-decoder";
+
+import * as fs from "fs.promises";
+
+const file = await fs.readFile("2019-03-03_22_47_37-RUNNING.1614374918.fit");
+const buffer = file.buffer;
+
+const jsonRaw = fitDecoder.fit2json(buffer);
+const json = fitDecoder.parseRecords(jsonRaw);
+
+const num = 0;
