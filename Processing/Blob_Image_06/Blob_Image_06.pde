@@ -28,9 +28,9 @@ void setup() {
   CreateFolders(path + "Blob_Images");
   CreateFolders(path + "Sequence_Images");
 
-  //size(640, 480, P2D);
-  //size(1280, 720, P2D);
-  //size(1920, 1080, P2D);
+  size(640, 480, P2D);
+  // size(1280, 720, P2D);
+  // size(1920, 1080, P2D);
   //fullScreen();
 
   frameRate(9);
@@ -109,7 +109,6 @@ void draw() {
     }
     // ---- SAVE BLOBS ----
 
-
     // ---- SAVE OUTLINES ----
     if (second() % 2 == 0) {                                      // save the blob image every 10
 
@@ -127,6 +126,7 @@ void draw() {
         seqCount = 0;
       }
     }
+  
     // ---- SAVE OUTLINES ----
     //
     //
