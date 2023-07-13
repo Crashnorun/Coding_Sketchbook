@@ -2,10 +2,25 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "Chrome",
     "windows":{
         "command":"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
     },
-    "args": ["${file}"]
+    "args": [
+        "${file}"
+    ],
+    "tasks": [
+        {
+            "label": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+            "args": [
+                "${file}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
+        }
+    ]
 }
