@@ -24,7 +24,7 @@ class cls_Pxl {
     posY = Y;
     location = new PVector(X, Y);
     col = C;
-    ConvertColor();
+    ConvertColor(); //<>//
     FindGroupName();
     acceleration = new PVector(0, 0);
     velocity = new PVector(0, 0);

@@ -21,6 +21,7 @@ class cls_Group {
 
   //----FIND CENT OF GROUP------------------------------------------------------------------
   void FindCent() {
+    println("Finding centpt");
     int X = 0;
     int Y = 0;
 
@@ -48,4 +49,3 @@ class cls_Group {
   }
   //----------------------------------------------------------------------
 }    // close class
-

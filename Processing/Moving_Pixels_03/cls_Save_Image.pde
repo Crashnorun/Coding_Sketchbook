@@ -37,7 +37,7 @@ class SaveImg implements Runnable
         //cam = new Capture(app, cameras[172]);                                    // get the first camera
         //cam = new Capture(app, w, h, 30);
         //cam = new Capture(app, w, h, "name=Logitech HD Pro Webcam C910,size=640x480,fps=5");
-        cam = new Capture(app, cameras[1]);
+        cam = new Capture(app, cameras[0]);
         delay(1000);
         cam.start();                                                             // start the camera
         delay(1000);

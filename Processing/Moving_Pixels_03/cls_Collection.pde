@@ -34,9 +34,9 @@ class cls_Collection implements Runnable {
       int x = i % myImg.width;                                              // get the X value
       int y = i / myImg.width;                                              // get the Y value
       color c = img.pixels[i];                                              // get the color
-      cls_Pxl newPix = new cls_Pxl(x*4, y*4, c);                            // populate new cls_Pxl
+      cls_Pxl newPix = new cls_Pxl(x*4, y*4, c);                            // populate new cls_Pxl //<>//
       pxls[i] = newPix;                                                     // save new pixel
-      GroupPxls(pxls[i]);                                                   // find pixel group
+      GroupPxls(pxls[i]);                                                   // find pixel group //<>//
       //println("X = " + newPix.posX + " - Y = " + newPix.posY + " - COLOR = " + newPix.col + " Group = " + newPix.groupName);
     }  //close for
 
@@ -72,7 +72,7 @@ class cls_Collection implements Runnable {
   // group each pixel
   void GroupPxls(cls_Pxl Pixel) {
 
-    if (Pixel.groupName == "W") {
+    if (Pixel.groupName == "W") { //<>//
       WGroup.Append(Pixel);
     } else if (Pixel.groupName == "R") {
       RGroup.Append(Pixel);
@@ -84,6 +84,7 @@ class cls_Collection implements Runnable {
       println("PIXEL NOT GROUPED");
     }
     // find the goups
+
   }
   //----CREATE GROUPS------------------------------------------------------------------
 
@@ -126,4 +127,3 @@ class cls_Collection implements Runnable {
     //empty method
   }  //----RUN THREAD----
 }    //close class
-
